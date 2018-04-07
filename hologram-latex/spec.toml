@@ -1,0 +1,18 @@
+[package]
+name = "hologram-latex"
+version = "0.1"
+release = 1
+description = "LaTeX packages" #Tweaked hologram-dtp (desktop publishing applications)
+requires = [
+	"hologram-gui",
+
+	"texlive-core", #The following packages depend on this anyway
+	"texlive-latexextra",
+	"texlive-pictures",
+	"texlive-science",
+	"scribus"
+]
+
+[[symlink]]
+path="/usr/bin/tlmgr"
+target="/usr/share/texmf-dist/scripts/texlive/tlmgr.pl"
