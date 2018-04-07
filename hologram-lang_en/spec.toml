@@ -1,0 +1,13 @@
+[package]
+name = "hologram-lang_en"
+provides = [ "hologram-lang" ]
+version = "2.0"
+release = 1
+description = "english locales for X"
+requires = [
+]
+
+[[file]]
+path = "/etc/X11/xorg.conf.d/00-keyboard.conf"
+mode = "0644"
+contentFrom = "keyboard.conf"

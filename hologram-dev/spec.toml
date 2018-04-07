@@ -1,0 +1,49 @@
+[package]
+name = "hologram-dev"
+version = "0.1"
+release = 1
+description = "packages and configuration for software development"
+requires = [
+	"hologram-gui",
+
+	"ed",
+	"emacs",
+	"gdb",
+	"git",
+	"go",
+	"gvim",
+	"nmap",
+	"rust",
+	"bc",
+]
+
+
+# emacs
+
+[[file]]
+path = "/usr/bin/emacsd"
+mode = "0755"
+contentFrom = "emacsd.sh"
+# don't make a shortcut called ed because that would shadow another awesome text editor!
+
+[[file]]
+path = "/usr/bin/emacsq"
+mode = "0755"
+contentFrom = "emacsq.sh"
+
+[[symlink]]
+path = "/usr/bin/eq"
+target = "/usr/bin/emacsq"
+
+[[file]]
+path = "/usr/bin/eswitch"
+mode = "0755"
+contentFrom = "eswitch.sh"
+
+
+# git
+
+[[file]]
+path = "/etc/gitconfig"
+mode = "0644"
+contentFrom = "gitconfig"

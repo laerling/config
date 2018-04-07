@@ -1,0 +1,97 @@
+[package]
+name = "hologram-gui"
+version = "0.3"
+release = 1
+description = "X configuration and i3 wm"
+requires = [
+	# drivers
+	"xf86-video-nouveau",
+
+	# X
+	"group:xorg-apps",
+	"xorg-server",
+	"xorg-xinit",
+
+	# console
+	"xterm",
+
+	# window manager (with status bar and application starter)
+	"i3-wm",
+	"i3status",
+	"dmenu",
+
+	# virtual language package (provided by hologram-lang_en, hologram-lang_de, hologram-lang_no etc.)
+	"hologram-lang",
+
+	# fonts
+	"adobe-source-code-pro-fonts",
+
+	# standard programs depending on GUI
+	"evince",
+	"slock",
+	"nitrogen",
+
+	# other programs (not games, communication, audio or video)
+	"dolphin",
+	"kolourpaint",
+	"scrot",
+	"shotwell",
+	"xsel",
+]
+
+
+# configuration files
+
+[[file]]
+path = "/etc/X11/xinit/Xresources"
+mode = "0644"
+contentFrom = "Xresources"
+
+
+# holoscripts
+
+[[file]]
+path = "/usr/share/holo/files/01-gui/etc/inputrc.holoscript"
+mode = "0755"
+contentFrom = "inputrc.sed"
+
+[[file]]
+path = "/usr/share/holo/files/01-gui/etc/i3/config.holoscript"
+mode = "0755"
+contentFrom = "i3_config.sed"
+
+[[file]] #nitrogen, i3
+path = "/usr/share/holo/files/01-gui/etc/X11/xinit/xinitrc.holoscript"
+mode = "0755"
+contentFrom = "xinitrc.pl"
+
+
+# own binaries
+
+[[file]]
+path = "/usr/bin/x"
+mode = "0755"
+content="""
+#!/bin/bash
+startx
+"""
+
+[[file]]
+path = "/usr/bin/exiti3"
+mode = "0755"
+contentFrom = "exiti3"
+
+[[file]]
+path = "/usr/bin/slocksus"
+mode = "0755"
+contentFrom = "slocksus"
+
+[[file]]
+path = "/usr/bin/slockhib"
+mode = "0755"
+contentFrom = "slockhib"
+
+[[file]]
+path = "/usr/bin/scrots"
+mode = "0755"
+contentFrom = "scrots"
