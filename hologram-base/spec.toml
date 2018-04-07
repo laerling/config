@@ -1,0 +1,28 @@
+[package]
+name = "hologram-base"
+version = "0.1"
+release = 1
+description = "Minimal configuration"
+requires = [
+	"holo",
+	"group:base", "group:base-devel",
+
+	"acpi",
+	"cryptsetup",
+	# emacs in hologram-dev since it is too big for a minimal installation
+	# intel-ucode in holodecks since it is machine specific
+	"gnu-netcat",
+	"tree",
+	"ttf-freefont",
+	"unzip",
+	"vim", # gvim in hologram-dev
+	# no yaourt because that can't be installed as root (due to makepkg), therefore it cannot exist when a holodeck is installed for the first time
+]
+
+
+# bashrc
+
+[[file]]
+path = "/usr/share/holo/files/00-base/etc/bash.bashrc.holoscript"
+mode = "0755"
+contentFrom = "bash.bashrc.pl"

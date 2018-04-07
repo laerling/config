@@ -12,12 +12,11 @@ It assumes the disk has been partitioned and the base system has been bootstrapp
 
 
 ## FIXMEs and TODOs (not in any particular order)
-- move aliases from bash.bashrc to fitting holograms
+- move aliases from bash.bashrc to fitting holograms (use #!/usr/bin/tee -a respectively)
 - Use ART
 - Rerun GRUB config after holodeck install in order to include the intel-ucode initrd
 - Roll out WHEEL in sudoers with hologram-base
 - Move systemd out of init.sh (used for dhcp handling there) into base or something. Use systemd matching on interface to abstract from LAN NIC.
-- Use #!/usr/bin/tee -a in bash.bashrc
 - C3D2 chat (z. B. profanity, (oder, falls einfachere Bedienung als profanity, bitlbee oder irssi+irssi-xmpp))
 - shell prompt by pattern <git-repo-name>/path/to/subdir/
 - Put recommendations for AUR packages into holograms?
