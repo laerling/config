@@ -1,6 +1,6 @@
 [package]
 name = "holodeck-laptop"
-version = "0.2"
+version = "0.10"
 release = 1
 description = "configuration of laptop"
 requires = [
@@ -8,7 +8,7 @@ requires = [
 
 	"hologram-base",
 	"hologram-dev",
-	#"hologram-multimedia",
+	"hologram-multimedia",
 
 	"intel-ucode",
 	"xorg-xrandr", # peripheral screens

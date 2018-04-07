@@ -1,0 +1,11 @@
+[package]
+name = "hologram-multimedia"
+version = "0.1"
+release = 1
+description = "Bundle with video, graphics, audio, communication, and games"
+requires = [
+	"hologram-audio",
+	"hologram-communication",
+	"hologram-graphics",
+	"hologram-video",
+]

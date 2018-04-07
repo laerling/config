@@ -1,0 +1,17 @@
+[package]
+name = "hologram-video"
+version = "0.1"
+release = 1
+description = "Video programs and codecs"
+requires = [
+	"hologram-gui",
+
+	# copyright stuff
+	"libdvdread",
+	"libdvdcss",
+	"libdvdnav",
+
+	"mpv",
+	"youtube-dl",
+	"vlc" #can play some files/DVDs that mpv can't. Also, good title selection for DVDs.
+]

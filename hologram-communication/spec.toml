@@ -1,0 +1,13 @@
+[package]
+name = "hologram-communication"
+version = "0.1"
+release = 1
+description = "communication programs (for use with a GUI)"
+requires = [
+	"hologram-gui",
+
+	"firefox",
+	"hexchat",
+	"irssi",
+	"telegram-desktop",
+]

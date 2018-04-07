@@ -1,0 +1,12 @@
+[package]
+name = "hologram-graphics"
+version = "0.1"
+release = 1
+description = "graphics and drawing programs"
+requires = [
+	"hologram-gui",
+
+	"blender",
+	"graphviz",
+	"shotwell",
+]

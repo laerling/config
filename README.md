@@ -14,8 +14,10 @@ It assumes the disk has been partitioned and the base system has been bootstrapp
 ## FIXMEs and TODOs
 - Bump version numbers to 1.x as soon as all holograms are in place
 - Apply locales for each hologram_lang* to vconsole.conf too
+- Make make return non-zero when a holo-build failed
 - move aliases from bash.bashrc to fitting holograms (use #!/usr/bin/tee -a respectively)
-- Use ART
+- Prompt user for password for laerling (passwd somehow doesn't work in the [[action]] hook)
+- Use ART (?)
 - Rerun GRUB config after holodeck install in order to include the intel-ucode initrd
 - Roll out WHEEL in sudoers with hologram-base
 - Move systemd out of init.sh (used for dhcp handling there) into base or something. Use systemd matching on interface to abstract from LAN NIC.
