@@ -1,7 +1,9 @@
 # config
-This should bundle as much config as possible
+This should bundle as much config as possible.
+It assumes the disk has been partitioned and the base system has been bootstrapped.
 
-# holo conventions
+
+## holo conventions
 - hologram packages shall be named `hologram-name` where `name` is an arbitrary descriptive name, e. g. `hologram-games`
 - In the tree (see above) holograms are displayed not by their actual package name but by the name of their ambiguators (The directory names used below `/usr/share/holo/*/`).
 - The number of a disambiguator shall be two digits long and as low as possible without being lower than the number of any dependency. The following exceptions exist:
@@ -9,13 +11,13 @@ This should bundle as much config as possible
 	- The number of the disambiguator of a holodeck shall be `99` always. No hologram must have this number.
 
 
-# FIXMEs and TODOs (not in any particular order)
+## FIXMEs and TODOs (not in any particular order)
+- move aliases from bash.bashrc to fitting holograms
 - Use ART
 - Rerun GRUB config after holodeck install in order to include the intel-ucode initrd
 - Roll out WHEEL in sudoers with hologram-base
 - Move systemd out of init.sh (used for dhcp handling there) into base or something. Use systemd matching on interface to abstract from LAN NIC.
 - Use #!/usr/bin/tee -a in bash.bashrc
-- move aliases from bash.bashrc to fitting holograms
 - C3D2 chat (z. B. profanity, (oder, falls einfachere Bedienung als profanity, bitlbee oder irssi+irssi-xmpp))
 - shell prompt by pattern <git-repo-name>/path/to/subdir/
 - Put recommendations for AUR packages into holograms?
