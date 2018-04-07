@@ -33,6 +33,10 @@ holograms:
 		cd ..; \
 	)
 
+tree: tree.png
+tree.png: tree.dot
+	dot -Tpng tree.dot > tree.png
+
 clean:
 	# remove package files
 	rm -f holodeck-*/$(package_files)

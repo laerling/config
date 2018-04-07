@@ -1,0 +1,37 @@
+strict digraph G{
+
+hd_laptop[label="99-laptop", shape=box];
+hd_laptop -> base;
+hd_laptop -> multimedia;
+hd_laptop -> dev;
+
+
+base[label="00-base"]; #every holodeck depends on this
+
+multimedia[label="03-multimedia"];
+multimedia -> video;
+multimedia -> audio;
+multimedia -> graphics;
+multimedia -> communication;
+
+dev[label="02-dev"];
+dev -> gui;
+
+
+communication[label="02-communication"];
+communication -> gui;
+
+video[label="02-video"];
+video -> gui;
+
+audio[label="01-audio"];
+
+graphics[label="01-graphics"];
+graphics -> gui;
+
+latex[label="01-latex"];
+
+
+gui[label="01-gui"];
+
+}

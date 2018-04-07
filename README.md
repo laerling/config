@@ -1,9 +1,13 @@
 # config
-This should bundle as much config as possible.
+
+This repo shall bundle as much config as possible.
 It assumes the disk has been partitioned and the base system has been bootstrapped.
 
 
 ## holo conventions
+
+![hologram dependency tree rendering](./tree.png)
+
 - hologram packages shall be named `hologram-name` where `name` is an arbitrary descriptive name, e. g. `hologram-games`
 - In the tree (see above) holograms are displayed not by their actual package name but by the name of their ambiguators (The directory names used below `/usr/share/holo/*/`).
 - The number of a disambiguator shall be two digits long and as low as possible without being lower than the number of any dependency. The following exceptions exist:
@@ -45,3 +49,4 @@ It assumes the disk has been partitioned and the base system has been bootstrapp
 - hologram-games
   - steam (multilib, but activate here, not in hologram-base. Pay attention, for it might already be activated)
 - Replace dolphin with another mtp-capable graphical file manager like nautilus, nemo, this awesome file manager I once tried, ...
+- hologram-latex: What was scribus for again?
