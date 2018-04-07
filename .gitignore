@@ -1,3 +1,6 @@
 *~
 \#*
-repo
+*#
+*.pkg.tar.xz
+temptest*
+repo*

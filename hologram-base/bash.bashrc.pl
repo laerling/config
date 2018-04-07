@@ -18,6 +18,7 @@ print "
 ##aliases
 
 #basic aliases
+alias ..='cd ..'
 alias cd..='cd ..'
 alias ls='ls --color=auto'
 alias l='ls -b' # -b = use c-like escape sequences instead of ticks (a\\ whitespace instead of 'a whitespace')

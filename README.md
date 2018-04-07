@@ -11,7 +11,9 @@ It assumes the disk has been partitioned and the base system has been bootstrapp
 	- The number of the disambiguator of a holodeck shall be `99` always. No hologram must have this number.
 
 
-## FIXMEs and TODOs (not in any particular order)
+## FIXMEs and TODOs
+- Bump version numbers to 1.x as soon as all holograms are in place
+- Apply locales for each hologram_lang* to vconsole.conf too
 - move aliases from bash.bashrc to fitting holograms (use #!/usr/bin/tee -a respectively)
 - Use ART
 - Rerun GRUB config after holodeck install in order to include the intel-ucode initrd
@@ -40,3 +42,4 @@ It assumes the disk has been partitioned and the base system has been bootstrapp
 - xterm config (?) (https://wiki.archlinux.de/title/Xterm) (color, font)
 - hologram-games
   - steam (multilib, but activate here, not in hologram-base. Pay attention, for it might already be activated)
+- Replace dolphin with another mtp-capable graphical file manager like nautilus, nemo, this awesome file manager I once tried, ...
