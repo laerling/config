@@ -16,7 +16,7 @@ It assumes the disk has been partitioned and the base system has been bootstrapp
 
 
 ## FIXMEs and TODOs
-- Apply locales for each hologram_lang* to vconsole.conf too
+- DHCP (but no long waiting when IF down)
 - Make make return non-zero when a holo-build failed
 - move aliases from bash.bashrc to fitting holograms (use #!/usr/bin/tee -a respectively)
 - Prompt user for password for laerling (passwd somehow doesn't work in the [[action]] hook)

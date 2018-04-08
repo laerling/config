@@ -1,7 +1,7 @@
 [package]
 name = "hologram-lang_no"
 provides = [ "hologram-lang" ]
-version = "2.1"
+version = "2.2"
 release = 1
 description = "norwegian locales for X"
 requires = [
@@ -11,3 +11,8 @@ requires = [
 path = "/etc/X11/xorg.conf.d/00-keyboard.conf"
 mode = "0644"
 contentFrom = "keyboard.conf"
+
+[[file]]
+path = "/etc/vconsole.conf"
+mode = "0644"
+contentFrom = "vconsole.conf"
