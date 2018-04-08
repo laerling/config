@@ -1,6 +1,6 @@
 [package]
 name = "hologram-dev"
-version = "0.1"
+version = "1.0"
 release = 1
 description = "packages and configuration for software development"
 requires = [

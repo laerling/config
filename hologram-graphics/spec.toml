@@ -1,6 +1,6 @@
 [package]
 name = "hologram-graphics"
-version = "0.1"
+version = "1.0"
 release = 1
 description = "graphics and drawing programs"
 requires = [

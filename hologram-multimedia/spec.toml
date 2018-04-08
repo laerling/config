@@ -1,6 +1,6 @@
 [package]
 name = "hologram-multimedia"
-version = "0.1"
+version = "1.0"
 release = 1
 description = "Bundle with video, graphics, audio, communication, and games"
 requires = [

@@ -1,6 +1,6 @@
 [package]
 name = "hologram-communication"
-version = "0.1"
+version = "1.0"
 release = 1
 description = "communication programs (for use with a GUI)"
 requires = [

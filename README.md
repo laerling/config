@@ -16,7 +16,6 @@ It assumes the disk has been partitioned and the base system has been bootstrapp
 
 
 ## FIXMEs and TODOs
-- Bump version numbers to 1.x as soon as all holograms are in place
 - Apply locales for each hologram_lang* to vconsole.conf too
 - Make make return non-zero when a holo-build failed
 - move aliases from bash.bashrc to fitting holograms (use #!/usr/bin/tee -a respectively)

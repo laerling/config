@@ -1,6 +1,6 @@
 [package]
 name = "hologram-gui"
-version = "0.3"
+version = "1.0"
 release = 1
 description = "X configuration and i3 wm"
 requires = [
