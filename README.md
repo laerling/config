@@ -16,7 +16,11 @@ It assumes the disk has been partitioned and the base system has been bootstrapp
 
 
 ## FIXMEs and TODOs
-- DHCP (but no long waiting when IF down)
+- Terminal: Don't beep. Add /etc/modprobe.d/nobeep.conf with content "blacklist pcspkr" to hologram-base
+- DHCP (but no long waiting when IF down) >See majewsky/system-configuration/holodeck-krikkit (also the # network setup: systemd-resolved is important!)
+- wpa_supplicant (see holodeck-krikkit)
+- eswitch: Force replacing .emacs.d by symlink when it's not a symlink
+- eswitch: When switching, ask if .emacs.d shall be replaced by symlink if it's not a symlink
 - Make make return non-zero when a holo-build failed
 - move aliases from bash.bashrc to fitting holograms (use #!/usr/bin/tee -a respectively)
 - Prompt user for password for laerling (passwd somehow doesn't work in the [[action]] hook)
@@ -49,3 +53,5 @@ It assumes the disk has been partitioned and the base system has been bootstrapp
   - steam (multilib, but activate here, not in hologram-base. Pay attention, for it might already be activated)
 - Replace dolphin with another mtp-capable graphical file manager like nautilus, nemo, this awesome file manager I once tried, ...
 - hologram-latex: What was scribus for again?
+- Replace Shift+4 with $ on X for norwegian keyboard layout
+- Remove slockhib completely? I only use slocksus and hibernation does not work with encrypted swap anyway. Given, that I even use swap.
