@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# check .emacs.d
-if [ -e ~/.emacs.d ] && [ ! -L ~/.emacs.d ]; then
+# check .emacs.d if argument supplied
+if [ -n "$1"  -a  -e ~/.emacs.d  -a  ! -L ~/.emacs.d ]; then
 	echo "$HOME/.emacs.d is not a symbolic link";
 	exit;
 fi
@@ -11,7 +11,7 @@ fi
 
 if [ -z "$1" ]; then
 
-	# get current distro
+	# get current distro if present
 	if [ -L ~/.emacs.d ]; then
 		curdist=$(readlink ~/.emacs.d | grep -o '.emacs.d-.\+' | cut -d'-' -f 2-);
 	fi
