@@ -1,9 +1,18 @@
-.PHONY: holo-repo_registration config-repo_registration repo holodecks holograms tree clean
+.PHONY: packages_update packages_upgrade holo-repo_registration config-repo_registration repo holodecks holograms tree clean
 package_files=*.pkg.tar.xz
 repo_dir=repo
 repo_name=config
 
-config-repo_registration: repo
+packages_update: repo
+	pacman -Sy;
+
+packages_upgrade: packages_update
+	pacman -S --needed holo*
+
+repo: /usr/bin/holo-build /usr/bin/holo config-repo_registration clean holograms holodecks
+	repo-add $(repo_dir)/$(repo_name).db.tar.gz $(repo_dir)/$(package_files)
+
+config-repo_registration:
 	@if [[ $EUID -ne 0 ]]; then \
 		echo -e "make $@ must be run as root." 1>&2; exit 1; fi;
 	@if [ ! $(shell grep '^\[$(repo_name)\]' /etc/pacman.conf) ]; then \
@@ -11,9 +20,6 @@ config-repo_registration: repo
 	else \
 		echo "$(repo_name) already registered in pacman.conf"; \
 	fi
-
-repo: /usr/bin/holo-build /usr/bin/holo clean holograms holodecks
-	repo-add $(repo_dir)/$(repo_name).db.tar.gz $(repo_dir)/$(package_files)
 
 /usr/bin/holo-build: /usr/bin/holo
 
