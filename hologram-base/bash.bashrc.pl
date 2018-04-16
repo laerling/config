@@ -59,10 +59,6 @@ alias emacs='emacs -nw'
 alias eq='emacs -q'
 alias e=emacs
 
-# other programs
-alias telegram=telegram-cli
-alias tg=telegram
-
 # Multimedia
 alias mpv='mpv --audio-display=no'
 alias mpvall='mpv --loop-playlist --shuffle '
