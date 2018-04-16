@@ -18,8 +18,8 @@ xterm*altSendsEscape: true
 #xterm*foreground: #00ff00
 
 # blue
-#xterm*background: #222222
-#xterm*foreground: #6fe7ea
+xterm*background: #222222
+xterm*foreground: #6fe7ea
 
 # TeX exchange
 #xterm*background: #fdfdf5
