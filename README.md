@@ -48,7 +48,6 @@ It assumes the disk has been partitioned and the base system has been bootstrapp
   - Plugin
     - umatrix
     - Decentraleyes
-- hologram-video: chrome +media.ccc.de as startpage
 - vlc config (Allow only one instance, Enqueue items into playlist in one instance mode, use dark theme)
 - xterm config (?) (https://wiki.archlinux.de/title/Xterm) (color, font)
 - hologram-games
