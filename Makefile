@@ -1,4 +1,4 @@
-.PHONY: update upgrade holo-repo_registration config-repo_registration repo holodecks holograms tree clean
+.PHONY: update upgrade holo-repo_registration config-repo_registration whole_repo repo holodecks holograms tree clean
 package_files=*.pkg.tar.xz
 repo_dir=repo
 repo_name=config
@@ -9,7 +9,9 @@ update: repo
 upgrade: update
 	pacman -Su;
 
-repo: /usr/bin/holo-build /usr/bin/holo config-repo_registration clean holograms holodecks
+whole_repo: /usr/bin/holo-build /usr/bin/holo config-repo_registration repo_only
+
+repo: clean holograms holodecks
 	repo-add $(repo_dir)/$(repo_name).db.tar.gz $(repo_dir)/$(package_files)
 
 config-repo_registration:
