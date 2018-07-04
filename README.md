@@ -14,6 +14,20 @@ It assumes the disk has been partitioned and the base system has been bootstrapp
 	- The number of the disambiguator of `hologram-base` shall be `00` always. No other hologram must have this number. This means that other holograms have at least `01`. Every holodeck must depend on `hologram-base`.
 	- The number of the disambiguator of a holodeck shall be `99` always. No hologram must have this number.
 
+## Building
+On a blank system, run `make all`.
+After changing something, just run `make`. The changes are then being installed.
+
+The following important targets are defined in the Makefile:
+- `all`: Install holo and holo-build, make the config repository, and register it
+- `repo`: Build holodecks and holograms and put them into the repository
+- `holodecks`, `holograms`: Build holodecks and holograms, respectively
+
+The following dependency targets might be useful as well:
+- `holo-repo_registration`: Register the `holo` repo in `/etc/pacman.conf` (contains holo and holo-build)
+- `config-repo_registration`: Register the `config` repo in `/etc/pacman.conf` (contains the holodecks and holograms)
+- `/usr/bin/holo-build`, `/usr/bin/holo`: Download signing keys and install `holo` and `holo-build`
+
 
 ## FIXMEs and TODOs
 - holodecks: Add user to sudoers

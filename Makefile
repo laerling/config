@@ -3,13 +3,13 @@ package_files=*.pkg.tar.xz
 repo_dir=repo
 repo_name=config
 
-update: repo
-	sudo pacman -Sy;
-
 upgrade: update
 	sudo pacman -Su;
 
-whole_repo: /usr/bin/holo-build /usr/bin/holo config-repo_registration repo
+update: repo
+	sudo pacman -Sy;
+
+all: /usr/bin/holo-build /usr/bin/holo repo config-repo_registration update
 
 repo: clean holograms holodecks
 	repo-add $(repo_dir)/$(repo_name).db.tar.gz $(repo_dir)/$(package_files)
