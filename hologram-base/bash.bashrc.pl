@@ -55,7 +55,6 @@ alias gitr='git remote -v'       ; alias gr='git remote -v'
 alias gits='git status'          ; alias gs='git status' # might shadow ghostscript
 
 # editors
-alias emacs='emacs -nw'
 alias eq='emacs -q'
 alias e=emacs
 
