@@ -17,3 +17,14 @@ s/Mod1/Mod4/
 
 # font (optional. The default one looks nice, too)
 #s/\(font pango:\).\+/\1adobe-source-code-pro 9/
+
+# Add color codes to the end of the file
+$a\
+\
+#color-class             border   backgr.  text     indicator  child_border\
+client.focused           #224422  #224422  #00ff00  #000000    #000000\
+client.focused_inactive  #222222  #222222  #22ee22  #222222    #222222\
+client.unfocused         #111111  #111111  #11cc11  #111111    #111111\
+client.urgent            #aa0000  #aa0000  #000000  #000000    #000000\
+client.placeholder       #000000  #000000  #00ff00  #000000    #000000\
+client.background        #000000
