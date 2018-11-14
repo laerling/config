@@ -1,6 +1,6 @@
 [package]
 name = "hologram-dev"
-version = "1.3"
+version = "1.6"
 release = 1
 description = "packages and configuration for software development"
 requires = [
@@ -34,6 +34,12 @@ contentFrom = "emacsq.sh"
 [[symlink]]
 path = "/usr/bin/eq"
 target = "/usr/bin/emacsq"
+
+
+[[file]]
+path = "/usr/share/holo/files/02-dev/etc/bash.bashrc.holoscript"
+mode = "0755"
+contentFrom = "bash.bashrc.pl"
 
 
 # git

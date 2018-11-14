@@ -4,6 +4,7 @@ use warnings;
 
 system("rm -f /home/*/.bashrc"); # Don't let ~/.bashrc overwrite the settings in bash.bashrc
 
+# print contents of already existing file, substituting prompt variable
 while(<>){
     if($_ =~ /^PS1/){
 	print "PS1='\\t \\w <\\u@\\h> '\n";
@@ -12,7 +13,7 @@ while(<>){
     }
 }
 
-# aliases
+# append
 print "
 
 ##aliases
