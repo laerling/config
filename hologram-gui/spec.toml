@@ -1,6 +1,6 @@
 [package]
 name = "hologram-gui"
-version = "1.2"
+version = "1.4"
 release = 1
 description = "X configuration and i3 wm"
 requires = [
@@ -29,13 +29,12 @@ requires = [
 	# standard programs depending on GUI
 	"evince",
 	"slock",
-	"nitrogen",
 
 	# other programs (not games, communication, audio or video)
 	"dolphin",
 	"kolourpaint",
 	"scrot",
-	"shotwell",
+	"feh",
 	"xsel",
 ]
 
