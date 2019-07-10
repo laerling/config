@@ -4,7 +4,7 @@ repo_dir=repo
 repo_name=config
 
 upgrade: update
-	sudo pacman -Su;
+	yes | sudo pacman -Su;
 
 update: repo
 	sudo pacman -Sy;
