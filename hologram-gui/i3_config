@@ -38,7 +38,8 @@ bindsym Mod4+m bar mode toggle
 floating_modifier Mod4
 
 # start a terminal
-bindsym Mod4+Return exec i3-sensible-terminal
+# usually you should call i3-sensible-terminal, because it is distribution-agnostic
+bindsym Mod4+Return exec gnome-terminal
 
 # kill focused window
 bindsym Mod4+Shift+q kill

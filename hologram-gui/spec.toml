@@ -1,6 +1,6 @@
 [package]
 name = "hologram-gui"
-version = "1.5"
+version = "1.8"
 release = 1
 description = "X configuration and i3 wm"
 requires = [
@@ -13,7 +13,7 @@ requires = [
 	"xorg-xinit",
 
 	# console
-	"xterm",
+	"gnome-terminal",
 
 	# window manager (with status bar and application starter)
 	"i3-wm",
