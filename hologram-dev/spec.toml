@@ -1,6 +1,6 @@
 [package]
 name = "hologram-dev"
-version = "1.6"
+version = "1.7"
 release = 1
 description = "packages and configuration for software development"
 requires = [
@@ -37,9 +37,9 @@ target = "/usr/bin/emacsq"
 
 
 [[file]]
-path = "/usr/share/holo/files/02-dev/etc/bash.bashrc.holoscript"
+path = "/etc/profile.d/hologram-dev.sh"
 mode = "0755"
-contentFrom = "bash.bashrc.pl"
+contentFrom = "profile.sh"
 
 
 # git
