@@ -1,6 +1,6 @@
 [package]
 name = "hologram-gui"
-version = "1.4"
+version = "1.5"
 release = 1
 description = "X configuration and i3 wm"
 requires = [
@@ -55,9 +55,9 @@ mode = "0755"
 contentFrom = "inputrc.sed"
 
 [[file]]
-path = "/usr/share/holo/files/01-gui/etc/i3/config.holoscript"
+path = "/usr/share/holo/files/01-gui/etc/i3/config"
 mode = "0755"
-contentFrom = "i3_config.sed"
+contentFrom = "i3_config"
 
 [[file]] #nitrogen, i3
 path = "/usr/share/holo/files/01-gui/etc/X11/xinit/xinitrc.holoscript"
