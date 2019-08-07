@@ -1,21 +1,12 @@
 # config
 
 This repo shall bundle as much config as possible.
-It assumes the disk has been partitioned and the base system has been bootstrapped.
+Currently it only works with Arch Linux systems.
+It assumes the disk has been partitioned and the `base` package group has been pacstrapped.
 
-
-## holo conventions
-
-![hologram dependency tree rendering](./tree.png)
-
-- hologram packages shall be named `hologram-name` where `name` is an arbitrary descriptive name, e. g. `hologram-games`
-- In the tree (see above) holograms are displayed not by their actual package name but by the name of their ambiguators (The directory names used below `/usr/share/holo/*/`).
-- The number of a disambiguator shall be two digits long and as low as possible without being lower than the number of any dependency. The following exceptions exist:
-	- The number of the disambiguator of `hologram-base` shall be `00` always. No other hologram must have this number. This means that other holograms have at least `01`. Every holodeck must depend on `hologram-base`.
-	- The number of the disambiguator of a holodeck shall be `99` always. No hologram must have this number.
 
 ## Building
-On a blank system, run `make all`.
+On a blank system with just the 'base' group and the root user, run `./bootstrap.sh`.
 After changing something, just run `make`. The changes are then being installed.
 
 The following important targets are defined in the Makefile:
@@ -27,6 +18,17 @@ The following dependency targets might be useful as well:
 - `holo-repo_registration`: Register the `holo` repo in `/etc/pacman.conf` (contains holo and holo-build)
 - `config-repo_registration`: Register the `config` repo in `/etc/pacman.conf` (contains the holodecks and holograms)
 - `/usr/bin/holo-build`, `/usr/bin/holo`: Download signing keys and install `holo` and `holo-build`
+
+
+## holo conventions
+
+![hologram dependency tree rendering](./tree.png)
+
+- hologram packages shall be named `hologram-name` where `name` is an arbitrary descriptive name, e. g. `hologram-games`
+- In the tree (see above) holograms are displayed not by their actual package name but by the name of their ambiguators (The directory names used below `/usr/share/holo/*/`).
+- The number of a disambiguator shall be two digits long and as low as possible without being lower than the number of any dependency. The following exceptions exist:
+	- The number of the disambiguator of `hologram-base` shall be `00` always. No other hologram must have this number. This means that other holograms have at least `01`. Every holodeck must depend on `hologram-base`.
+	- The number of the disambiguator of a holodeck shall be `99` always. No hologram must have this number.
 
 
 ## FIXMEs and TODOs
