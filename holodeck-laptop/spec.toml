@@ -1,6 +1,6 @@
 [package]
 name = "holodeck-laptop"
-version = "1.0"
+version = "1.1"
 release = 1
 description = "configuration of laptop"
 requires = [
@@ -37,3 +37,21 @@ shell   = "/bin/bash"
 path = "/usr/share/holo/files/99-home/etc/X11/xinit/xinitrc.holoscript"
 mode = "0755"
 contentFrom = "xinitrc.pl"
+
+
+# networking
+
+[[symlink]]
+# as created by `systemctl enable dhcpcd`
+path = "/etc/systemd/system/multi-user.target.wants/dhcpcd.service"
+target = "/usr/lib/systemd/system/dhcpcd.service"
+
+[[symlink]]
+# as created by `systemctl enable systemd-resolved`
+path = "/etc/systemd/system/dbus-org.freedesktop.resolve1.service"
+target = "/usr/lib/systemd/system/systemd-resolved.service"
+
+[[symlink]]
+# as created by `systemctl enable systemd-resolved`
+path = "/etc/systemd/system/multi-user.target.wants/systemd-resolved.service"
+target = "/usr/lib/systemd/system/systemd-resolved.service"
