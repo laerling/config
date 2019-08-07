@@ -4,10 +4,10 @@ repo_dir=repo
 repo_name=config
 
 upgrade: update
-	yes | sudo pacman -Su;
+	yes | su root -c 'pacman -Su';
 
 update: repo
-	sudo pacman -Sy;
+	su root -c 'pacman -Sy';
 
 all: /usr/bin/holo-build /usr/bin/holo repo config-repo_registration update
 
@@ -16,7 +16,7 @@ repo: clean holograms holodecks
 
 config-repo_registration:
 	@if [ -z $(shell grep '^\[$(repo_name)\]' /etc/pacman.conf) ]; then \
-		sudo bash -c 'echo -e "\n[$(repo_name)]\nSigLevel = Optional TrustAll\nServer = file://$(shell pwd)/$(repo_dir)" >> /etc/pacman.conf'; \
+		su root -c 'echo -e "\n[$(repo_name)]\nSigLevel = Required TrustAll\nServer = file://$(shell pwd)/$(repo_dir)" >> /etc/pacman.conf'; \
 	else \
 		echo "$(repo_name) already registered in pacman.conf"; \
 	fi
@@ -24,15 +24,15 @@ config-repo_registration:
 /usr/bin/holo-build: /usr/bin/holo
 
 /usr/bin/holo: holo-repo_registration
-	sudo pacman-key --init;
-	sudo pacman-key --populate archlinux;
-	sudo pacman-key -r 0xF7A9C9DC4631BD1A;
+	su root -c 'pacman-key --init';
+	su root -c 'pacman-key --populate archlinux';
+	su root -c 'pacman-key -r 0xF7A9C9DC4631BD1A'; # if this fails, try it on a live system and comment this line out
 	if ! pacman-key -f 0xF7A9C9DC4631BD1A | grep -o "2A53 49F6 B4D7 305A 85DE  D8D4 F7A9 C9DC 4631 BD1A"; then \
 		echo -e "FATAL ERROR: The holo signing key has the wrong fingerprint. Check manually! Aborting." 1>&2; exit 1; \
 	fi
-	sudo pacman-key --lsign-key 0xF7A9C9DC4631BD1A;
-	sudo pacman -Sy;
-	yes | sudo pacman -S --needed holo holo-build;
+	su root -c 'pacman-key --lsign-key 0xF7A9C9DC4631BD1A';
+	su root -c 'pacman -Sy';
+	yes | su root -c 'pacman -S --needed holo holo-build';
 
 holo-repo_registration:
 	@if [ ! $(shell grep '^\[holo\]' /etc/pacman.conf) ]; then \
