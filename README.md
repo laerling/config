@@ -32,7 +32,6 @@ The following dependency targets might be useful as well:
 
 
 ## FIXMEs and TODOs
-- holodecks: Add user to sudoers
 - Makefile: Don't "remake" holo and holo-build, be happy when they are simply there, no matter how old. Like --assume-old, but without writing that explicitely on the command line
 - Terminal: Don't beep. Add /etc/modprobe.d/nobeep.conf with content "blacklist pcspkr" to hologram-base
 - DHCP (but no long waiting when IF down) >See majewsky/system-configuration/holodeck-krikkit (also the # network setup: systemd-resolved is important!)
