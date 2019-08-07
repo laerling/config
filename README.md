@@ -7,7 +7,7 @@ It assumes the disk has been partitioned and the `base` package group has been p
 
 ## Building
 On a blank system with just the 'base' group and the root user, run `./bootstrap.sh`.
-After changing something, just run `make`. The changes are then being installed.
+After changing something, just run `sudo make`. The changes are then being installed.
 
 The following important targets are defined in the Makefile:
 - `all`: Install holo and holo-build, make the config repository, and register it
@@ -65,10 +65,10 @@ The following dependency targets might be useful as well:
     - umatrix
     - Decentraleyes
 - vlc config (Allow only one instance, Enqueue items into playlist in one instance mode, use dark theme)
-- xterm config (?) (https://wiki.archlinux.de/title/Xterm) (color, font)
 - hologram-games
   - steam (multilib, but activate here, not in hologram-base. Pay attention, for it might already be activated)
 - Replace dolphin with another mtp-capable graphical file manager like nautilus, nemo, this awesome file manager I once tried, ...
 - hologram-latex: What was scribus for again?
 - Replace Shift+4 with $ on X for norwegian keyboard layout
 - Remove slockhib completely? I only use slocksus and hibernation does not work with encrypted swap anyway. Given, that I even use swap.
+- Use a terminal that doesn't rely on a server part and thus is usable on several ttys
