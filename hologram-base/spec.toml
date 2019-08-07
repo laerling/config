@@ -1,6 +1,6 @@
 [package]
 name = "hologram-base"
-version = "1.5"
+version = "1.6"
 release = 1
 description = "Minimal configuration"
 requires = [
@@ -20,7 +20,10 @@ requires = [
 ]
 
 
-# bashrc
+[[file]]
+path = "/usr/share/holo/files/00-base/etc/sudoers.holoscript"
+mode = "0755"
+contentFrom = "sudoers.sed"
 
 [[file]]
 path = "/usr/share/holo/files/00-base/etc/bash.bashrc.holoscript"

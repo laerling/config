@@ -1,6 +1,6 @@
 [package]
 name = "holodeck-laptop"
-version = "1.5"
+version = "1.6"
 release = 1
 description = "configuration of laptop"
 requires = [
@@ -31,11 +31,6 @@ path = "/home/laerling"
 mode = "0700"
 owner = 1001
 group = 1001
-
-[[file]]
-path = "/usr/share/holo/files/99-laptop/etc/sudoers.holoscript"
-mode = "0755"
-contentFrom = "sudoers.sed"
 
 
 # xrandr
