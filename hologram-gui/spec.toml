@@ -1,6 +1,6 @@
 [package]
 name = "hologram-gui"
-version = "1.8"
+version = "1.9"
 release = 1
 description = "X configuration and i3 wm"
 requires = [
@@ -24,6 +24,7 @@ requires = [
 	"hologram-lang",
 
 	# fonts
+	"gnu-free-fonts", # replaces ttf-freefont
 	"adobe-source-code-pro-fonts",
 
 	# standard programs depending on GUI

@@ -1,6 +1,6 @@
 [package]
 name = "hologram-base"
-version = "1.4"
+version = "1.5"
 release = 1
 description = "Minimal configuration"
 requires = [
@@ -14,7 +14,6 @@ requires = [
 	"gnu-netcat",
 	"rsync",
 	"tree",
-	"ttf-freefont",
 	"unzip",
 	"vim", # gvim in hologram-dev
 	# no yaourt because that can't be installed as root (due to makepkg), therefore it cannot exist when a holodeck is installed for the first time
