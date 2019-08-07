@@ -1,19 +1,25 @@
-.PHONY: update upgrade holo-repo_registration config-repo_registration whole_repo repo holodecks holograms tree clean
 package_files=*.pkg.tar.xz
 repo_dir=repo
 repo_name=config
 
+
+PHONY+=upgrade
 upgrade: update
 	yes | su root -c 'pacman -Su';
 
+PHONY+=update
 update: repo
 	su root -c 'pacman -Sy';
 
+PHONY+=all
 all: /usr/bin/holo-build /usr/bin/holo repo config-repo_registration update
 
+
+PHONY+=repo
 repo: clean holograms holodecks
 	repo-add $(repo_dir)/$(repo_name).db.tar.gz $(repo_dir)/$(package_files)
 
+PHONY+=config-repo_registration
 config-repo_registration:
 	@if [ -z $(shell grep '^\[$(repo_name)\]' /etc/pacman.conf) ]; then \
 		su root -c 'echo -e "\n[$(repo_name)]\nSigLevel = Optional TrustAll\nServer = file://$(shell pwd)/$(repo_dir)" >> /etc/pacman.conf'; \
@@ -21,8 +27,8 @@ config-repo_registration:
 		echo "$(repo_name) already registered in pacman.conf"; \
 	fi
 
-/usr/bin/holo-build: /usr/bin/holo
 
+/usr/bin/holo-build: /usr/bin/holo
 /usr/bin/holo: holo-repo_registration
 	su root -c 'pacman-key --init';
 	su root -c 'pacman-key --populate archlinux';
@@ -34,6 +40,7 @@ config-repo_registration:
 	su root -c 'pacman -Sy';
 	yes | su root -c 'pacman -S --needed holo holo-build';
 
+PHONY+=holo-repo_registration
 holo-repo_registration:
 	@if [ ! $(shell grep '^\[holo\]' /etc/pacman.conf) ]; then \
 		echo -e "\n[holo]\nSigLevel = TrustAll\nServer = https://repo.holocm.org/archlinux/x86_64" >> /etc/pacman.conf; \
@@ -42,6 +49,7 @@ holo-repo_registration:
 	fi
 
 
+PHONY+=holodecks
 holodecks:
 	$(foreach i, $(wildcard holodeck-*/), \
 		echo "Add holodeck $i"; \
@@ -51,6 +59,7 @@ holodecks:
 		cd ..; \
 	)
 
+PHONY+=holograms
 holograms:
 	$(foreach i, $(wildcard hologram-*/), \
 		echo "Add hologram $i"; \
@@ -60,11 +69,33 @@ holograms:
 		cd ..; \
 	)
 
+
+PHONY+=tree
 tree: tree.png
 
 tree.png: tree.dot
 	dot -Tpng tree.dot > tree.png
 
+
+PHONY+=yaourt
+yaourt: /usr/bin/yaourt
+
+/usr/bin/yaourt:
+	if [ -d package-query ]; then \
+		cd package-query; git pull; cd ..; \
+	else \
+		git clone "https://aur.archlinux.org/package-query.git"; \
+	fi
+	cd package-query; makepkg -si; cd ..;
+	if [ -d yaourt ]; then \
+		cd yaourt; git pull; cd ..; \
+	else \
+		git clone "https://aur.archlinux.org/yaourt.git"; \
+	fi
+	cd yaourt; makepkg -si; cd ..;
+
+
+PHONY+=clean
 clean:
 	# remove package files
 	rm -f holodeck-*/$(package_files)
@@ -72,3 +103,8 @@ clean:
 	# reset repo
 	rm -rf $(repo_dir)
 	mkdir -p $(repo_dir)
+	# remove yaourt build artifacts
+	rm -rf yaourt package-query
+
+
+.PHONY: $(PHONY)

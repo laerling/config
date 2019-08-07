@@ -4,3 +4,5 @@
 *.pkg.tar.xz
 temptest*
 repo*
+package-query
+yaourt
