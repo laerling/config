@@ -13,5 +13,5 @@ requires = [
 
 	"mpv",
 	"youtube-dl",
-	"vlc" #can play some files/DVDs that mpv can't. Also, good title selection for DVDs.
+	"vlc" # can play some files/DVDs that mpv can't. Also, good title selection for DVDs.
 ]

@@ -11,7 +11,7 @@ requires = [
 	"hologram-multimedia",
 
 	"intel-ucode",
-	"xorg-xrandr", # peripheral screens
+	"xorg-xrandr", # for peripheral screens
 ]
 
 
