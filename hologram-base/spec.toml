@@ -1,6 +1,6 @@
 [package]
 name = "hologram-base"
-version = "1.6"
+version = "1.7"
 release = 1
 description = "Minimal configuration"
 requires = [
@@ -13,6 +13,7 @@ requires = [
 	# intel-ucode in holodecks since it is machine specific
 	"gnu-netcat",
 	"rsync",
+	"screen",
 	"tree",
 	"unzip",
 	"vim", # gvim in hologram-dev
