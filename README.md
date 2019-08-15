@@ -36,7 +36,6 @@ The following dependency targets might be useful as well:
 - Makefile: Don't "remake" holo and holo-build, be happy when they are simply there, no matter how old. Like --assume-old, but without writing that explicitely on the command line
 - gnome terminal: Set config (colorscheme tango-dark, ...)
 - Use better terminal than gnome terminal (Gnome terminal is unusable on other tty)
-- Terminal: Don't beep. Add /etc/modprobe.d/nobeep.conf with content "blacklist pcspkr" to hologram-base
 - DHCP (but no long waiting when IF down) >See majewsky/system-configuration/holodeck-krikkit (also the # network setup: systemd-resolved is important!)
 - wpa_supplicant (see holodeck-krikkit)
 - eswitch: Force replacing .emacs.d by symlink when it's not a symlink
