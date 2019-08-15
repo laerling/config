@@ -30,7 +30,6 @@ alias lld='ll -d'
 
 # system tools and dev
 alias grepi='grep -i'
-alias any='ps -e | grepi'
 alias xxd='xxd -c48'
 # git (only commands that output stuff, no commands that actually change stuff, that'd be dangerous)
 alias gita='git add'             ; alias ga='git add'
@@ -54,6 +53,10 @@ alias gitstd='git stash drop'    ; alias gstd='git stash drop'
 # Besides, only commands that output stuff, no commands that actually change stuff, as already stated above
 alias gitr='git remote -v'       ; alias gr='git remote -v'
 alias gits='git status'          ; alias gs='git status' # might shadow ghostscript
+# define any as a function so that it can be called without arguments as well
+function any {
+	ps -e | grep \"\$1\"
+}
 
 # editors
 alias eq='emacs -q'
