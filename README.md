@@ -8,6 +8,7 @@ It assumes the disk has been partitioned and the `base` package group has been p
 ## Building
 On a blank system with just the 'base' group and the root user, run `./bootstrap.sh`.
 After changing something, just run `sudo make`. The changes are then being installed.
+If you only want to update the holodecks and holograms, but not upgrade them, run `sudo make update` (`make` is equal to `make upgrade`).
 
 The following important targets are defined in the Makefile:
 - `all`: Install holo and holo-build, make the config repository, and register it
