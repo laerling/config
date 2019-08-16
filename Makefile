@@ -8,7 +8,7 @@ upgrade: update
 	yes | su root -c 'pacman -Su';
 
 PHONY+=update
-update: repo
+update: clean repo
 	su root -c 'pacman -Sy';
 
 PHONY+=all
@@ -16,7 +16,7 @@ all: /usr/bin/holo-build /usr/bin/holo repo config-repo_registration update
 
 
 PHONY+=repo
-repo: clean holograms holodecks
+repo: holograms holodecks
 	repo-add $(repo_dir)/$(repo_name).db.tar.gz $(repo_dir)/$(package_files)
 
 PHONY+=config-repo_registration
