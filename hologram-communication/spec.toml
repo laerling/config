@@ -1,6 +1,6 @@
 [package]
 name = "hologram-communication"
-version = "1.3"
+version = "1.4"
 release = 1
 description = "communication programs (for use with a GUI)"
 requires = [
@@ -9,4 +9,5 @@ requires = [
 	"firefox",
 	"hexchat",
 	"irssi",
+	"thunderbird",
 ]
