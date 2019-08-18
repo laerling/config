@@ -1,6 +1,6 @@
 [package]
 name = "hologram-base"
-version = "1.10"
+version = "1.13"
 release = 1
 description = "Minimal configuration"
 requires = [
@@ -32,6 +32,6 @@ mode = "0755"
 contentFrom = "bash.bashrc.pl"
 
 [[file]]
-path = "/usr/share/holo/files/00-base/etc/modprobe.d/nobeep.conf"
+path = "/etc/modprobe.d/nobeep.conf"
 mode = "0444"
 content = "blacklist pcspkr"
