@@ -1,6 +1,6 @@
 [package]
 name = "holodeck-laptop"
-version = "1.20"
+version = "1.21"
 release = 1
 description = "configuration of laptop"
 requires = [
@@ -34,7 +34,7 @@ owner = 1001
 group = 1001
 
 
-# xrandr
+# screen setup
 
 [[file]]
 path = "/usr/share/holo/files/99-laptop/etc/X11/xinit/xinitrc.holoscript"
@@ -68,3 +68,18 @@ contentFrom = "wpa_supplicant-wlp2s0.conf"
 # as created by `systemctl enable wpa_supplicant@wlp2s0`
 path = "/etc/systemd/system/multi-user.target.wants/wpa_supplicant@wlp2s0.service"
 target = "/usr/lib/systemd/system/wpa_supplicant@.service"
+
+
+# mount points
+
+[[directory]]
+path = "/mnt/backup"
+mode = "0700"
+owner = 1001
+group = 1001
+
+[[directory]]
+path = "/mnt/archive"
+mode = "0700"
+owner = 1001
+group = 1001
