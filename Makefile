@@ -5,7 +5,7 @@ repo_name=config
 
 PHONY+=upgrade
 upgrade: update
-	yes | su root -c 'pacman -Su';
+	su root -c 'pacman -Su';
 
 PHONY+=update
 update: clean repo
