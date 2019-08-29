@@ -1,6 +1,6 @@
 [package]
 name = "hologram-video"
-version = "1.1"
+version = "1.4"
 release = 1
 description = "Video programs and codecs"
 requires = [
@@ -18,6 +18,14 @@ requires = [
 
 [[file]]
 path = "/usr/bin/yt"
+mode = "0555"
+content = """
+#!/usr/bin/bash
+mpv --ytdl-format=mp4 $(xsel -b)
+"""
+
+[[file]]
+path = "/usr/bin/ythd"
 mode = "0555"
 content = """
 #!/usr/bin/bash
