@@ -1,6 +1,6 @@
 [package]
 name = "hologram-video"
-version = "1.0"
+version = "1.1"
 release = 1
 description = "Video programs and codecs"
 requires = [
@@ -15,3 +15,11 @@ requires = [
 	"youtube-dl",
 	"vlc" # can play some files/DVDs that mpv can't. Also, good title selection for DVDs.
 ]
+
+[[file]]
+path = "/usr/bin/yt"
+mode = "0555"
+content = """
+#!/usr/bin/bash
+mpv $(xsel -b)
+"""
