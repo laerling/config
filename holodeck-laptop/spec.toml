@@ -1,6 +1,6 @@
 [package]
 name = "holodeck-laptop"
-version = "1.23"
+version = "1.24"
 release = 1
 description = "configuration of laptop"
 requires = [
@@ -80,6 +80,26 @@ group = 1001
 
 [[directory]]
 path = "/mnt/archive"
+mode = "0700"
+owner = 1001
+group = 1001
+
+# mount points for USB ports, because why not
+
+[[directory]]
+path = "/mnt/usb0"
+mode = "0700"
+owner = 1001
+group = 1001
+
+[[directory]]
+path = "/mnt/usb1"
+mode = "0700"
+owner = 1001
+group = 1001
+
+[[directory]]
+path = "/mnt/usb2"
 mode = "0700"
 owner = 1001
 group = 1001
