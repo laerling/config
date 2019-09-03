@@ -1,6 +1,6 @@
 [package]
 name = "holodeck-laptop"
-version = "1.25"
+version = "1.29"
 release = 1
 description = "configuration of laptop"
 requires = [
@@ -71,16 +71,26 @@ path = "/etc/systemd/system/multi-user.target.wants/wpa_supplicant@wlp2s0.servic
 target = "/usr/lib/systemd/system/wpa_supplicant@.service"
 
 
-# mount points
+# storage and mount points
+
+[[file]]
+path = "/usr/share/holo/files/99-laptop/etc/fstab.holoscript"
+mode = "0755"
+contentFrom = "fstab.sh"
 
 [[directory]]
-path = "/mnt/backup"
+path = "/mnt/archive"
 mode = "0700"
 owner = 1001
 group = 1001
 
+[[file]]
+path = "/usr/bin/archive"
+mode = "0555"
+contentFrom = "archive.sh"
+
 [[directory]]
-path = "/mnt/archive"
+path = "/mnt/backup"
 mode = "0700"
 owner = 1001
 group = 1001
