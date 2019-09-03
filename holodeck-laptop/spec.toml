@@ -1,6 +1,6 @@
 [package]
 name = "holodeck-laptop"
-version = "1.24"
+version = "1.25"
 release = 1
 description = "configuration of laptop"
 requires = [
@@ -10,9 +10,10 @@ requires = [
 	"hologram-dev",
 	"hologram-multimedia",
 
+	"android-file-transfer",
 	"intel-ucode",
-	"xorg-xrandr", # for peripheral screens
 	"wpa_supplicant",
+	"xorg-xrandr", # for peripheral screens
 ]
 
 
