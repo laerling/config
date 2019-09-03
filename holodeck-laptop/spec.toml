@@ -1,6 +1,6 @@
 [package]
 name = "holodeck-laptop"
-version = "1.29"
+version = "1.30"
 release = 1
 description = "configuration of laptop"
 requires = [
@@ -12,6 +12,7 @@ requires = [
 
 	"android-file-transfer",
 	"intel-ucode",
+	"openssh",
 	"wpa_supplicant",
 	"xorg-xrandr", # for peripheral screens
 ]

@@ -1,11 +1,12 @@
 [package]
 name = "hologram-dev"
-version = "1.9"
+version = "1.11"
 release = 1
 description = "packages and configuration for software development"
 requires = [
 	"hologram-gui",
 
+	"bc",
 	"ed",
 	"emacs",
 	"gdb",
@@ -15,7 +16,6 @@ requires = [
 	"gvim",
 	"nmap",
 	"rust",
-	"bc",
 ]
 
 
