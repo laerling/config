@@ -56,6 +56,7 @@ The following dependency targets might be useful as well:
     - Plugin
       - umatrix
       - Decentraleyes
+      - Tree Style Tab
   - vlc config (Allow only one instance, Enqueue items into playlist in one instance mode, use dark theme)
   - hologram-games
     - steam (multilib, but activate here, not in hologram-base. Pay attention, for it might already be activated)
