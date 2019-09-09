@@ -64,8 +64,9 @@ alias e=emacs
 
 # Multimedia
 alias mpv='mpv --audio-display=no'
-alias mpvall='mpv --loop-playlist --shuffle '
-alias play='mpvall --no-video'
+alias loop='mpv --loop-playlist'
+alias shuffle='loop --shuffle '
+alias play='shuffle --no-video'
 alias music='play ~/Musik'
 
 
