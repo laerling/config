@@ -1,6 +1,6 @@
 [package]
 name = "hologram-multimedia"
-version = "1.3"
+version = "1.4"
 release = 1
 description = "Bundle with video, graphics, audio, communication, and games"
 requires = [
@@ -9,3 +9,8 @@ requires = [
 	"hologram-graphics",
 	"hologram-video",
 ]
+
+[[file]]
+path = "/etc/mpv/mpv.conf"
+mode = "0644"
+content = "audio-display=no"

@@ -62,8 +62,7 @@ function any {
 alias eq='emacs -q'
 alias e=emacs
 
-# Multimedia
-alias mpv='mpv --audio-display=no'
+# Multimedia # TODO move into hologram-multimedia
 alias loop='mpv --loop-playlist'
 alias shuffle='loop --shuffle '
 alias play='shuffle --no-video'
