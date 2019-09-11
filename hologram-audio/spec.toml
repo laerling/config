@@ -1,9 +1,10 @@
 [package]
 name = "hologram-audio"
-version = "1.0"
+version = "1.1"
 release = 1
 description = "basic audio infrastructure"
 requires = [
 	"alsa-utils",
+	"pavucontrol",
 	"pulseaudio-alsa",
 ]
