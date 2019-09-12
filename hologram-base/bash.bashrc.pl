@@ -27,6 +27,8 @@ alias ll='ls -lF'
 alias la='ls -a'
 alias lla='ll -a'
 alias lld='ll -d'
+alias r='rm -r'
+alias rk='r -f'
 
 # system tools and dev
 alias grepi='grep -i'
@@ -62,10 +64,10 @@ function any {
 alias eq='emacs -q'
 alias e=emacs
 
-# Multimedia
-alias mpv='mpv --audio-display=no'
-alias mpvall='mpv --loop-playlist --shuffle '
-alias play='mpvall --no-video'
+# Multimedia # TODO move into hologram-multimedia
+alias loop='mpv --loop-playlist'
+alias shuffle='loop --shuffle '
+alias play='shuffle --no-video'
 alias music='play ~/Musik'
 
 

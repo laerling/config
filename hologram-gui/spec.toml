@@ -1,6 +1,6 @@
 [package]
 name = "hologram-gui"
-version = "1.9"
+version = "1.10"
 release = 1
 description = "X configuration and i3 wm"
 requires = [
@@ -32,7 +32,6 @@ requires = [
 	"slock",
 
 	# other programs (not games, communication, audio or video)
-	"dolphin",
 	"kolourpaint",
 	"scrot",
 	"feh",
