@@ -5,6 +5,10 @@ hd_laptop -> base;
 hd_laptop -> multimedia;
 hd_laptop -> dev;
 
+hd_jarvis[label="99-jarvis", shape=box];
+hd_jarvis -> base;
+hd_jarvis -> dummy;
+
 
 base[label="00-base"]; #every holodeck depends on this
 
@@ -33,5 +37,10 @@ latex[label="01-latex"];
 
 
 gui[label="01-gui"];
+gui -> lang;
+
+lang[label="lang"];
+
+dummy[label="dummy"];
 
 }
