@@ -1,6 +1,6 @@
 [package]
 name = "holodeck-jarvis"
-version = "1.0"
+version = "1.2"
 release = 1
 description = "configuration for raspberry pi 'jarvis'"
 requires = [
@@ -57,3 +57,21 @@ target = "/usr/lib/systemd/system/systemd-resolved.service"
 # as created by `systemctl enable systemd-resolved`
 path = "/etc/systemd/system/multi-user.target.wants/systemd-resolved.service"
 target = "/usr/lib/systemd/system/systemd-resolved.service"
+
+
+# workaround to keep jarvis from switching to boot screen every now and then
+# see https://raspberrypi.stackexchange.com/questions/84240
+[[file]]
+path = "/etc/modprobe.d/nobootscreen.conf"
+mode = "0444"
+content = "blacklist vc4" # vc4 seems to be for hardware graphics acceleration
+
+# keep jarvis from logging kaudit messages to the console all the time
+# see https://raspberrypi.stackexchange.com/questions/351387
+# and https://raspberrypi.stackexchange.com/questions/13019
+# The current setting can be read from /proc/sys/kernel/printk
+# Before adding printk.conf it was 7 4 1 7
+[[file]]
+path = "/etc/sysctl.d/printk.conf"
+mode = "0444"
+content = "kernel.printk = 3 4 1 3"
