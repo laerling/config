@@ -1,0 +1,59 @@
+[package]
+name = "holodeck-jarvis"
+version = "1.0"
+release = 1
+description = "configuration for raspberry pi 'jarvis'"
+requires = [
+	# hologram-dummy provides holo-users-groups and holo-files.
+	# See https://github.com/holocm/holo-build/issues/19
+	"hologram-dummy",
+
+	"hologram-base",
+	"wpa_supplicant",
+]
+
+
+# user
+
+[[user]]
+name    = "laerling"
+system  = false
+comment = "Benjamin Ludwig"
+uid     = 1001
+groups  = [ "audio", "video", "wheel" ]
+home    = "/home/laerling"
+shell   = "/bin/bash"
+
+[[directory]]
+path = "/home/laerling"
+mode = "0700"
+owner = 1001
+group = 1001
+
+
+# networking
+
+# WLAN
+[[file]]
+path = "/etc/wpa_supplicant/wpa_supplicant-wlan0.conf"
+contentFrom = "wpa_supplicant-wlan0.conf"
+[[symlink]]
+# as created by `systemctl enable wpa_supplicant@wlan0`
+path = "/etc/systemd/system/multi-user.target.wants/wpa_supplicant@wlan0.service"
+target = "/usr/lib/systemd/system/wpa_supplicant@.service"
+
+# dhcp
+[[symlink]]
+# as created by `systemctl enable dhcpcd`
+path = "/etc/systemd/system/multi-user.target.wants/dhcpcd.service"
+target = "/usr/lib/systemd/system/dhcpcd.service"
+
+# DNS
+[[symlink]]
+# as created by `systemctl enable systemd-resolved`
+path = "/etc/systemd/system/dbus-org.freedesktop.resolve1.service"
+target = "/usr/lib/systemd/system/systemd-resolved.service"
+[[symlink]]
+# as created by `systemctl enable systemd-resolved`
+path = "/etc/systemd/system/multi-user.target.wants/systemd-resolved.service"
+target = "/usr/lib/systemd/system/systemd-resolved.service"

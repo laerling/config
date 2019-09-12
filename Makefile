@@ -51,7 +51,7 @@ holo-repo_registration:
 
 PHONY+=holodecks
 holodecks:
-	$(foreach i, $(wildcard holodeck-*/), \
+	@$(foreach i, $(wildcard holodeck-*/), \
 		echo "Add holodeck $i"; \
 		cd $i; \
 		holo-build < spec.toml; \
@@ -61,7 +61,7 @@ holodecks:
 
 PHONY+=holograms
 holograms:
-	$(foreach i, $(wildcard hologram-*/), \
+	@$(foreach i, $(wildcard hologram-*/), \
 		echo "Add hologram $i"; \
 		cd $i; \
 		holo-build < spec.toml; \

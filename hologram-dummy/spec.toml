@@ -1,0 +1,10 @@
+[package]
+name = "hologram-dummy"
+provides = [
+	"holo",
+	"holo-files",
+	"holo-users-groups",
+]
+version = "1.0"
+release = 1
+description = "Dummy package, which provides holo, holo-files, and holo-users-groups"
