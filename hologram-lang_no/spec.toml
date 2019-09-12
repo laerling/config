@@ -1,9 +1,9 @@
 [package]
 name = "hologram-lang_no"
 provides = [ "hologram-lang" ]
-version = "2.2"
+version = "3.0"
 release = 1
-description = "norwegian locales for X"
+description = "norwegian locales"
 requires = [
 ]
 
