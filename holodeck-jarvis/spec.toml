@@ -1,6 +1,6 @@
 [package]
 name = "holodeck-jarvis"
-version = "1.2"
+version = "1.5"
 release = 1
 description = "configuration for raspberry pi 'jarvis'"
 requires = [
@@ -10,6 +10,7 @@ requires = [
 
 	"hologram-base",
 	"wpa_supplicant",
+	"polkit", # for using poweroff etc. without sudo
 ]
 
 
