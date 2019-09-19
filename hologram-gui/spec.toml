@@ -13,7 +13,7 @@ requires = [
 	"xorg-xinit",
 
 	# console
-	"gnome-terminal",
+	"guake",
 
 	# window manager (with status bar and application starter)
 	"i3-wm",
@@ -49,7 +49,7 @@ path = "/usr/share/holo/files/01-gui/etc/i3/config"
 mode = "0755"
 contentFrom = "i3_config"
 
-[[file]] #nitrogen, i3
+[[file]]
 path = "/usr/share/holo/files/01-gui/etc/X11/xinit/xinitrc.holoscript"
 mode = "0755"
 contentFrom = "xinitrc.pl"
