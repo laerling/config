@@ -23,8 +23,8 @@ alias ll='ls -lF'
 alias la='ls -a'
 alias lla='ll -a'
 alias lld='ll -d'
-alias r='rm -r'
 alias rk='r -f'
+alias cal='cal -m -3' # start week on Monday and display adjecent months
 
 # system tools and dev
 alias grepi='grep -i'
