@@ -53,7 +53,7 @@ alias gitr='git remote -v'       ; alias gr='git remote -v'
 alias gits='git status'          ; alias gs='git status' # might shadow ghostscript
 # define any as a function so that it can be called without arguments as well
 function any {
-	ps -e | grep "$1"
+	ps -e | grep "\$1"
 }
 
 # editors

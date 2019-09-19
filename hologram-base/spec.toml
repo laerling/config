@@ -1,6 +1,6 @@
 [package]
 name = "hologram-base"
-version = "1.27"
+version = "1.28"
 release = 1
 description = "Minimal configuration"
 requires = [
