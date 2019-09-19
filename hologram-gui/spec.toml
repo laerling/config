@@ -39,16 +39,6 @@ requires = [
 ]
 
 
-# configuration files
-
-[[file]]
-path = "/etc/X11/xinit/Xresources"
-mode = "0644"
-contentFrom = "Xresources"
-
-
-# holoscripts
-
 [[file]]
 path = "/usr/share/holo/files/01-gui/etc/inputrc.holoscript"
 mode = "0755"
