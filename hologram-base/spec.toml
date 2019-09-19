@@ -1,6 +1,6 @@
 [package]
 name = "hologram-base"
-version = "1.18"
+version = "1.27"
 release = 1
 description = "Minimal configuration"
 requires = [
@@ -29,7 +29,7 @@ contentFrom = "sudoers_wheel"
 [[file]]
 path = "/usr/share/holo/files/00-base/etc/bash.bashrc.holoscript"
 mode = "0755"
-contentFrom = "bash.bashrc.pl"
+contentFrom = "bashrc.sh"
 
 [[file]]
 path = "/etc/modprobe.d/nobeep.conf"

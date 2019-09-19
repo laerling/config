@@ -1,20 +1,16 @@
-#!/usr/bin/perl
-use strict;
-use warnings;
+#!/usr/bin/bash
 
-system("rm -f /home/*/.bashrc"); # Don't let ~/.bashrc overwrite the settings in bash.bashrc
+# Don't let ~/.bashrc overwrite the settings in bash.bashrc
+rm -f /home/*/.bashrc
 
-# print contents of already existing file, substituting prompt variable
-while(<>){
-    if($_ =~ /^PS1/){
-	print "PS1='\\t \\w <\\u@\\h> '\n";
-    }else{
-	print;
-    }
-}
+# print contents of already existing file
+cat -
 
 # append
-print "
+cat <<EOF
+
+# overwrite prompt variable
+PS1='\t \w <\u@\h> '
 
 ##aliases
 
@@ -22,7 +18,7 @@ print "
 alias ..='cd ..'
 alias cd..='cd ..'
 alias ls='ls --color=auto'
-alias l='ls -b' # -b = use c-like escape sequences instead of ticks (a\\ whitespace instead of 'a whitespace')
+alias l='ls -b' # -b = use c-like escape sequences instead of ticks (a\ whitespace instead of 'a whitespace')
 alias ll='ls -lF'
 alias la='ls -a'
 alias lla='ll -a'
@@ -57,7 +53,7 @@ alias gitr='git remote -v'       ; alias gr='git remote -v'
 alias gits='git status'          ; alias gs='git status' # might shadow ghostscript
 # define any as a function so that it can be called without arguments as well
 function any {
-	ps -e | grep \"\$1\"
+	ps -e | grep "$1"
 }
 
 # editors
@@ -70,8 +66,17 @@ alias shuffle='loop --shuffle '
 alias play='shuffle --no-video'
 alias music='play ~/Musik'
 
-
 #custom variables
 export EDITOR='emacs -nw'
 export VISUAL=vim
-"
+
+# colors for less
+export LESS_TERMCAP_mb=$'\e[1;32m'
+export LESS_TERMCAP_md=$'\e[1;32m'
+export LESS_TERMCAP_me=$'\e[0m'
+export LESS_TERMCAP_se=$'\e[0m'
+export LESS_TERMCAP_so=$'\e[01;33m'
+export LESS_TERMCAP_ue=$'\e[0m'
+export LESS_TERMCAP_us=$'\e[1;4;31m'
+
+EOF
