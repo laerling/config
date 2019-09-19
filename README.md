@@ -3,12 +3,13 @@
 This repo shall bundle as much config as possible.
 Currently it only works with Arch Linux systems.
 It assumes the disk has been partitioned and the `base` package group has been pacstrapped.
+Also, the hostname has to be set manually (write it to /etc/hostname).
 
 
 ## Building
-On a blank system with just the 'base' group and the root user, run `./bootstrap.sh`.
-After changing something, just run `sudo make`. The changes are then being installed.
-If you only want to update the holodecks and holograms, but not upgrade them, run `sudo make update` (`make` is equal to `make upgrade`).
+On a blank system with just the 'base' group and the root user, just run `./bootstrap.sh`.
+After changing something, run `sudo make`. The changes are then being installed.
+This upgrades the whole system. If you want to only update the package databases, run `sudo make update`.
 
 The following important targets are defined in the Makefile:
 - `all`: Install holo and holo-build, make the config repository, and register it

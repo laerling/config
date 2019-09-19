@@ -4,10 +4,7 @@ version = "1.7"
 release = 1
 description = "configuration for raspberry pi 'jarvis'"
 requires = [
-	# hologram-dummy provides holo-users-groups and holo-files.
-	# See https://github.com/holocm/holo-build/issues/19
-	"hologram-dummy",
-
+	"hologram-dummy", # because holo is not packaged yet for arm
 	"hologram-base",
 	"wpa_supplicant",
 	"polkit", # for using poweroff etc. without sudo

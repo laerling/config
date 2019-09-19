@@ -7,4 +7,4 @@ provides = [
 ]
 version = "1.0"
 release = 1
-description = "Dummy package, which provides holo, holo-files, and holo-users-groups"
+description = "Dummy package, which provides holo, holo-files, and holo-users-groups. See https://github.com/holocm/holo-build/issues/19"
