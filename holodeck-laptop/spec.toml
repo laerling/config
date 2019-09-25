@@ -1,6 +1,6 @@
 [package]
 name = "holodeck-laptop"
-version = "1.36"
+version = "2.0"
 release = 1
 description = "configuration of laptop"
 requires = [
