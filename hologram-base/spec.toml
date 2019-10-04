@@ -1,6 +1,6 @@
 [package]
 name = "hologram-base"
-version = "2.0"
+version = "3.0"
 release = 1
 description = "Minimal configuration"
 requires = [
@@ -12,6 +12,7 @@ requires = [
 	# emacs in hologram-dev since it is too big for a minimal installation
 	# intel-ucode in holodecks since it is machine specific
 	"gnu-netcat",
+	"pacman-contrib", # rankmirrors, ...
 	"rsync",
 	"screen",
 	"tree",
