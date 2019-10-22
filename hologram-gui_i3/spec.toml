@@ -1,7 +1,9 @@
 [package]
-name = "hologram-gui"
-version = "1.10"
+name = "hologram-gui_i3"
+version = "1.11"
 release = 1
+provides = [ "hologram-gui" ]
+conflicts = [ "hologram-gui_kde" ]
 description = "X configuration and i3 wm"
 requires = [
 	# drivers
