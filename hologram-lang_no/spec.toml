@@ -2,7 +2,7 @@
 name = "hologram-lang_no"
 provides = [ "hologram-lang" ]
 conflicts = [ "hologram-lang_de", "hologram-lang_en" ]
-version = "4.0"
+version = "5.1"
 release = 1
 description = "norwegian locales"
 requires = [
