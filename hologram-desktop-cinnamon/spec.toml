@@ -1,6 +1,6 @@
 [package]
 name = "hologram-desktop-cinnamon"
-version = "0.6.0"
+version = "1.0.0"
 release = 1
 provides = [ "hologram-desktop" ]
 conflicts = [
@@ -12,6 +12,9 @@ requires = [
 
 	# desktop environment
 	"cinnamon",
+
+	# display manager
+	"hologram-dm",
 
 	# standard programs depending on GUI
 	"scrot",

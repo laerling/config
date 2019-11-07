@@ -3,10 +3,8 @@ name = "hologram-dm-startx"
 version = "1.0.0"
 release = 1
 provides = [ "hologram-dm" ]
-conflicts = [
-	"hologram-dm-gdm",
-	]
-description = "Not an actual display manager, but startx with x binary"
+conflicts = [ "hologram-dm-gdm" ]
+description = "Not an actual display manager, but startx with x binary. May need special ~/.xinitrc config."
 requires = [
 	"hologram-gui",
 ]
