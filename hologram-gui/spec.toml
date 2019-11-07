@@ -1,6 +1,6 @@
 [package]
 name = "hologram-gui"
-version = "2.0.1"
+version = "2.0.2"
 release = 1
 provides = [ "hologram-gui" ]
 conflicts = [
@@ -33,3 +33,11 @@ requires = [
 path = "/usr/share/holo/files/01-gui/etc/inputrc.holoscript"
 mode = "0755"
 contentFrom = "inputrc.sed"
+
+[[file]]
+path = "/usr/bin/x"
+mode = "0755"
+content="""
+#!/bin/bash
+startx
+"""

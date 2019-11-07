@@ -1,6 +1,6 @@
 [package]
 name = "hologram-desktop-i3"
-version = "1.0.1"
+version = "1.0.2"
 release = 1
 provides = [ "hologram-desktop" ]
 conflicts = [
@@ -43,14 +43,6 @@ contentFrom = "xinitrc.pl"
 
 
 # own binaries
-
-[[file]]
-path = "/usr/bin/x"
-mode = "0755"
-content="""
-#!/bin/bash
-startx
-"""
 
 [[file]]
 path = "/usr/bin/exiti3"
