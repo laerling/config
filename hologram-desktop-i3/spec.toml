@@ -23,11 +23,8 @@ requires = [
 	"adobe-source-code-pro-fonts",
 
 	# standard programs depending on GUI
-	"evince",
 	"slock",
-	"kolourpaint",
 	"scrot",
-	"feh",
 ]
 
 
