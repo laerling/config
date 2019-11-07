@@ -1,6 +1,6 @@
 [package]
 name = "hologram-gui"
-version = "2.0.0"
+version = "2.0.1"
 release = 1
 provides = [ "hologram-gui" ]
 conflicts = [
@@ -23,6 +23,9 @@ requires = [
 
 	# locales
 	"hologram-lang",
+
+	# programs independent of desktop environment
+	"xsel",
 ]
 
 
