@@ -1,0 +1,32 @@
+[package]
+name = "hologram-gui"
+version = "2.0.0"
+release = 1
+provides = [ "hologram-gui" ]
+conflicts = [
+	"hologram-gui_kde",
+	"hologram-gui_cinnamon",
+	]
+description = "X configuration without desktop environment"
+requires = [
+
+	# drivers
+	"xf86-video-nouveau",
+
+	# X
+	"group:xorg-apps",
+	"xorg-server",
+	"xorg-xinit",
+
+	# desktop environment
+	"hologram-desktop",
+
+	# locales
+	"hologram-lang",
+]
+
+
+[[file]]
+path = "/usr/share/holo/files/01-gui/etc/inputrc.holoscript"
+mode = "0755"
+contentFrom = "inputrc.sed"

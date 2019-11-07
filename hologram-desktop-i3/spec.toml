@@ -1,18 +1,14 @@
 [package]
-name = "hologram-gui_i3"
-version = "1.11"
+name = "hologram-desktop-i3"
+version = "1.0.0"
 release = 1
-provides = [ "hologram-gui" ]
-conflicts = [ "hologram-gui_kde" ]
-description = "X configuration and i3 wm"
+provides = [ "hologram-desktop" ]
+conflicts = [
+	"hologram-desktop-cinnamon",
+	"hologram-desktop-kde",
+	]
+description = "i3 wm and basic desktop utilities"
 requires = [
-	# drivers
-	"xf86-video-nouveau",
-
-	# X
-	"group:xorg-apps",
-	"xorg-server",
-	"xorg-xinit",
 
 	# console
 	"guake",
@@ -22,9 +18,6 @@ requires = [
 	"i3status",
 	"dmenu",
 
-	# virtual language package (provided by hologram-lang_en, hologram-lang_de, hologram-lang_no etc.)
-	"hologram-lang",
-
 	# fonts
 	"gnu-free-fonts", # replaces ttf-freefont
 	"adobe-source-code-pro-fonts",
@@ -32,19 +25,12 @@ requires = [
 	# standard programs depending on GUI
 	"evince",
 	"slock",
-
-	# other programs (not games, communication, audio or video)
 	"kolourpaint",
 	"scrot",
 	"feh",
 	"xsel",
 ]
 
-
-[[file]]
-path = "/usr/share/holo/files/01-gui/etc/inputrc.holoscript"
-mode = "0755"
-contentFrom = "inputrc.sed"
 
 [[file]]
 path = "/usr/share/holo/files/01-gui/etc/i3/config"
