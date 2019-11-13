@@ -1,11 +1,11 @@
 [package]
 name = "hologram-desktop-cinnamon"
-version = "1.0.0"
+version = "1.0.1"
 release = 1
 provides = [ "hologram-desktop" ]
 conflicts = [
+	"hologram-desktop-gnome",
 	"hologram-desktop-i3",
-	"hologram-desktop-kde",
 	]
 description = "cinnamon desktop environment"
 requires = [

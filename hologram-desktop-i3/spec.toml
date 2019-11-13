@@ -1,11 +1,11 @@
 [package]
 name = "hologram-desktop-i3"
-version = "1.0.2"
+version = "1.0.3"
 release = 1
 provides = [ "hologram-desktop" ]
 conflicts = [
 	"hologram-desktop-cinnamon",
-	"hologram-desktop-kde",
+	"hologram-desktop-gnome",
 	]
 description = "i3 wm and basic desktop utilities"
 requires = [

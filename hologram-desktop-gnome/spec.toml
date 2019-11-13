@@ -1,0 +1,23 @@
+[package]
+name = "hologram-desktop-gnome"
+version = "1.0.3"
+release = 1
+provides = [ "hologram-desktop" ]
+conflicts = [
+	"hologram-desktop-cinnamon",
+	"hologram-desktop-i3",
+	"hologram-dm", # gnome comes with gdm
+	]
+description = "gnome desktop environment"
+requires = [
+	"group:gnome",
+	"gnome-tweaks", # because the default settings miss a lot of things!
+	"dconf-editor",
+]
+
+# TODO write holo plugin for dconf configuration and provision that
+
+# activate gdm
+[[symlink]]
+path = "/etc/systemd/system/display-manager.service"
+target = "/usr/lib/systemd/system/gdm.service"
