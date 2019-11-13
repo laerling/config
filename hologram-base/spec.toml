@@ -1,6 +1,6 @@
 [package]
 name = "hologram-base"
-version = "3.0"
+version = "3.0.1"
 release = 1
 description = "Minimal configuration"
 requires = [
@@ -8,6 +8,7 @@ requires = [
 	"group:base", "group:base-devel",
 
 	"acpi",
+	"bind-tools", # for host, dig, nslookup
 	"cryptsetup",
 	# emacs in hologram-dev since it is too big for a minimal installation
 	# intel-ucode in holodecks since it is machine specific
