@@ -1,6 +1,6 @@
 [package]
 name = "hologram-gui"
-version = "3.1.0"
+version = "3.1.1"
 release = 1
 provides = [ "hologram-gui" ]
 conflicts = [
@@ -20,7 +20,9 @@ requires = [
 
 	# desktop environment
 	"hologram-desktop",
-	"hologram-dm",
+	# don't depend on hologram-dm, because the desktop environment
+	# hologram should know whether it needs a DM. E. g. i3 does
+	# not necessarily need one.
 
 	# locales
 	"hologram-lang",
