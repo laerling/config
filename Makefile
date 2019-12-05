@@ -4,6 +4,13 @@ repo_name=config
 sudo=$(shell which sudo || echo "su root -c")
 
 
+PHONY+=repo
+repo: holograms holodecks
+	repo-add $(repo_dir)/$(repo_name).db.tar.gz $(repo_dir)/$(package_files)
+
+PHONY+=all
+all: /usr/bin/holo-build /usr/bin/holo repo config-repo_registration update
+
 PHONY+=upgrade
 upgrade: update
 	$(sudo) pacman -Su;
@@ -11,14 +18,6 @@ upgrade: update
 PHONY+=update
 update: clean repo
 	$(sudo) pacman -Sy;
-
-PHONY+=all
-all: /usr/bin/holo-build /usr/bin/holo repo config-repo_registration update
-
-
-PHONY+=repo
-repo: holograms holodecks
-	repo-add $(repo_dir)/$(repo_name).db.tar.gz $(repo_dir)/$(package_files)
 
 PHONY+=config-repo_registration
 config-repo_registration:
