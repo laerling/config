@@ -29,7 +29,6 @@ alias cal='cal -m -3' # start week on Monday and display adjecent months
 
 # system tools and dev
 alias grepi='grep -i'
-alias xxd='xxd -c48'
 # git (only commands that output stuff, no commands that actually change stuff, that'd be dangerous)
 alias gita='git add'             ; alias ga='git add'
 alias gitaa='git add -A'         ; alias gaa='git add -A'
