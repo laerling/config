@@ -26,12 +26,12 @@ requires = [
 [[file]]
 path = "/etc/sudoers.d/wheel"
 mode = "0444"
-contentFrom = "sudoers_wheel"
+contentFrom = "files/sudoers"
 
 [[file]]
 path = "/usr/share/holo/files/00-base/etc/bash.bashrc.holoscript"
 mode = "0755"
-contentFrom = "bashrc.sh"
+contentFrom = "holoscripts/bashrc"
 
 [[file]]
 path = "/etc/modprobe.d/nobeep.conf"
