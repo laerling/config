@@ -1,6 +1,6 @@
 [package]
 name = "hologram-video"
-version = "1.4"
+version = "1.5"
 release = 1
 description = "Video programs and codecs"
 requires = [
@@ -30,4 +30,12 @@ mode = "0555"
 content = """
 #!/usr/bin/bash
 mpv $(xsel -b)
+"""
+
+[[file]]
+path = "/usr/bin/ytnv"
+mode = "0555"
+content = """
+#!/usr/bin/bash
+mpv --no-video $(xsel -b)
 """
