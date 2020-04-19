@@ -52,23 +52,19 @@ holo-repo_registration:
 PHONY+=holodecks
 holodecks:
 	mkdir -p $(repo_dir)
-	@$(foreach i, $(wildcard holodeck-*/), \
-		echo "Add holodeck $i"; \
-		cd $i; \
-		holo-build < spec.toml; \
-		mv $(package_files) ../$(repo_dir)/; \
-		cd ..; \
+	@$(foreach i, $(wildcard holodeck-*.toml), \
+		echo "Compiling $i"; \
+		holo-build < "$i"; \
+		mv $(package_files) $(repo_dir)/; \
 	)
 
 PHONY+=holograms
 holograms:
 	mkdir -p $(repo_dir)
-	@$(foreach i, $(wildcard hologram-*/), \
-		echo "Add hologram $i"; \
-		cd $i; \
-		holo-build < spec.toml; \
-		mv $(package_files) ../$(repo_dir)/; \
-		cd ..; \
+	@$(foreach i, $(wildcard hologram-*.toml), \
+		echo "Compiling $i"; \
+		holo-build < "$i"; \
+		mv $(package_files) $(repo_dir)/; \
 	)
 
 
