@@ -11,9 +11,9 @@ requires = [
 [[file]]
 path = "/etc/X11/xorg.conf.d/00-keyboard.conf"
 mode = "0644"
-contentFrom = "keyboard.conf"
+contentFrom = "files/keyboard.conf_hologram-lang_de"
 
 [[file]]
 path = "/etc/vconsole.conf"
 mode = "0644"
-contentFrom = "vconsole.conf"
+contentFrom = "files/vconsole.conf_hologram-lang_de"

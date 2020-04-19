@@ -25,13 +25,13 @@ requires = [
 [[file]]
 path = "/usr/bin/emacsd"
 mode = "0755"
-contentFrom = "emacsd.sh"
+contentFrom = "files/emacsd"
 # don't make a shortcut called ed because that would shadow another awesome text editor!
 
 [[file]]
 path = "/usr/bin/emacsq"
 mode = "0755"
-contentFrom = "emacsq.sh"
+contentFrom = "files/emacsq"
 
 [[symlink]]
 path = "/usr/bin/eq"
@@ -41,7 +41,7 @@ target = "/usr/bin/emacsq"
 [[file]]
 path = "/etc/profile.d/hologram-dev.sh"
 mode = "0755"
-contentFrom = "profile.sh"
+contentFrom = "files/profile_hologram-dev"
 
 
 # git
@@ -49,4 +49,4 @@ contentFrom = "profile.sh"
 [[file]]
 path = "/etc/gitconfig"
 mode = "0644"
-contentFrom = "gitconfig"
+contentFrom = "files/gitconfig"
