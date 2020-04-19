@@ -11,4 +11,4 @@ requires = [
 [[file]]
 path = "/etc/X11/xorg.conf.d/00-keyboard.conf"
 mode = "0644"
-contentFrom = "keyboard.conf"
+contentFrom = "files/keyboard.conf_hologram-lang_en"
