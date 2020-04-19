@@ -36,4 +36,4 @@ requires = [
 [[file]]
 path = "/usr/share/holo/files/01-gui/etc/inputrc.holoscript"
 mode = "0755"
-contentFrom = "inputrc.sed"
+contentFrom = "files/inputrc.sed"
