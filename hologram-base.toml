@@ -1,11 +1,11 @@
 [package]
 name = "hologram-base"
-version = "3.0.3"
+version = "3.0.4"
 release = 1
 description = "Minimal configuration"
 requires = [
 	"holo",
-	"group:base", "group:base-devel",
+	"group:base-devel", # don't depend on group:base. It can't be resolved by pacman -Sg
 
 	"acpi",
 	"bind-tools", # for host, dig, nslookup
@@ -18,13 +18,13 @@ requires = [
 	"screen",
 	"tree",
 	"unzip",
-	"vim", # gvim in hologram-dev
+	"vim", # contains gvim
 	# no yaourt because that can't be installed as root (due to makepkg), therefore it cannot exist when a holodeck is installed for the first time
 ]
 
 
 [[file]]
-path = "/etc/sudoers.d/wheel"
+path = "/etc/sudoers.d/hologram-base"
 mode = "0444"
 contentFrom = "files/sudoers"
 
