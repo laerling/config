@@ -24,4 +24,4 @@ requires = [
 [[file]]
 path = "/etc/X11/xinit/xinitrc.d/cinnamon"
 mode = "0755"
-contentFrom = "xinitrc"
+contentFrom = "files/xinitrc"
