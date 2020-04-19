@@ -31,12 +31,12 @@ requires = [
 [[file]]
 path = "/usr/share/holo/files/01-gui/etc/i3/config"
 mode = "0755"
-contentFrom = "i3_config"
+contentFrom = "files/i3_config"
 
 [[file]]
 path = "/usr/share/holo/files/01-gui/etc/X11/xinit/xinitrc.holoscript"
 mode = "0755"
-contentFrom = "xinitrc.pl"
+contentFrom = "files/xinitrc_hologram-desktop-i3"
 
 
 # own binaries
@@ -44,19 +44,19 @@ contentFrom = "xinitrc.pl"
 [[file]]
 path = "/usr/bin/exiti3"
 mode = "0755"
-contentFrom = "exiti3"
+contentFrom = "files/exiti3"
 
 [[file]]
 path = "/usr/bin/slocksus"
 mode = "0755"
-contentFrom = "slocksus"
+contentFrom = "files/slocksus"
 
 [[file]]
 path = "/usr/bin/slockhib"
 mode = "0755"
-contentFrom = "slockhib"
+contentFrom = "files/slockhib"
 
 [[file]]
 path = "/usr/bin/scrots"
 mode = "0755"
-contentFrom = "scrots"
+contentFrom = "files/scrots"

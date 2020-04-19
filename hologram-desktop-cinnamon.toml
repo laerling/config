@@ -24,4 +24,4 @@ requires = [
 [[file]]
 path = "/etc/X11/xinit/xinitrc.d/cinnamon"
 mode = "0755"
-contentFrom = "files/xinitrc"
+contentFrom = "files/xinitrc_hologram-desktop-cinnamon"
