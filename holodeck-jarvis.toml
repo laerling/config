@@ -34,7 +34,7 @@ group = 1001
 # WLAN
 [[file]]
 path = "/etc/wpa_supplicant/wpa_supplicant-wlan0.conf"
-content = ""
+content = "# empty" # content must not be emptystring or holo-build will fail
 [[symlink]]
 # as created by `systemctl enable wpa_supplicant@wlan0`
 path = "/etc/systemd/system/multi-user.target.wants/wpa_supplicant@wlan0.service"
