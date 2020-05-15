@@ -34,12 +34,43 @@ graphics[label="01-graphics"];
 graphics -> gui;
 
 latex[label="01-latex"];
+latex -> gui;
 
 
 gui[label="01-gui"];
+gui -> desktop;
 gui -> lang;
 
-lang[label="lang"];
+desktop[shape="plaintext"];
+desktop -> desktop_cinnamon;
+desktop -> desktop_gnome;
+desktop -> desktop_i3;
+
+desktop_cinnamon[label="desktop-cinnamon"];
+desktop_cinnamon -> dm;
+
+desktop_gnome[label="desktop-gnome"];
+
+desktop_i3[label="desktop-i3"];
+desktop_i3 -> dm;
+
+dm[shape="plaintext"];
+dm -> dm_gdm;
+dm -> dm_startx;
+
+dm_gdm[label="dm-gdm"];
+dm_gdm -> gui;
+dm_startx[label="dm-startx"];
+dm_startx -> gui;
+
+lang[shape="plaintext"];
+lang -> lang_de;
+lang -> lang_en;
+lang -> lang_no;
+
+lang_de[label="lang-de"];
+lang_en[label="lang-en"];
+lang_no[label="lang-no"];
 
 dummy[label="dummy"];
 

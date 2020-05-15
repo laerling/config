@@ -1,12 +1,7 @@
 [package]
 name = "hologram-gui"
-version = "3.1.1"
+version = "3.1.2"
 release = 1
-provides = [ "hologram-gui" ]
-conflicts = [
-	"hologram-gui_kde",
-	"hologram-gui_cinnamon",
-	]
 description = "X configuration without desktop environment"
 requires = [
 
