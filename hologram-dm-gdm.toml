@@ -1,12 +1,11 @@
 [package]
 name = "hologram-dm-gdm"
-version = "1.0.0"
+version = "1.0.1"
 release = 1
 provides = [ "hologram-dm" ]
 conflicts = [ "hologram-dm-startx" ]
 description = "The GDM Gnome Display Manager"
 requires = [
-	"hologram-gui",
 	"gdm",
 ]
 

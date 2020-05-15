@@ -59,9 +59,7 @@ dm -> dm_gdm;
 dm -> dm_startx;
 
 dm_gdm[label="dm-gdm"];
-dm_gdm -> gui;
 dm_startx[label="dm-startx"];
-dm_startx -> gui;
 
 lang[shape="plaintext"];
 lang -> lang_de;
