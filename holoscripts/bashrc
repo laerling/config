@@ -10,7 +10,12 @@ cat -
 cat <<EOF
 
 # overwrite prompt variable
-PS1='\t \w <\u@\h> '
+promptcolor="yes"
+if [ "\$promptcolor" = "yes" ]; then
+    PS1="\\[\\033[01;32m\\]\\u@\\h\\[\\033[00m\\]:\\[\\033[01;34m\\]\\w\\[\\033[00m\\]\\\$ "
+else
+    PS1="\\u@\\h:\\w\\\$ "
+fi
 
 ##aliases
 
