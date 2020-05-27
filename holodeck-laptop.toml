@@ -1,6 +1,6 @@
 [package]
 name = "holodeck-laptop"
-version = "3.0.0"
+version = "3.0.1"
 release = 1
 description = "configuration of laptop"
 requires = [
@@ -19,6 +19,10 @@ requires = [
 
 
 # user
+
+[[group]]
+name = "sudo"
+system = false
 
 [[user]]
 name    = "laerling"
