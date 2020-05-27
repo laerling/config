@@ -1,21 +1,18 @@
-#!/usr/bin/bash
+cat;tail --lines=+3 "$0";exit
+# This must stand in the second line of the file. Everything that follows gets written to the destination file verbatim.
 
-# Don't let ~/.bashrc overwrite the settings in bash.bashrc
-rm -f /home/*/.bashrc
-
-# print contents of already existing file
-cat -
-
-# append
-cat <<EOF
+########################################
+# configuration from bashrc.holoscript "
+########################################
 
 # overwrite prompt variable
 promptcolor="yes"
-if [ "\$promptcolor" = "yes" ]; then
-    PS1="\\[\\033[01;32m\\]\\u@\\h\\[\\033[00m\\]:\\[\\033[01;34m\\]\\w\\[\\033[00m\\]\\\$ "
+if [ "$promptcolor" = "yes" ]; then
+    PS1="\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ "
 else
-    PS1="\\u@\\h:\\w\\\$ "
+    PS1="\u@\h:\w\$ "
 fi
+
 
 ##aliases
 
@@ -58,7 +55,7 @@ alias gitr='git remote -v'       ; alias gr='git remote -v'
 alias gits='git status'          ; alias gs='git status' # might shadow ghostscript
 # define any as a function so that it can be called without arguments as well
 function any {
-	ps -e | grep "\$1"
+	ps -e | grep "$1"
 }
 
 # editors
@@ -75,13 +72,21 @@ alias music='play ~/Musik'
 export EDITOR='emacs -nw'
 export VISUAL=vim
 
-# colors for less
-export LESS_TERMCAP_mb=$'\e[1;32m'
-export LESS_TERMCAP_md=$'\e[1;32m'
-export LESS_TERMCAP_me=$'\e[0m'
-export LESS_TERMCAP_se=$'\e[0m'
-export LESS_TERMCAP_so=$'\e[01;33m'
-export LESS_TERMCAP_ue=$'\e[0m'
-export LESS_TERMCAP_us=$'\e[1;4;31m'
+## red and green highlighting
+#export LESS_TERMCAP_mb=$'\e[1;32m'
+#export LESS_TERMCAP_md=$'\e[1;32m'
+#export LESS_TERMCAP_me=$'\e[0m'
+#export LESS_TERMCAP_se=$'\e[0m'
+#export LESS_TERMCAP_so=$'\e[01;33m'
+#export LESS_TERMCAP_ue=$'\e[0m'
+#export LESS_TERMCAP_us=$'\e[1;4;31m'
 
-EOF
+# green and blue highlighting
+export LESS_TERMCAP_mb=$'\E[1;31m'     # begin bold
+export LESS_TERMCAP_md=$'\E[1;36m'     # begin blink
+export LESS_TERMCAP_me=$'\E[0m'        # reset bold/blink
+export LESS_TERMCAP_so=$'\E[01;44;33m' # begin reverse video
+export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
+export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
+export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
+export GROFF_NO_SGR=1                  # for konsole and gnome-terminal
