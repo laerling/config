@@ -1,5 +1,6 @@
-cat;tail --lines=+3 "$0";exit
-# This must stand in the second line of the file. Everything that follows gets written to the destination file verbatim.
+#!/usr/bin/bash
+cat;tail --lines=+4 "$0";exit
+# This must stand in the third line of the file. Everything that follows gets written to the destination file verbatim.
 
 ########################################
 # configuration from bashrc.holoscript "
