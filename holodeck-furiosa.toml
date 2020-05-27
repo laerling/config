@@ -1,0 +1,10 @@
+[package]
+name = "holodeck-furiosa"
+version = "0.1.0"
+release = 1
+description = "configuration of server furiosa"
+requires = [
+    "cron",
+    "curl",
+    "hologram-base",
+]

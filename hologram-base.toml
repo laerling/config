@@ -1,25 +1,17 @@
 [package]
 name = "hologram-base"
-version = "3.1.1"
+version = "4.0.0"
 release = 1
-description = "Minimal configuration"
+description = "Minimal configuration for all systems"
 requires = [
-	"holo",
-	"group:base-devel", # don't depend on group:base. It can't be resolved by pacman -Sg
-
 	"acpi",
-	"bind-tools", # for host, dig, nslookup
-	"cryptsetup",
-	# emacs in hologram-dev since it is too big for a minimal installation
-	# intel-ucode in holodecks since it is machine specific
-	"gnu-netcat",
-	"pacman-contrib", # rankmirrors, ...
-	"rsync",
+	"holo",
 	"screen",
 	"tree",
 	"unzip",
 	"vim", # contains gvim
-	# no yaourt because that can't be installed as root (due to makepkg), therefore it cannot exist when a holodeck is installed for the first time
+	# emacs in hologram-dev since it is too big for a minimal installation
+	# intel-ucode/intel-microcode in holodecks since it is machine specific
 ]
 
 
@@ -32,8 +24,3 @@ contentFrom = "files/sudoers"
 path = "/usr/share/holo/files/00-base/etc/bash.bashrc.holoscript"
 mode = "0755"
 contentFrom = "holoscripts/bashrc"
-
-[[file]]
-path = "/etc/modprobe.d/nobeep.conf"
-mode = "0444"
-content = "blacklist pcspkr"
