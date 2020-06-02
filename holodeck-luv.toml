@@ -1,8 +1,8 @@
 [package]
-name = "holodeck-laptop"
+name = "holodeck-luv"
 version = "2.0.1"
 release = 1
-description = "configuration of laptop"
+description = "configuration of laptop 'luv'"
 requires = [
 	"holo-users-groups",
 
