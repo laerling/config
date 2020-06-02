@@ -1,10 +1,11 @@
 [package]
 name = "hologram-base"
-version = "3.1.1"
+version = "4.1.0"
 release = 1
 description = "Minimal configuration"
 requires = [
 	"holo",
+	"holo-users-groups",
 	"group:base-devel", # don't depend on group:base. It can't be resolved by pacman -Sg
 
 	"acpi",
@@ -22,6 +23,10 @@ requires = [
 	# no yaourt because that can't be installed as root (due to makepkg), therefore it cannot exist when a holodeck is installed for the first time
 ]
 
+
+[[group]]
+name = "sudo"
+system = false
 
 [[file]]
 path = "/etc/sudoers.d/hologram-base"
