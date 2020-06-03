@@ -1,6 +1,6 @@
 [package]
 name = "holodeck-luv"
-version = "2.0.3"
+version = "2.0.4"
 release = 1
 description = "configuration of laptop 'luv'"
 requires = [
@@ -13,7 +13,6 @@ requires = [
 	"android-file-transfer",
 	"intel-ucode",
 	"openssh",
-	"wpa_supplicant",
 	"xorg-xrandr", # for peripheral screens
 ]
 
@@ -47,34 +46,6 @@ contentFrom = "holoscripts/xinitrc.pl"
 path = "/usr/share/holo/files/99-laptop/etc/systemd/logind.conf.holoscript"
 mode = "0755"
 contentFrom = "holoscripts/logind.conf.sh"
-
-
-# networking
-
-# WLAN
-[[file]]
-path = "/etc/wpa_supplicant/wpa_supplicant-wlp2s0.conf"
-contentFrom = "files/wpa_supplicant-wlp2s0.conf"
-[[symlink]]
-# as created by `systemctl enable wpa_supplicant@wlp2s0`
-path = "/etc/systemd/system/multi-user.target.wants/wpa_supplicant@wlp2s0.service"
-target = "/usr/lib/systemd/system/wpa_supplicant@.service"
-
-# dhcp
-[[symlink]]
-# as created by `systemctl enable dhcpcd`
-path = "/etc/systemd/system/multi-user.target.wants/dhcpcd.service"
-target = "/usr/lib/systemd/system/dhcpcd.service"
-
-# DNS
-[[symlink]]
-# as created by `systemctl enable systemd-resolved`
-path = "/etc/systemd/system/dbus-org.freedesktop.resolve1.service"
-target = "/usr/lib/systemd/system/systemd-resolved.service"
-[[symlink]]
-# as created by `systemctl enable systemd-resolved`
-path = "/etc/systemd/system/multi-user.target.wants/systemd-resolved.service"
-target = "/usr/lib/systemd/system/systemd-resolved.service"
 
 
 # storage and mount points
