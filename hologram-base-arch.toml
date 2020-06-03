@@ -1,6 +1,6 @@
 [package]
 name = "hologram-base-arch"
-version = "0.1.1"
+version = "0.2.0"
 release = 1
 description = "Minimal configuration, specific to Arch Linux"
 requires = [
@@ -27,3 +27,9 @@ requires = [
     # and of course, hologram-base itself
     "hologram-base",
 ]
+
+
+[[file]]
+path = "/usr/share/holo/files/01-base-arch/etc/bash.bashrc.holoscript"
+mode = "0755"
+contentFrom = "holoscripts/bashrc_hologram-base-arch"

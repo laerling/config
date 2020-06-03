@@ -1,0 +1,16 @@
+#!/usr/bin/bash
+cat;tail --lines=+4 "$0";exit
+# This must stand in the third line of the file. Everything that follows gets written to the destination file verbatim.
+
+#########################################
+# configuration from hologram-base-arch #
+#########################################
+
+# upgrade system
+upgradefile=~/.last_upgrade
+touch "$upgradefile"
+if [ "$(cat "$upgradefile")" != $(date -I) ]; then
+    echo "Upgrading system"
+    date -I > "$upgradefile"
+    yaourt -Syu
+fi

@@ -1,6 +1,6 @@
 [package]
 name = "hologram-base"
-version = "4.1.0"
+version = "4.2.0"
 release = 1
 description = "Minimal configuration for all systems"
 requires = [
@@ -30,4 +30,4 @@ contentFrom = "files/sudo"
 [[file]]
 path = "/usr/share/holo/files/00-base/etc/bash.bashrc.holoscript"
 mode = "0755"
-contentFrom = "holoscripts/bashrc"
+contentFrom = "holoscripts/bashrc_hologram-base"
