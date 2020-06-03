@@ -1,12 +1,12 @@
 [package]
 name = "holodeck-luv"
-version = "2.0.4"
+version = "3.1.0"
 release = 1
 description = "configuration of laptop 'luv'"
 requires = [
 	"holo-users-groups",
 
-	"hologram-base",
+	"hologram-base-arch",
 	"hologram-dev",
 	"hologram-multimedia",
 
@@ -18,6 +18,10 @@ requires = [
 
 
 # user
+
+[[group]]
+name = "sudo"
+system = false
 
 [[user]]
 name    = "laerling"
@@ -31,8 +35,8 @@ shell   = "/bin/bash"
 [[directory]]
 path = "/home/laerling"
 mode = "0700"
-owner = 1000
-group = 1000
+owner = "laerling"
+group = "laerling"
 
 
 # screen setup

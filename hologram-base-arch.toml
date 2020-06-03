@@ -1,0 +1,29 @@
+[package]
+name = "hologram-base-arch"
+version = "0.1.1"
+release = 1
+description = "Minimal configuration, specific to Arch Linux"
+requires = [
+    #############################################################
+    # dependencies whose package names exist only in Arch repos #
+    #############################################################
+    "bind-tools", # for host, dig, nslookup
+    "gnu-netcat",
+    "group:base-devel", # don't depend on group:base. It can't be resolved by pacman -Sg
+    "pacman-contrib", # rankmirrors, ...
+    # no yaourt because that can't be installed as root (due to
+    # makepkg), therefore it cannot exist when a holodeck is
+    # installed for the first time
+
+    ##############################################################
+    # dependencies that have the same package name on Arch and   #
+    # Debian, but which I don't need on my debian-based machines #
+    # so far                                                     #
+    ##############################################################
+    "acpi",
+    "cryptsetup",
+    "rsync",
+
+    # and of course, hologram-base itself
+    "hologram-base",
+]
