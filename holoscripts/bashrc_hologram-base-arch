@@ -12,5 +12,5 @@ touch "$upgradefile"
 if [ "$(cat "$upgradefile")" != $(date -I) ]; then
     echo "Upgrading system"
     date -I > "$upgradefile"
-    yaourt -Syu
+    yaourt -Syu || rm "$upgradefile"
 fi
