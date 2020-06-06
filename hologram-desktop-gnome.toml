@@ -1,6 +1,6 @@
 [package]
 name = "hologram-desktop-gnome"
-version = "1.0.4"
+version = "1.0.5"
 release = 1
 provides = [ "hologram-desktop" ]
 conflicts = [
@@ -32,3 +32,8 @@ target = "/usr/lib/systemd/system/NetworkManager-dispatcher.service"
 [[symlink]]
 path = "/etc/systemd/system/network-online.target.wants/NetworkManager-wait-online.service"
 target = "/usr/lib/systemd/system/NetworkManager-wait-online.service"
+[[symlink]]
+# as created by `systemctl enable systemd-resolved`
+path = "/etc/systemd/system/dbus-org.freedesktop.resolve1.service"
+target = "/usr/lib/systemd/system/systemd-resolved.service"
+
