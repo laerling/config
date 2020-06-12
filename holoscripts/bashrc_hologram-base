@@ -44,6 +44,8 @@ alias gitco=gitch                ; alias gco=gch
 alias gitd='git diff'            ; alias gd='git diff'
 alias gitds='git diff --staged'  ; alias gds='git diff --staged'
 alias gitl='git log'             ; alias gl='git log'
+                                   alias glg='git log --graph --oneline'
+                                   alias glga='git log --graph --oneline --all'
 alias gitp='git pull'            ; alias gp='git pull'
 alias gitst='git stash'          ; alias gst='git stash'
 alias gitsta='git stash apply'   ; alias gsta='git stash apply'
