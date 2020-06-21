@@ -1,6 +1,6 @@
 [package]
 name = "hologram-communication"
-version = "1.6"
+version = "1.7"
 release = 1
 description = "communication programs (for use with a GUI)"
 requires = [
@@ -8,8 +8,6 @@ requires = [
 
 	"discord", # don't forget to turn off notifications (libnotify is not installed)
 	"firefox",
-	"hexchat",
-	"irssi",
 	"telegram-desktop",
 	"thunderbird",
 ]
