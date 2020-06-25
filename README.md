@@ -2,7 +2,7 @@
 
 This repo shall bundle as much config as possible.
 Currently it only works with Arch Linux systems.
-It assumes the disk has been partitioned and the `base` package group has been pacstrapped.
+It assumes the disk has been partitioned and the `base` package group has been 	pacstrapped.
 Also, the hostname has to be set manually (write it to /etc/hostname).
 
 
@@ -50,18 +50,19 @@ It is recommended to use GNU screen!
 ### arch-chroot
 11) set timezone: `ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime`
 12) create `/etc/adjtime`: `hwclock --systohc`
-13) create `/etc/hostname`
-14) append to `/etc/hosts`:
+13) create locales: Edit `/etc/locale.gen`: Uncomment `en_US.UTF-8 UTF-8`. Then run `locale-gen`
+14) create `/etc/hostname`
+15) append to `/etc/hosts`:
 ```
 127.0.0.1       localhost
 ::1             localhost
 ```
-15) set root password: `passwd`
-16) add [encryption](https://wiki.archlinux.org/index.php/Dm-crypt/Encrypting_an_entire_system#LUKS_on_a_partition) hook to initial ramdisk: `sed -i '/^HOOKS/s/(.*)/(base udev autodetect keyboard modconf block encrypt filesystems fsck)/' /etc/mkinitcpio.conf`
-17) Rebuild initial ramdisk: `mkinitcpio -p linux`
-18) install [microcode](https://wiki.archlinux.org/index.php/Microcode#systemd-boot): `pacman -S amd-ucode` (or `pacman -S intel-ucode`)
-19) install systemd-boot: `bootctl install`
-20) create Arch Linux boot entry with enabled microcode loading and root disk decryption parameter:
+16) set root password: `passwd`
+17) add [encryption](https://wiki.archlinux.org/index.php/Dm-crypt/Encrypting_an_entire_system#LUKS_on_a_partition) hook to initial ramdisk: `sed -i '/^HOOKS/s/(.*)/(base udev autodetect keyboard modconf block encrypt filesystems fsck)/' /etc/mkinitcpio.conf`
+18) Rebuild initial ramdisk: `mkinitcpio -p linux`
+19) install [microcode](https://wiki.archlinux.org/index.php/Microcode#systemd-boot): `pacman -S amd-ucode` (or `pacman -S intel-ucode`)
+20) install systemd-boot: `bootctl install`
+21) create Arch Linux boot entry with enabled microcode loading and root disk decryption parameter:
 NOTE: `<ROOT_PARTITION_UUID>` is the UUID of the unencrypted root partition, NOT of the device mapper file (`dm-0`)!
 ```
 cat > /boot/loader/entries/arch.conf
@@ -71,32 +72,20 @@ initrd  /amd-ucode.img
 initrd  /initramfs-linux.img
 options cryptdevice=UUID=<ROOT_PARTITION_UUID>:root root=/dev/mapper/root rw
 ```
-21) configure systemd-boot:
+22) configure systemd-boot:
 ```
 cat > /boot/loader/loader.conf
 default arch.conf
 timeout 2
 ```
-22) exit arch-chroot, `sync` and reboot into freshly installed system
+23) exit arch-chroot, `sync` and reboot into freshly installed system
 
 ### installed system
-23) get a DHCP lease: `systemctl start dhcpcd`
-24) clone this repo: `git clone https://github.com/laerling/config ~/config && cd ~/config`
-25) execute `./bootstrap`
-26) reboot
-
-[automatic systemd-boot update](https://wiki.archlinux.org/index.php/Systemd-boot#Automatic_update)
-
-
-### installed system
-24) exit arch-chroot and reboot into installed system, logon as root
-TODO: HOLO STUFF
-
-### The boot process goes something like this
-1) POST executes
-2) EFI executes and reads entries from NVRAM, one entry points to GRUB EFI executable in EFI system partition (ESP)
-3) GRUB EFI executable applies the initial ramdisk and executes the kernel
-4) root disk is decrypted and mounted at `/`, ESP at `/efi`, boot partition at `/boot`.
+24) get a DHCP lease: `systemctl start dhcpcd`
+25) clone this repo: `git clone https://github.com/laerling/config ~/config && cd ~/config`
+26) execute `./bootstrap`
+27) reboot and logon as user
+28) delete `/root/config` and adjust entry in `/etc/pacman.conf`, then `make update`
 
 
 ## FIXMEs and TODOs
