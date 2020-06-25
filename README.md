@@ -29,8 +29,50 @@ The following dependency targets might be useful as well:
 - hologram packages shall be named `hologram-name` where `name` is an arbitrary descriptive name, e. g. `hologram-games`
 - In the tree (see above) holograms are displayed not by their actual package name but by the name of their ambiguators (The directory names used below `/usr/share/holo/*/`).
 - The number of a disambiguator shall be two digits long and as low as possible without being lower than the number of any dependency. The following exceptions exist:
-	- The number of the disambiguator of `hologram-base` shall be `00` always. No other hologram must have this number. This means that other holograms have at least `01`. Every holodeck must depend on `hologram-base`.
-	- The number of the disambiguator of a holodeck shall be `99` always. No hologram must have this number.
+  - The number of the disambiguator of `hologram-base` shall be `00` always. No other hologram must have this number. This means that other holograms have at least `01`. Every holodeck must depend on `hologram-base`.
+  - The number of the disambiguator of a holodeck shall be `99` always. No hologram must have this number.
+
+## Arch Linux [installation](https://wiki.archlinux.org/index.php/Installation_guide) checklist
+
+### live system
+It is recommended to use screen
+1) verify boot mode: `ls /sys/firmware/efi/efivars/`
+2) connect to internet
+3) update system clock: `timedatectl set-ntp true`
+4) partition disks (use lsblk to check which disk to use)
+5) format partitions (FAT32 for EFI (`mkfs.fat -F32`))
+6) mount partitions (root: `/mnt`, efi: `/mnt/efi`, boot: `/mnt/boot`)
+7) select and rank mirrors (`rankmirrors` in package `pacman-contrib`)
+8) `pacstrap /mnt base linux linux-firmware`
+9) `genfstab -U /mnt >> /mnt/etc/fstab`
+10) `arch-chroot /mnt` (all following steps have to be done in the arch-chroot environment!)
+11) `ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime`
+12) create `/etc/adjtime`: `hwclock --systohc`
+13) create `/etc/hostname`
+14) append to `/etc/hosts`:
+```
+127.0.0.1       localhost
+::1             localhost
+```
+15) set root password: `passwd`
+16) enable [microcode](https://wiki.archlinux.org/index.php/Microcode#GRUB) updates (`grub-mkconfig` will detect the package): `pacman -S intel-ucode` or `pacman -S amd-ucode`
+17) mount EFI system partition (ESP) to `/efi` and boot partition to `/boot`
+18) add [encryption](https://wiki.archlinux.org/index.php/Dm-crypt/Encrypting_an_entire_system#LUKS_on_a_partition) hook to initial ramdisk: `sed -i '/^HOOKS/s/block /&encrypt /;' /etc/mkinitcpio.conf` (must contain udev and keyboard hooks as well)
+19) Rebuild initial ramdisk: `mkinitcpio -p linux`
+20) install `grub` and `efibootmgr` packages
+21) install GRUB EFI application: `grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB`
+22) add kernel command line parameter for root partition decryption: `sed -i '/^GRUB_CMDLINE_LINUX_DEFAULT/s/"$/ cryptdevice=UUID=<ROOT_PARTITION_UUID>:root root=\/dev\/mapper\/root"/' /etc/default/grub` (replace `<ROOT_PARTITION_UUID>` with UUID of root partition)
+23) generate the [main configuration file](https://wiki.archlinux.org/index.php/GRUB#Generate_the_main_configuration_file) in `/boot/grub/grub.cfg` (do this after every change to `/etc/default/grub` or `/etc/grub.d/`): `grub-mkconfig -o /boot/grub/grub.cfg`
+
+### installed system
+24) exit arch-chroot and reboot into installed system, logon as root
+TODO: HOLO STUFF
+
+### The boot process goes something like this
+1) POST executes
+2) EFI executes and reads entries from NVRAM, one entry points to GRUB EFI executable in EFI system partition (ESP)
+3) GRUB EFI executable applies the initial ramdisk and executes the kernel
+4) root disk is decrypted and mounted at `/`, ESP at `/efi`, boot partition at `/boot`.
 
 
 ## FIXMEs and TODOs
