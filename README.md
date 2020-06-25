@@ -35,18 +35,20 @@ The following dependency targets might be useful as well:
 ## Arch Linux [installation](https://wiki.archlinux.org/index.php/Installation_guide) checklist
 
 ### live system
-It is recommended to use screen
-1) verify boot mode: `ls /sys/firmware/efi/efivars/`
+It is recommended to use GNU screen!
+1) verify boot mode: `efivar --list` or `ls /sys/firmware/efi/efivars/`
 2) connect to internet
 3) update system clock: `timedatectl set-ntp true`
-4) partition disks (use lsblk to check which disk to use)
-5) format partitions (FAT32 for EFI (`mkfs.fat -F32`))
-6) mount partitions (root: `/mnt`, efi: `/mnt/efi`, boot: `/mnt/boot`)
-7) select and rank mirrors (`rankmirrors` in package `pacman-contrib`)
-8) `pacstrap /mnt base linux linux-firmware`
+4) partition disks (use `lsblk` to check which disk to use)
+5) format partitions (FAT32 for EFI system partition (ESP): `mkfs.fat -F32`)
+6) mount partitions (root: `/mnt`, efi/boot: `/mnt/boot`)
+7) select mirrors (they're already ranked)
+8) `pacstrap /mnt base linux linux-firmware dhcpcd git`
 9) `genfstab -U /mnt >> /mnt/etc/fstab`
 10) `arch-chroot /mnt` (all following steps have to be done in the arch-chroot environment!)
-11) `ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime`
+
+### arch-chroot
+11) set timezone: `ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime`
 12) create `/etc/adjtime`: `hwclock --systohc`
 13) create `/etc/hostname`
 14) append to `/etc/hosts`:
@@ -55,14 +57,36 @@ It is recommended to use screen
 ::1             localhost
 ```
 15) set root password: `passwd`
-16) enable [microcode](https://wiki.archlinux.org/index.php/Microcode#GRUB) updates (`grub-mkconfig` will detect the package): `pacman -S intel-ucode` or `pacman -S amd-ucode`
-17) mount EFI system partition (ESP) to `/efi` and boot partition to `/boot`
-18) add [encryption](https://wiki.archlinux.org/index.php/Dm-crypt/Encrypting_an_entire_system#LUKS_on_a_partition) hook to initial ramdisk: `sed -i '/^HOOKS/s/block /&encrypt /;' /etc/mkinitcpio.conf` (must contain udev and keyboard hooks as well)
-19) Rebuild initial ramdisk: `mkinitcpio -p linux`
-20) install `grub` and `efibootmgr` packages
-21) install GRUB EFI application: `grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB`
-22) add kernel command line parameter for root partition decryption: `sed -i '/^GRUB_CMDLINE_LINUX_DEFAULT/s/"$/ cryptdevice=UUID=<ROOT_PARTITION_UUID>:root root=\/dev\/mapper\/root"/' /etc/default/grub` (replace `<ROOT_PARTITION_UUID>` with UUID of root partition)
-23) generate the [main configuration file](https://wiki.archlinux.org/index.php/GRUB#Generate_the_main_configuration_file) in `/boot/grub/grub.cfg` (do this after every change to `/etc/default/grub` or `/etc/grub.d/`): `grub-mkconfig -o /boot/grub/grub.cfg`
+16) add [encryption](https://wiki.archlinux.org/index.php/Dm-crypt/Encrypting_an_entire_system#LUKS_on_a_partition) hook to initial ramdisk: `sed -i '/^HOOKS/s/(.*)/(base udev autodetect keyboard modconf block encrypt filesystems fsck)/' /etc/mkinitcpio.conf`
+17) Rebuild initial ramdisk: `mkinitcpio -p linux`
+18) install [microcode](https://wiki.archlinux.org/index.php/Microcode#systemd-boot): `pacman -S amd-ucode` (or `pacman -S intel-ucode`)
+19) install systemd-boot: `bootctl install`
+20) create Arch Linux boot entry with enabled microcode loading and root disk decryption parameter:
+NOTE: `<ROOT_PARTITION_UUID>` is the UUID of the unencrypted root partition, NOT of the device mapper file (`dm-0`)!
+```
+cat > /boot/loader/entries/arch.conf
+title   Arch Linux
+linux   /vmlinuz-linux
+initrd  /amd-ucode.img
+initrd  /initramfs-linux.img
+options cryptdevice=UUID=<ROOT_PARTITION_UUID>:root root=/dev/mapper/root rw
+```
+21) configure systemd-boot:
+```
+cat > /boot/loader/loader.conf
+default arch.conf
+timeout 2
+```
+22) exit arch-chroot, `sync` and reboot into freshly installed system
+
+### installed system
+23) get a DHCP lease: `systemctl start dhcpcd`
+24) clone this repo: `git clone https://github.com/laerling/config ~/config && cd ~/config`
+25) execute `./bootstrap`
+26) reboot
+
+[automatic systemd-boot update](https://wiki.archlinux.org/index.php/Systemd-boot#Automatic_update)
+
 
 ### installed system
 24) exit arch-chroot and reboot into installed system, logon as root
