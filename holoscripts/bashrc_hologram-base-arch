@@ -12,9 +12,9 @@ touch "$upgradefile"
 if [ "$(cat "$upgradefile")" != $(date -I) ]; then
     echo "Upgrading system"
     date -I > "$upgradefile"
-    if hash yaourt; then
+    if hash yaourt 2>/dev/null; then
         yaourt -Syu || rm "$upgradefile"
     else
-        pacman -Syu || rm "$upgradefile"
+        sudo pacman -Syu || rm "$upgradefile"
     fi
 fi
