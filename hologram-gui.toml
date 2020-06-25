@@ -1,12 +1,15 @@
 [package]
 name = "hologram-gui"
-version = "3.1.2"
+version = "3.2.0"
 release = 1
 description = "X configuration without desktop environment"
 requires = [
 
 	# drivers
-	"xf86-video-nouveau",
+  "nvidia",
+  "nvidia-settings",
+  "nvidia-utils",
+  "nvtop",
 
 	# X
 	"group:xorg-apps",
