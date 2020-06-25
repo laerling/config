@@ -1,0 +1,58 @@
+[package]
+name = "holodeck-titus"
+version = "0.1.0"
+release = 1
+description = "configuration of PC 'Titus'"
+requires = [
+	"holo-users-groups",
+
+	"hologram-base-arch",
+	"hologram-dev",
+	"hologram-multimedia",
+
+	"android-file-transfer",
+	"amd-ucode",
+	"openssh",
+]
+
+
+# user
+
+[[group]]
+name = "sudo"
+system = false
+
+[[user]]
+name    = "laerling"
+system  = false
+comment = "Benjamin Ludwig"
+uid     = 1000
+groups  = [ "audio", "video", "sudo" ]
+home    = "/home/laerling"
+shell   = "/bin/bash"
+
+[[directory]]
+path = "/home/laerling"
+mode = "0700"
+owner = "laerling"
+group = "laerling"
+
+
+# storage and mount points
+
+[[file]]
+path = "/usr/share/holo/files/99-titus/etc/fstab.holoscript"
+mode = "0755"
+contentFrom = "holoscripts/fstab.sh"
+
+[[directory]]
+path = "/mnt/archive"
+mode = "0700"
+owner = 1000
+group = 1000
+
+[[directory]]
+path = "/mnt/backup"
+mode = "0700"
+owner = 1000
+group = 1000
