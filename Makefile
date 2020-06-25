@@ -30,15 +30,15 @@ config-repo_registration:
 
 /usr/bin/holo-build: /usr/bin/holo
 /usr/bin/holo: holo-repo_registration
-	$(sudo) 'pacman-key --init';
-	$(sudo) 'pacman-key --populate archlinux';
-	$(sudo) 'pacman-key -r 0xF7A9C9DC4631BD1A'; # if this fails, try it on a live system and comment this line out
+	$(sudo) pacman-key --init;
+	$(sudo) pacman-key --populate archlinux;
+	$(sudo) pacman-key -r 0xF7A9C9DC4631BD1A; # if this fails, try it on a live system and comment this line out
 	if ! pacman-key -f 0xF7A9C9DC4631BD1A | grep -o "2A53 49F6 B4D7 305A 85DE  D8D4 F7A9 C9DC 4631 BD1A"; then \
 		echo -e "FATAL ERROR: The holo signing key has the wrong fingerprint. Check manually! Aborting." 1>&2; exit 1; \
 	fi
-	$(sudo) 'pacman-key --lsign-key 0xF7A9C9DC4631BD1A';
-	$(sudo) 'pacman -Sy';
-	yes | $(sudo) 'pacman -S --needed holo holo-build';
+	$(sudo) pacman-key --lsign-key 0xF7A9C9DC4631BD1A;
+	$(sudo) pacman -Sy;
+	yes | $(sudo) pacman -S --needed holo holo-build;
 
 PHONY+=holo-repo_registration
 holo-repo_registration:
