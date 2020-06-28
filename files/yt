@@ -1,0 +1,6 @@
+#!/usr/bin/bash
+
+link="$(xsel -b)"
+# if it's a list, play it whole instead of just one video
+link=$(echo "$link"|sed 's/watch?v=.\+&//')
+mpv "$@" --ytdl-raw-options=rm-cache-dir= "$link"
