@@ -2,10 +2,12 @@
 
 cd ~/Downloads || cd "$HOME"
 link="$(xsel -b)"
-if (echo "$link"|grep '[&?]list='); then
-	list_id=$(echo "$link"|grep -o '[&?]list=[^&]\+'|tail -c +7)
-	dir_name="list $list_id"
-	mkdir "$dir_name"
-	cd "$dir_name"
+if (echo "$link"|grep '[&?]list=' > /dev/null); then
+	list_name=$(youtube-dl --flat-playlist "$link"|grep "Finished downloading playlist"|sed 's/.*Finished downloading playlist: //')
+	echo "Video is part of list: $list_name"
+	mkdir "$list_name"
+	cd "$list_name"
 fi
+echo "Downloading to '$PWD'"
+echo
 youtube-dl "$@" --no-overwrites --no-cache-dir "$link"

@@ -1,6 +1,6 @@
 [package]
 name = "hologram-video"
-version = "2.0.1"
+version = "2.1."
 release = 1
 description = "Video programs and codecs"
 requires = [
