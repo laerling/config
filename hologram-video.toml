@@ -1,6 +1,6 @@
 [package]
 name = "hologram-video"
-version = "1.7.0"
+version = "2.0.0"
 release = 1
 description = "Video programs and codecs"
 requires = [
@@ -22,11 +22,21 @@ mode = "0755"
 contentFrom = "files/yt"
 
 [[file]]
-path = "/usr/bin/ytnv"
+path = "/usr/bin/yta"
 mode = "0755"
-contentFrom = "files/ytnv"
+contentFrom = "files/yta"
 
 [[file]]
 path = "/usr/bin/ytmp4"
 mode = "0755"
 contentFrom = "files/ytmp4"
+
+[[file]]
+path = "/usr/bin/dl"
+mode = "0755"
+contentFrom = "files/dl"
+
+[[file]]
+path = "/usr/bin/dla"
+mode = "0755"
+contentFrom = "files/dla"

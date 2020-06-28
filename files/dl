@@ -1,0 +1,11 @@
+#!/usr/bin/bash
+
+cd ~/Downloads || cd "$HOME"
+link="$(xsel -b)"
+if (echo "$link"|grep '[&?]list='); then
+	list_id=$(echo "$link"|grep -o '[&?]list=[^&]\+'|tail -c +7)
+	dir_name="list $list_id"
+	mkdir "$dir_name"
+	cd "$dir_name"
+fi
+youtube-dl "$@" --no-cache-dir "$link"
