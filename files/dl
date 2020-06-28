@@ -8,4 +8,4 @@ if (echo "$link"|grep '[&?]list='); then
 	mkdir "$dir_name"
 	cd "$dir_name"
 fi
-youtube-dl "$@" --no-cache-dir "$link"
+youtube-dl "$@" --no-overwrites --no-cache-dir "$link"
