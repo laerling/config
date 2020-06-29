@@ -1,15 +1,11 @@
 [package]
 name = "hologram-gui"
-version = "3.2.0"
+version = "3.3.0"
 release = 1
 description = "X configuration without desktop environment"
 requires = [
 
-	# drivers
-  "nvidia",
-  "nvidia-settings",
-  "nvidia-utils",
-  "nvtop",
+  # graphics drivers have to be included in holodecks
 
 	# X
 	"group:xorg-apps",
