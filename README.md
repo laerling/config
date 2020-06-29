@@ -2,24 +2,32 @@
 
 This repo shall bundle as much config as possible.
 Currently it only works with Arch Linux systems.
-It assumes the disk has been partitioned and the `base` package group has been 	pacstrapped.
-Also, the hostname has to be set manually (write it to /etc/hostname).
+
+
+## Bootstrapping a fresh Arch Linux system
+
+For bootstrapping a fresh Arch Linux installation, read the [checklist](./checklist.md).
+It covers the whole process of installation, including holo and holograms, so you can ignore the 'Building' section below.
 
 
 ## Building
-On a blank system with just the 'base' group and the root user, just run `./bootstrap.sh`.
-After changing something, run `sudo make`. The changes are then being installed.
-This upgrades the whole system. If you want to only update the package databases, run `sudo make update`.
 
-The following important targets are defined in the Makefile:
-- `all`: Install holo and holo-build, make the config repository, and register it
-- `repo`: Build holodecks and holograms and put them into the repository
-- `holodecks`, `holograms`: Build holodecks and holograms, respectively
+After changing something, just run `make`. This builds the packages and updates pacmans package database.
+This is the same as running `make update`. To build and upgrade the whole system, run `make upgrade`.
 
-The following dependency targets might be useful as well:
-- `holo-repo_registration`: Register the `holo` repo in `/etc/pacman.conf` (contains holo and holo-build)
-- `config-repo_registration`: Register the `config` repo in `/etc/pacman.conf` (contains the holodecks and holograms)
-- `/usr/bin/holo-build`, `/usr/bin/holo`: Download signing keys and install `holo` and `holo-build`
+The following relevant `make` targets exist:
+target | description
+-|-
+`all` | Install holo and holo-build, make the config repository, and register it
+`repo` | Build holodecks and holograms and put them into the repository
+`holodecks`, `holograms` | Build holodecks and holograms, respectively
+
+The following dependency `make` targets might be useful as well:
+target | description
+-|-
+`holo-repo_registration` | Register the `holo` repo in `/etc/pacman.conf` (contains holo and holo-build)
+`config-repo_registration` | Register the `config` repo in `/etc/pacman.conf` (contains the holodecks and holograms)
+`/usr/bin/holo-build`, `/usr/bin/holo` | Download signing keys and install `holo` and `holo-build`
 
 
 ## holo conventions
@@ -31,12 +39,6 @@ The following dependency targets might be useful as well:
 - The number of a disambiguator shall be two digits long and as low as possible without being lower than the number of any dependency. The following exceptions exist:
   - The number of the disambiguator of `hologram-base` shall be `00` always. No other hologram must have this number. This means that other holograms have at least `01`. Every holodeck must depend on `hologram-base`.
   - The number of the disambiguator of a holodeck shall be `99` always. No hologram must have this number.
-
-
-## Arch Linux [installation](https://wiki.archlinux.org/index.php/Installation_guide) checklist
-
-There is a [checklist](./checklist.md) for the complete process of installing
-an Arch Linux system including configuration from this repo.
 
 
 ## FIXMEs and TODOs

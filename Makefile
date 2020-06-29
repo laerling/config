@@ -4,6 +4,9 @@ repo_name=config
 sudo=$(shell which sudo || echo "su root -c")
 
 
+PHONY+=default
+default: clean update
+
 PHONY+=repo
 repo: holograms holodecks
 	repo-add $(repo_dir)/$(repo_name).db.tar.gz $(repo_dir)/$(package_files)
