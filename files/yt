@@ -1,6 +1,10 @@
 #!/usr/bin/bash
 
 link="$(xsel -b)"
+echo "Clipboard: $link"
+
 # if it's a list, play it whole instead of just one video
-link=$(echo "$link"|sed 's/watch?v=.\+&//')
+link=$(echo "$link"|sed 's/v=[^&]\+&//')
+
+echo "Playing: $link"
 mpv "$@" --ytdl-raw-options=no-cache-dir= "$link"
