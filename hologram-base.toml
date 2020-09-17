@@ -1,6 +1,6 @@
 [package]
 name = "hologram-base"
-version = "4.3.1"
+version = "4.3.2"
 release = 1
 description = "Minimal configuration for all systems"
 requires = [
@@ -13,7 +13,7 @@ requires = [
   "screen",
   "tree",
   "unzip",
-  "vim", # contains gvim
+  "gvim", # gvim instead of vim, so we have clipboard support
   # emacs in hologram-dev since it is too big for a minimal installation
   # intel-ucode/intel-microcode in holodecks since it is machine specific
 ]

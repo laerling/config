@@ -1,6 +1,6 @@
 [package]
 name = "hologram-dev"
-version = "1.16"
+version = "1.16.1"
 release = 1
 description = "packages and configuration for software development"
 requires = [
@@ -13,7 +13,6 @@ requires = [
 	"git",
 	"go",
 	"go-tools",
-	"vim", # contains gvim
 	"nmap",
 	"rustup", # replaces cargo
 	"strace",
