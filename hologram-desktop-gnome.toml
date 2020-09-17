@@ -1,6 +1,6 @@
 [package]
 name = "hologram-desktop-gnome"
-version = "1.0.5"
+version = "1.2.0"
 release = 1
 provides = [ "hologram-desktop" ]
 conflicts = [
@@ -13,6 +13,12 @@ requires = [
 	"group:gnome",
 	"gnome-tweaks", # because the default settings miss a lot of things!
 	"dconf-editor",
+  # install from aur:
+  # - yaru-gtk-theme
+  # - yaru-icon-theme
+  # - yaru-session
+  # - yaru-sound-theme
+  # - yaru-unity-theme (?)
 ]
 
 # TODO write holo plugin for dconf configuration and provision that
