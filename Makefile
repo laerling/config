@@ -106,6 +106,8 @@ clean:
 	mkdir -p $(repo_dir)
 	# remove yaourt build artifacts
 	rm -rf yaourt package-query
+	# remove nix build result for GC
+	if [ -l result ]; then rm result; fi
 
 
 .PHONY: $(PHONY)
