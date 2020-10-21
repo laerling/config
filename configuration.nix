@@ -38,7 +38,7 @@ with builtins; {
     base     = [ file git gnumake screen vim wget ];
     base_gui = [ gnome3.gnome-tweaks ];
     dev      = [ emacs rustup ];
-    leisure  = [ discord mpv qutebrowser tdesktop ];
+    leisure  = [ discord mpv qutebrowser tdesktop youtube-dl ];
   in base ++ base_gui ++ dev ++ leisure;
 
   sound.enable = true;
