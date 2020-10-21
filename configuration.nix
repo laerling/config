@@ -4,7 +4,7 @@
 
 { config, pkgs, ... }:
 
-{
+with builtins; {
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
@@ -23,6 +23,8 @@
 
   networking = {
     hostName = "ana";
+    hosts = let hostsPath = ./hosts.nix; in
+      if pathExists hostsPath then import hostsPath else {};
     useDHCP = false; # Deprecated. ALWAYS set to false!
     interfaces.enp0s25.useDHCP = true;
     interfaces.wlp2s0.useDHCP = true;
@@ -44,7 +46,7 @@
 
   services.xserver = {
     enable = true;
-    libinput.enable = true; # touchpad support
+    # TEMP WIE IST ES OHNE?  libinput.enable = true; # touchpad support
     displayManager.gdm.enable = true;
     desktopManager.gnome3.enable = true;
   };
