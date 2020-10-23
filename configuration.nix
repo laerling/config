@@ -36,9 +36,9 @@ with builtins; {
   nixpkgs.config.allowUnfree = true; # needed for Discord, ...
   environment.systemPackages = with pkgs; let
     base     = [ file git gnumake screen vim wget ];
-    base_gui = [ gnome3.gnome-tweaks ];
+    base_gui = [ gnome3.gnome-tweaks kolourpaint ];
     dev      = [ emacs rustup ];
-    leisure  = [ discord mpv qutebrowser tdesktop youtube-dl ];
+    leisure  = [ discord ffmpeg mpv qutebrowser tdesktop youtube-dl ];
   in base ++ base_gui ++ dev ++ leisure;
 
   sound.enable = true;
