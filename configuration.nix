@@ -46,7 +46,6 @@ with builtins; {
 
   services.xserver = {
     enable = true;
-    # TEMP WIE IST ES OHNE?  libinput.enable = true; # touchpad support
     displayManager.gdm.enable = true;
     desktopManager.gnome3.enable = true;
   };
