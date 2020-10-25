@@ -1,6 +1,6 @@
 [package]
 name = "hologram-desktop-cinnamon"
-version = "1.1.0"
+version = "1.4.0"
 release = 1
 provides = [ "hologram-desktop" ]
 conflicts = [
@@ -17,7 +17,10 @@ requires = [
   "hologram-dm",
 
   # standard programs depending on GUI
+  "gnome-calculator",
+  "gnome-photos",
   "gnome-terminal", # way better than xterm
+  "gnome-screenshot",
   "gnome-system-monitor",
   "scrot",
 ]
