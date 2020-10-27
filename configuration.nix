@@ -15,12 +15,18 @@ with builtins; {
   # hardware scan
   imports = [ /etc/nixos/hardware-configuration.nix ];
 
+  # boot
   boot.loader.grub = {
     enable = true;
     version = 2;
     device = "/dev/sda";
   };
 
+  # low-level settings
+  hardware.pulseaudio.enable = true;
+  i18n.defaultLocale = "en_US.UTF-8";
+  sound.enable = true;
+  time.timeZone = "Europe/Berlin";
   networking = {
     hostName = "ana";
     hosts = let hostsPath = ./hosts.nix; in
@@ -30,10 +36,23 @@ with builtins; {
     interfaces.wlp2s0.useDHCP = true;
   };
 
-  i18n.defaultLocale = "en_US.UTF-8";
-  time.timeZone = "Europe/Berlin";
+  # GUI
+  services.xserver = {
+    enable = true;
+    displayManager.gdm.enable = true;
+    desktopManager.gnome3.enable = true;
+  };
 
-  nixpkgs.config.allowUnfree = true; # needed for Discord, ...
+  # Users - Don't forget to set a password with ‘passwd’!
+  users.users.laerling = {
+    isNormalUser = true;
+    createHome = true;
+    home = "/home/laerling";
+    extraGroups = [ "wheel" ];
+  };
+
+  # packages
+  nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; let
     base     = [ file git gnumake screen tree unzip vim wget ];
     base_gui = [ gnome3.gnome-tweaks kolourpaint ];
@@ -41,20 +60,4 @@ with builtins; {
     leisure  = [ discord ffmpeg mpv qutebrowser tdesktop thunderbird-bin youtube-dl ];
   in base ++ base_gui ++ dev ++ leisure;
 
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
-
-  services.xserver = {
-    enable = true;
-    displayManager.gdm.enable = true;
-    desktopManager.gnome3.enable = true;
-  };
-
-  # Don't forget to set a password with ‘passwd’!
-  users.users.laerling = {
-    isNormalUser = true;
-    createHome = true;
-    home = "/home/laerling";
-    extraGroups = [ "wheel" ];
-  };
 }
