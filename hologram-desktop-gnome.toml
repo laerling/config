@@ -1,6 +1,6 @@
 [package]
 name = "hologram-desktop-gnome"
-version = "1.3.0"
+version = "1.4.0"
 release = 1
 provides = [ "hologram-desktop" ]
 conflicts = [
@@ -11,9 +11,12 @@ conflicts = [
 description = "gnome desktop environment"
 requires = [
 	"group:gnome",
-	"gnome-tweaks", # because the default settings miss a lot of things!
+	"gnome-tweaks",
 	"dconf-editor",
-  # install from aur:
+
+  # ubuntu look
+  "ttf-ubuntu-font-family",
+  # install from AUR:
   # - yaru-gtk-theme
   # - yaru-icon-theme
   # - yaru-session
