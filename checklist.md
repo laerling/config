@@ -52,3 +52,37 @@ timeout 2
 26) execute `./bootstrap`
 27) reboot and logon as user
 28) delete `/root/config` and adjust entry in `/etc/pacman.conf`, then `make update`
+
+## cosmetical changes (Gnome desktop Ubuntu style)
+For the following steps the AUR packages noted in [hologram-desktop-gnome](./hologram-desktop-gnome.toml) have to be installed.
+
+### settings:
+29) Set a desktop wallpaper, e.&nbsp;g. [this generic one](https://news-cdn.softpedia.com/images/news2/ubuntu-16-04-lts-wallpapers-revealed-for-desktop-and-phone-501169-2.jpg).
+
+### tweaks:
+30) General:
+  - Untick "Suspend when Laptop lid is closed"
+31) Extensions: Activate extensions. Deactivate everything except:
+  - Dash to dock
+  - Removable drive menu
+  - User themes
+  - Windownavigator
+32) Appearance (extensions have to be configured first! See above):
+  - Set all themes to yaru (AUR packages have to be installed, see above)
+33) Fonts:
+  - Interface Text: Ubuntu Regular 11
+  - Document Text: Sans Regular 11
+  - Monospace Text: Ubuntu Mono Regular 13
+  - Legacy Window Titles: Ubuntu Bold 11
+34) Adjust terminal preferences:
+  - Untick "Use colors from system theme"
+  - Set background color to `#300A24`
+  - Set foreground color to `#FFFFFF`
+  - Set palette to 'Tango'
+35) Top Bar
+  - Optionally activate "Battery Percentage"
+  - Activate "Weekday"
+  - Activate "Week Numbers"
+36) Window Titlebars
+  - Middle-Click: Minimize
+  - Titlebar buttons: Maximize, Minimize
