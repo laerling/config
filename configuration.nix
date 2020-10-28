@@ -63,6 +63,9 @@ with builtins; {
     export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
     export GROFF_NO_SGR=1                  # for konsole and gnome-terminal
 
+    alias l='ls -Alh'
+    alias la='ls -A'
+
     alias loop='mpv --loop-playlist'
     alias play='loop --shuffle'
     alias music='play --no-video ~/Musik/'
