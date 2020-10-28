@@ -71,10 +71,11 @@ with builtins; {
   # packages
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; let
-    base     = [ file git gnumake screen tree unzip vim wget ];
-    base_gui = [ gnome3.gnome-tweaks kolourpaint ];
-    dev      = [ emacs rustup ];
-    leisure  = [ discord ffmpeg mpv qutebrowser tdesktop thunderbird-bin youtube-dl ];
-  in base ++ base_gui ++ dev ++ leisure;
+    base       = [ file git gnumake screen tree unzip vim wget ];
+    gui_base   = [ gnome3.gnome-tweaks kolourpaint source-code-pro ];
+    gui_ubuntu = [ gnomeExtensions.dash-to-dock ubuntu_font_family ubuntu-themes yaru-theme ];
+    dev        = [ emacs rustup ];
+    leisure    = [ discord ffmpeg mpv qutebrowser tdesktop thunderbird-bin youtube-dl ];
+  in base ++ gui_base ++ gui_ubuntu ++ dev ++ leisure;
 
 }
