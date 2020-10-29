@@ -1,6 +1,6 @@
 [package]
 name = "hologram-graphics"
-version = "2.0.3"
+version = "2.0.4"
 release = 1
 description = "graphics and drawing programs"
 requires = [
@@ -9,4 +9,5 @@ requires = [
 	"evince",
 	"graphviz",
 	"kolourpaint",
+  "breeze-icons", # icons for kolourpaint
 ]
