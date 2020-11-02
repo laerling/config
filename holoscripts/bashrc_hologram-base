@@ -70,7 +70,7 @@ alias e=emacs
 alias loop='mpv --loop-playlist'
 alias shuffle='loop --shuffle '
 alias play='shuffle --no-video'
-alias music='play ~/Musik'
+alias music='play ~/Music'
 
 #custom variables
 export EDITOR='emacs -nw'
