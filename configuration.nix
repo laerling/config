@@ -68,7 +68,7 @@ with builtins; {
 
     alias loop='mpv --loop-playlist'
     alias play='loop --shuffle'
-    alias music='play --no-video ~/Musik/'
+    alias music='play --no-video ~/Music/'
   '';
 
   # packages
