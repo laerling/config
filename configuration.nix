@@ -48,7 +48,7 @@ with builtins; {
     isNormalUser = true;
     createHome = true;
     home = "/home/laerling";
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "wheel" "adbusers" ];
   };
 
   # shell
@@ -82,4 +82,6 @@ with builtins; {
     leisure    = [ discord ffmpeg mpv qutebrowser tdesktop thunderbird-bin youtube-dl ];
   in base ++ gui_base ++ gui_ubuntu ++ dev ++ leisure;
 
+  # other programs
+  programs.adb.enable = true;
 }
