@@ -1,6 +1,6 @@
 [package]
 name = "holodeck-titus"
-version = "0.2.1"
+version = "0.2.6"
 release = 1
 description = "configuration of PC 'Titus'"
 requires = [
@@ -64,6 +64,8 @@ owner = 1000
 group = 1000
 
 
+# Fixes and workarounds
+
 # Workaround for annoying error messages a la 'i2c timeout error' or 'i2c_transfer failed'
 # nvidia driver assumes USB-C, even though none is present.
 # See https://askubuntu.com/a/1289997
@@ -71,3 +73,10 @@ group = 1000
 path = "/etc/modprobe.d/blacklist_i2c-nvidia-gpu.conf"
 mode = "0444"
 content = "blacklist i2c_nvidia_gpu"
+
+# Workaround for gdm not starting properly
+# see https://wiki.archlinux.org/index.php/GDM#GDM_freezes_with_systemd
+[[file]]
+path = "/usr/share/holo/files/99-titus/usr/lib/systemd/system/gdm.service.holoscript"
+mode = "0755"
+contentFrom = "holoscripts/gdm.service.sh"
