@@ -1,6 +1,6 @@
 [package]
 name = "hologram-base"
-version = "4.5.0"
+version = "4.5.1"
 release = 1
 description = "Minimal configuration for all systems"
 requires = [
@@ -32,3 +32,12 @@ contentFrom = "files/sudo"
 path = "/usr/share/holo/files/00-base/etc/bash.bashrc.holoscript"
 mode = "0755"
 contentFrom = "holoscripts/bashrc_hologram-base"
+
+# NTP
+# as created by `systemctl enable systemd.timesyncd`
+[[symlink]]
+path = "/etc/systemd/system/dbus-org.freedesktop.timesync1.service"
+target = "/usr/lib/systemd/system/systemd-timesyncd.service"
+[[symlink]]
+path = "/etc/systemd/system/sysinit.target.wants/systemd-timesyncd.service"
+target = "/usr/lib/systemd/system/systemd-timesyncd.service"
