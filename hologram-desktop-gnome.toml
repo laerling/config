@@ -1,6 +1,6 @@
 [package]
 name = "hologram-desktop-gnome"
-version = "1.4.0"
+version = "1.6.0"
 release = 1
 provides = [ "hologram-desktop" ]
 conflicts = [
@@ -11,17 +11,20 @@ conflicts = [
 description = "gnome desktop environment"
 requires = [
 	"group:gnome",
+	"gnome-passwordsafe",
+	"gnome-shell-extension-dash-to-dock",
+	"gnome-shell-extension-windowoverlay-icons",
 	"gnome-tweaks",
 	"dconf-editor",
 
-  # ubuntu look
-  "ttf-ubuntu-font-family",
-  # install from AUR:
-  # - yaru-gtk-theme
-  # - yaru-icon-theme
-  # - yaru-session
-  # - yaru-sound-theme
-  # - yaru-unity-theme (?)
+	# ubuntu look
+	"ttf-ubuntu-font-family",
+	# install from AUR:
+	# - yaru-gtk-theme
+	# - yaru-icon-theme
+	# - yaru-session
+	# - yaru-sound-theme
+	# - yaru-unity-theme (?)
 ]
 
 # TODO write holo plugin for dconf configuration and provision that
