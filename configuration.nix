@@ -79,7 +79,7 @@ with builtins; {
     gui_base   = [ breeze-icons gnome3.gnome-tweaks kolourpaint source-code-pro ];
     gui_ubuntu = [ gnomeExtensions.dash-to-dock ubuntu_font_family ubuntu-themes yaru-theme ];
     dev        = [ emacs rustup ];
-    leisure    = [ discord ffmpeg mpv qutebrowser tdesktop thunderbird-bin youtube-dl ];
+    leisure    = [ ffmpeg mpv qutebrowser tdesktop thunderbird-bin youtube-dl ];
   in base ++ gui_base ++ gui_ubuntu ++ dev ++ leisure;
 
   # other programs
