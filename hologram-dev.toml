@@ -14,6 +14,7 @@ requires = [
 	"go",
 	"go-tools",
 	"nmap",
+	"python-virtualenv",
 	"rustup", # replaces cargo
 	"strace",
 	"tk", # for gitk
