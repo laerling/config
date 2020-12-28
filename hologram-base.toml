@@ -1,21 +1,22 @@
 [package]
 name = "hologram-base"
-version = "4.5.1"
+version = "4.6.0"
 release = 1
 description = "Minimal configuration for all systems"
 requires = [
-  "holo",
-  "group:base-devel", # don't depend on group:base. It can't be resolved by pacman -Sg
+	"holo",
+	"group:base-devel", # don't depend on group:base. It can't be resolved by pacman -Sg
 
-  "acpi",
-  "holo",
-  "man-db",
-  "screen",
-  "tree",
-  "unzip",
-  "gvim", # gvim instead of vim, so we have clipboard support
-  # emacs in hologram-dev since it is too big for a minimal installation
-  # intel-ucode/intel-microcode in holodecks since it is machine specific
+	"acpi",
+	"gvim", # gvim instead of vim, so we have clipboard support
+	"holo",
+	"man-db",
+	"screen",
+	"tree",
+	"unzip",
+	"wget",
+	# emacs in hologram-dev since it is too big for a minimal installation
+	# intel-ucode/intel-microcode in holodecks since it is machine specific
 ]
 
 
