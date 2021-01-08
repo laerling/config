@@ -9,7 +9,7 @@ It is recommended to use GNU screen!
 5) format partitions (FAT32 for EFI system partition (ESP): `mkfs.fat -F32`)
 6) mount partitions (root: `/mnt`, efi/boot: `/mnt/boot`)
 7) select mirrors (they're already ranked)
-8) `pacstrap /mnt base linux linux-firmware dhcpcd git`
+8) `pacstrap /mnt base linux linux-firmware sudo which dhcpcd git nano screen`
 9) `genfstab -U /mnt >> /mnt/etc/fstab`
 10) `arch-chroot /mnt` (all following steps have to be done in the arch-chroot environment!)
 
@@ -49,7 +49,7 @@ timeout 2
 ## installed system
 24) get a DHCP lease: `systemctl start dhcpcd`
 25) clone this repo: `git clone https://github.com/laerling/config ~/config && cd ~/config`
-26) execute `./bootstrap`
+26) execute `./bootstrap.sh`
 27) reboot and logon as user
 28) delete `/root/config` and adjust entry in `/etc/pacman.conf`, then `make update`
 
