@@ -30,13 +30,9 @@ config-repo_registration:
 
 /usr/bin/holo-build: /usr/bin/holo
 /usr/bin/holo: holo-repo_registration
-	$(sudo) pacman-key --init;
-	$(sudo) pacman-key --populate archlinux;
-	$(sudo) pacman-key -r 0xF7A9C9DC4631BD1A; # if this fails, try it on a live system and comment this line out
-	if ! pacman-key -f 0xF7A9C9DC4631BD1A | grep -o "2A53 49F6 B4D7 305A 85DE  D8D4 F7A9 C9DC 4631 BD1A"; then \
-		echo -e "FATAL ERROR: The holo signing key has the wrong fingerprint. Check manually! Aborting." 1>&2; exit 1; \
-	fi
-	$(sudo) pacman-key --lsign-key 0xF7A9C9DC4631BD1A;
+	curl -o holo-keyring.pkg.tar.gz https://repo.holocm.org/archlinux/x86_64/holo-keyring-20201009.1-1-any.pkg.tar.xz
+	sha256sum holo-keyring.pkg.tar.gz | grep dec378054732fad0109eeff5da3933cefb70eaeb14217f20a33510f3772aea95 || exit 1
+	$(sudo) pacman -U holo-keyring.pkg.tar.gz
 	$(sudo) pacman -Sy;
 	yes | $(sudo) pacman -S --needed holo holo-build;
 
