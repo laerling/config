@@ -31,7 +31,7 @@ config-repo_registration:
 /usr/bin/holo: holo-repo_registration
 	curl -o holo-keyring.pkg.tar.xz https://repo.holocm.org/archlinux/x86_64/holo-keyring-20201009.1-1-any.pkg.tar.xz
 	sha256sum holo-keyring.pkg.tar.xz | grep dec378054732fad0109eeff5da3933cefb70eaeb14217f20a33510f3772aea95 || exit 1
-	sudo pacman -U holo-keyring.pkg.tar.xz;
+	yes | sudo pacman -U holo-keyring.pkg.tar.xz;
 	sudo pacman -Sy;
 	yes | sudo pacman -S --needed holo holo-build;
 
