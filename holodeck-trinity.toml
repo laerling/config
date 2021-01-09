@@ -1,0 +1,39 @@
+[package]
+name = "holodeck-trinity"
+version = "0.1.0"
+release = 1
+description = "configuration of server 'trinity'"
+requires = [
+	"holo-users-groups",
+
+	"hologram-base-arch",
+	"openssh",
+]
+
+
+# user
+
+[[group]]
+name = "sudo"
+system = false
+
+[[user]]
+name    = "lsf"
+system  = false
+uid     = 1000
+groups  = [ "audio", "sudo" ]
+home    = "/home/lsf"
+shell   = "/bin/bash"
+
+[[directory]]
+path = "/home/lsf"
+mode = "0700"
+owner = "lsf"
+group = "lsf"
+
+
+# SSH
+# as created by `systemctl enable sshd`
+[[symlink]]
+path = "/etc/systemd/system/multi-user.target.wants/sshd.service"
+target = "/usr/lib/systemd/system/sshd.service"
