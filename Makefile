@@ -8,7 +8,7 @@ repo: holograms holodecks
 	repo-add $(repo_dir)/$(repo_name).db.tar.gz $(repo_dir)/$(package_files)
 
 PHONY+=all
-all: /usr/bin/holo-build /usr/bin/holo repo config-repo_registration update
+all: /usr/bin/holo-build /usr/bin/holo config-repo_registration update
 
 PHONY+=upgrade
 upgrade: update
@@ -99,7 +99,7 @@ clean:
 	# remove yaourt build artifacts
 	rm -rf yaourt package-query
 	# remove nix build result for GC
-	if [ -l result ]; then rm result; fi
+	if [ -L result ]; then rm result; fi
 
 
 .PHONY: $(PHONY)
