@@ -8,6 +8,8 @@ It is recommended to use GNU screen!
 4) partition disks (use `lsblk` to check which disk to use)
 5) format partitions (FAT32 for EFI system partition (ESP): `mkfs.fat -F32`)
 6) mount partitions (root: `/mnt`, efi/boot: `/mnt/boot`)
+   Note that we're not using a separate boot partition in this case, but mount the ESP as `/boot`.
+   I'm not sure, but I think this might be necessary for `systemd-boot` to find the kernel, initrds etc.
 7) select mirrors (they're already ranked)
 8) `pacstrap /mnt base linux linux-firmware sudo which dhcpcd git nano screen`
 9) `genfstab -U /mnt >> /mnt/etc/fstab`
@@ -38,7 +40,7 @@ initrd  /amd-ucode.img
 initrd  /initramfs-linux.img
 options cryptdevice=UUID=<ROOT_PARTITION_UUID>:root root=/dev/mapper/root rw
 ```
-22) configure systemd-boot:
+22) configure systemd-boot (This assumes you do not have separate ESP and BOOT partitions):
 ```
 cat > /boot/loader/loader.conf
 default arch.conf
@@ -49,7 +51,7 @@ timeout 2
 ## installed system
 24) get a DHCP lease: `systemctl start dhcpcd`
 25) clone this repo: `git clone https://github.com/laerling/config ~/config && cd ~/config`
-26) execute `./bootstrap.sh`
+26) execute `./bootstrap.sh` and install a holodeck
 27) reboot and logon as user
 28) delete `/root/config` and adjust entry in `/etc/pacman.conf`, then `make update`
 
