@@ -1,6 +1,6 @@
 [package]
 name = "hologram-desktop-gnome"
-version = "1.6.2"
+version = "1.6.4"
 release = 1
 provides = [ "hologram-desktop" ]
 conflicts = [
@@ -12,7 +12,7 @@ description = "gnome desktop environment"
 requires = [
 	"group:gnome",
 	"gnome-passwordsafe",
-	"gnome-shell-extension",
+	"gnome-shell-extensions",
 	#"gnome-shell-extension-dash-to-dock",
 	#"gnome-shell-extension-windowoverlay-icons",
 	"gnome-tweaks",
@@ -50,3 +50,7 @@ target = "/usr/lib/systemd/system/NetworkManager-wait-online.service"
 path = "/etc/systemd/system/dbus-org.freedesktop.resolve1.service"
 target = "/usr/lib/systemd/system/systemd-resolved.service"
 
+# gnome-terminal doesn't start without this
+[[file]]
+path = "/etc/locale.conf"
+content = "LANG=en_US.UTF-8"
