@@ -1,13 +1,13 @@
 [package]
 name = "hologram-communication"
-version = "2.0.0"
+version = "3.0.0"
 release = 1
 description = "communication programs (for use with a GUI)"
 requires = [
 	"hologram-gui",
 
 	"discord", # don't forget to turn off notifications (libnotify is not installed)
-	"qutebrowser",
+	"firefox",
 	"telegram-desktop",
 	"thunderbird",
 ]
