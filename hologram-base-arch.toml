@@ -1,6 +1,6 @@
 [package]
 name = "hologram-base-arch"
-version = "0.2.3"
+version = "0.2.4"
 release = 1
 description = "Minimal configuration, specific to Arch Linux"
 requires = [
@@ -34,3 +34,8 @@ requires = [
 path = "/usr/share/holo/files/01-base-arch/etc/bash.bashrc.holoscript"
 mode = "0755"
 contentFrom = "holoscripts/bashrc_hologram-base-arch"
+
+[[file]]
+path = "/etc/security/faillock.conf"
+mode = "0644"
+content = "deny = 0"
