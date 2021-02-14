@@ -1,6 +1,6 @@
 [package]
 name = "hologram-base-arch"
-version = "0.2.4"
+version = "0.2.9"
 release = 1
 description = "Minimal configuration, specific to Arch Linux"
 requires = [
@@ -35,7 +35,8 @@ path = "/usr/share/holo/files/01-base-arch/etc/bash.bashrc.holoscript"
 mode = "0755"
 contentFrom = "holoscripts/bashrc_hologram-base-arch"
 
+# disable account locking when entering password wrong
 [[file]]
-path = "/etc/security/faillock.conf"
-mode = "0644"
-content = "deny = 0"
+path = "/usr/share/holo/files/00-base-arch/etc/security/faillock.conf.holoscript"
+mode = "0755"
+contentFrom = "holoscripts/faillock.conf"

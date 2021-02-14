@@ -10,11 +10,13 @@ cat;tail --lines=+4 "$0";exit
 upgradefile=~/.last_upgrade
 touch "$upgradefile"
 if [ "$(cat "$upgradefile")" != $(date -I) ]; then
-    echo "Upgrading system"
-    date -I > "$upgradefile"
-    if hash yaourt 2>/dev/null; then
-        yaourt -Syu || rm "$upgradefile"
-    else
-        sudo pacman -Syu || rm "$upgradefile"
+    read -p "Upgrade system (y/N)" upgrade
+    if [ "$upgrade" = y ]; then
+        date -I > "$upgradefile"
+        if hash yaourt 2>/dev/null; then
+            yaourt -Syu || rm "$upgradefile"
+        else
+            sudo pacman -Syu || rm "$upgradefile"
+        fi
     fi
 fi
