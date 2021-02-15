@@ -81,6 +81,13 @@ target | description
   - DHCP: Use systemd matching on interface to abstract from LAN NIC
 
 ### GUI:
+  - Run xorg-server without root rights with the help of systemd-logind
+    > xorg-server has now the ability to run without root rights with
+    > the help of systemd-logind. xserver will fail to run if not launched
+    > from the same virtual terminal as was used to log in.
+    > Without root rights, log files will be in ~/.local/share/xorg/ directory.
+    > Old behavior can be restored through Xorg.wrap config file.
+    > See Xorg.wrap man page (man xorg.wrap).
   - gnome terminal: Set config (colorscheme tango-dark, ...)
   - Use a terminal that doesn't rely on a server part and thus is usable on several ttys. That is, don't use gnome-terminal.
   - Terminal: Don't beep. Add /etc/modprobe.d/nobeep.conf with content "blacklist pcspkr" to hologram-base
