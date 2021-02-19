@@ -1,6 +1,6 @@
 [package]
 name = "holodeck-luv"
-version = "3.2.0"
+version = "4.0.0"
 release = 1
 description = "configuration of laptop 'luv'"
 requires = [
@@ -11,7 +11,9 @@ requires = [
 	"hologram-multimedia",
 
 	"android-file-transfer",
+	"dhcpcd",
 	"intel-ucode",
+	"iwd",
 	"openssh",
 	"xorg-xrandr", # for peripheral screens
 ]
@@ -37,6 +39,19 @@ path = "/home/laerling"
 mode = "0700"
 owner = "laerling"
 group = "laerling"
+
+
+# network
+
+# enable iwd
+[[symlink]]
+path = "/etc/systemd/system/multi-user.target.wants/iwd.service"
+target = "/usr/lib/systemd/system/iwd.service"
+
+# enable dhcpcd
+[[symlink]]
+path = "/etc/systemd/system/multi-user.target.wants/dhcpcd.service"
+target = "/usr/lib/systemd/system/dhcpcd.service"
 
 
 # screen setup
