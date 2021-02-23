@@ -1,6 +1,6 @@
 [package]
 name = "hologram-base-arch"
-version = "0.2.9"
+version = "1.0.0"
 release = 1
 description = "Minimal configuration, specific to Arch Linux"
 requires = [
