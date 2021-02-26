@@ -31,6 +31,11 @@ requires = [
 
 
 [[file]]
+path = "/usr/share/holo/files/01-base-arch/etc/pacman.d/mirrorlist.holoscript"
+mode = "0755"
+contentFrom = "holoscripts/mirrorlist"
+
+[[file]]
 path = "/usr/share/holo/files/01-base-arch/etc/bash.bashrc.holoscript"
 mode = "0755"
 contentFrom = "holoscripts/bashrc_hologram-base-arch"

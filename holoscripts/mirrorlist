@@ -1,0 +1,6 @@
+#!/usr/bin/bash
+
+echo "Ranking german mirrors" >/dev/stderr
+f=$(mktemp)
+sed -n '/Germany/{:x;p;n;/^Server /bx}' > "$f"
+rankmirrors "$f"
