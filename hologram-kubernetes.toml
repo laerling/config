@@ -1,0 +1,11 @@
+[package]
+name = "hologram-kubernetes"
+version = "1.0.0"
+release = 1
+description = "Kubernetes playground and tools"
+requires = [
+	"hologram-docker",
+
+	"minikube",
+	"kubectl",
+]
