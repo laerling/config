@@ -1,0 +1,23 @@
+[package]
+name = "hologram-docker"
+version = "1.0.0"
+release = 1
+description = "Docker daemon, service, user."
+requires = [
+	"docker",
+]
+
+
+[[group]]
+name = "docker"
+system = false
+
+# This will need manuel `holo apply --force`
+[[user]]
+name    = "laerling"
+groups  = [ "docker" ]
+
+# as created by `systemctl enable docker`
+[[symlink]]
+path = "/etc/systemd/system/multi-user.target.wants/docker.service"
+target = "/usr/lib/systemd/system/docker.service"
