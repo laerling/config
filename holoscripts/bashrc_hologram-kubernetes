@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+cat;tail --lines=+4 "$0";exit
+# This must stand in the third line of the file. Everything that follows gets written to the destination file verbatim.
+
+##########################################
+# configuration from hologram-kubernetes #
+##########################################
+
+source /etc/kubectl_autocompletion

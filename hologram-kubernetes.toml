@@ -1,6 +1,6 @@
 [package]
 name = "hologram-kubernetes"
-version = "1.0.0"
+version = "1.1.0"
 release = 1
 description = "Kubernetes playground and tools"
 requires = [
@@ -8,4 +8,21 @@ requires = [
 
 	"minikube",
 	"kubectl",
+	"bash-completion", # for the kubectl completion script
 ]
+
+
+[[file]]
+path = "/etc/kubectl_autocompletion"
+mode = "0444"
+content = " " # must not be empty. Will be replaced by holoscript below
+
+[[file]]
+path = "/usr/share/holo/files/01-kubernetes/etc/kubectl_autocompletion.holoscript"
+mode = "0755"
+content = "#!/usr/bin/bash\nkubectl completion bash"
+
+[[file]]
+path = "/usr/share/holo/files/01-kubernetes/etc/bash.bashrc.holoscript"
+mode = "0755"
+contentFrom = "holoscripts/bashrc_hologram-kubernetes"
