@@ -1,6 +1,6 @@
 [package]
 name = "hologram-base-arch"
-version = "1.0.0"
+version = "1.2.8"
 release = 1
 description = "Minimal configuration, specific to Arch Linux"
 requires = [
@@ -11,7 +11,6 @@ requires = [
   "bind-tools", # for host, dig, nslookup
   "gnu-netcat",
   "group:base-devel",
-  "pacman-contrib", # rankmirrors, ...
   # no yaourt because that can't be installed as root (due to
   # makepkg), therefore it cannot exist when a holodeck is
   # installed for the first time

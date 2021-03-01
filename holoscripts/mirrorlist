@@ -1,6 +1,9 @@
 #!/usr/bin/bash
 
-echo "Ranking german mirrors" >/dev/stderr
-f=$(mktemp)
-sed -n '/Germany/{:x;p;n;/^Server /bx}' > "$f"
-rankmirrors "$f"
+url='https://archlinux.org/mirrorlist/?country=DE&protocol=https&ip_version=4&use_mirror_status=on'
+
+echo "# Mirrorlist for Germany downloaded from:"
+echo "# $url"
+echo
+
+curl "$url" | sed 's/^#Server/Server/'

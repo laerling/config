@@ -6,9 +6,12 @@ cat;tail --lines=+4 "$0";exit
 # configuration from hologram-base-arch #
 #########################################
 
+# only update system if screen is running
+if (ps -e | grep '\<screen\>' >/dev/null); then
+
 # upgrade system
 upgradefile=~/.last_upgrade
-touch "$upgradefile"
+touch "$upgradefile" # just so that it exists
 if [ "$(cat "$upgradefile")" != $(date -I) ]; then
     read -p "Upgrade system (y/N)" upgrade
     if [ "$upgrade" = y ]; then
@@ -19,4 +22,6 @@ if [ "$(cat "$upgradefile")" != $(date -I) ]; then
             sudo pacman -Syu || rm "$upgradefile"
         fi
     fi
+fi
+
 fi
