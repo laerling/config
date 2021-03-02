@@ -2,11 +2,9 @@
 name = "hologram-lang_en"
 provides = [ "hologram-lang" ]
 conflicts = [ "hologram-lang_de", "hologram-lang_no" ]
-version = "4.0"
+version = "5.0.0"
 release = 1
 description = "english locales"
-requires = [
-]
 
 [[file]]
 path = "/etc/X11/xorg.conf.d/00-keyboard.conf"
