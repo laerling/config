@@ -1,6 +1,6 @@
 [package]
 name = "hologram-multimedia"
-version = "1.4"
+version = "1.5.0"
 release = 1
 description = "Bundle with video, graphics, audio, communication, and games"
 requires = [
@@ -14,3 +14,8 @@ requires = [
 path = "/etc/mpv/mpv.conf"
 mode = "0644"
 content = "audio-display=no"
+
+[[file]]
+path = "/usr/bin/decide"
+mode = "0755"
+contentFrom = "files/decide.sh"
