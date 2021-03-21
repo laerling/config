@@ -1,0 +1,12 @@
+[package]
+name = "hologram-studio-audio"
+version = "0.0.0"
+release = 1
+description = "Audio production software"
+requires = [
+	"hologram-gui",
+	"hologram-audio",
+
+  # Good read: https://wiki.archlinux.org/index.php/Professional_audio
+  "group:pro-audio",
+]
