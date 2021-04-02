@@ -1,6 +1,6 @@
 [package]
 name = "holodeck-luv"
-version = "4.0.1"
+version = "4.3.0"
 release = 1
 description = "configuration of laptop 'luv'"
 requires = [
@@ -10,7 +10,9 @@ requires = [
 	"hologram-dev",
 	"hologram-multimedia",
 	#"xorg-xrandr", # for peripheral screens # TODO move to hologram-desktop-i3
+	"hologram-desktop-i3",
 
+	"nautilus",
 	"android-file-transfer",
 	"dhcpcd",
 	"intel-ucode",
