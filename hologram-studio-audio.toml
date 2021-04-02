@@ -1,6 +1,6 @@
 [package]
 name = "hologram-studio-audio"
-version = "0.0.0"
+version = "1.0.0"
 release = 1
 description = "Audio production software"
 requires = [
@@ -10,3 +10,12 @@ requires = [
   # Good read: https://wiki.archlinux.org/index.php/Professional_audio
   "group:pro-audio",
 ]
+
+# needs restart, followed by manual reinstallation of this hologram
+[[action]]
+on = "setup"
+script = "modprobe snd-seq-midi"
+
+[[action]]
+on = "cleanup"
+script = "modprobe -r snd-seq-midi"
