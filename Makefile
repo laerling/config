@@ -50,7 +50,7 @@ holodecks:
 	mkdir -p $(repo_dir)
 	@$(foreach i, $(wildcard holodeck-*.toml), \
 		echo "Compiling $i"; \
-		holo-build < "$i"; \
+		holo-build < "$i" || exit 1; \
 		mv $(package_files) $(repo_dir)/; \
 	)
 
@@ -59,7 +59,7 @@ holograms:
 	mkdir -p $(repo_dir)
 	@$(foreach i, $(wildcard hologram-*.toml), \
 		echo "Compiling $i"; \
-		holo-build < "$i"; \
+		holo-build < "$i" || exit 1; \
 		mv $(package_files) $(repo_dir)/; \
 	)
 
