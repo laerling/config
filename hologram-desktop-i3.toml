@@ -1,6 +1,6 @@
 [package]
 name = "hologram-desktop-i3"
-version = "1.2.0"
+version = "1.4.0"
 release = 1
 provides = [ "hologram-desktop" ]
 description = "i3 wm and basic desktop utilities. Can be installed alongside any hologram-desktop-*"
@@ -38,6 +38,11 @@ contentFrom = "files/xinitrc_hologram-desktop-i3"
 
 
 # own binaries
+
+[[file]]
+path = "/usr/bin/x"
+mode = "0755"
+content = "startx"
 
 [[file]]
 path = "/usr/bin/exiti3"
