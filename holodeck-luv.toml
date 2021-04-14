@@ -1,6 +1,6 @@
 [package]
 name = "holodeck-luv"
-version = "4.6.0"
+version = "4.7.1"
 release = 1
 description = "configuration of laptop 'luv'"
 requires = [
@@ -56,9 +56,9 @@ target = "/usr/lib/systemd/system/dhcpcd.service"
 # external screen configuration for X
 
 [[file]]
-path = "/usr/share/holo/files/99-laptop/etc/X11/xinit/xinitrc.holoscript"
+path = "/etc/X11/xinit/xinitrc.d/holodeck-luv"
 mode = "0755"
-contentFrom = "holoscripts/xinitrc.pl"
+contentFrom = "files/xinitrc_holodeck-luv.sh"
 
 # How to handle the lid etc.
 [[file]]
