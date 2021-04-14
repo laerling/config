@@ -24,4 +24,8 @@ if [ "$(cat "$upgradefile")" != $(date -I) ]; then
     fi
 fi
 
+else
+
+screen -DR
+
 fi

@@ -1,6 +1,6 @@
 [package]
 name = "hologram-base-arch"
-version = "1.3.0"
+version = "1.5.1"
 release = 1
 description = "Minimal configuration, specific to Arch Linux"
 requires = [
@@ -45,3 +45,9 @@ contentFrom = "holoscripts/bashrc_hologram-base-arch"
 path = "/usr/share/holo/files/00-base-arch/etc/security/faillock.conf.holoscript"
 mode = "0755"
 contentFrom = "holoscripts/faillock.conf"
+
+# enable multilib
+[[file]]
+path = "/usr/share/holo/files/00-base-arch/etc/pacman.conf.holoscript"
+mode = "0755"
+contentFrom = "holoscripts/pacman.conf"
