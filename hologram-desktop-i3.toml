@@ -1,6 +1,6 @@
 [package]
 name = "hologram-desktop-i3"
-version = "1.4.0"
+version = "1.5.0"
 release = 1
 provides = [ "hologram-desktop" ]
 description = "i3 wm and basic desktop utilities. Can be installed alongside any hologram-desktop-*"
@@ -12,6 +12,7 @@ requires = [
 	# window manager (with status bar and application starter)
 	"xorg-server",
 	"xorg-xinit",
+	"xorg-xrandr", # for configuring peripheral screens etc.
 	"i3-wm",
 	"i3status",
 	"dmenu",
