@@ -1,0 +1,43 @@
+[package]
+name = "hologram-desktop-sway"
+version = "1.3.0"
+release = 1
+provides = [ "hologram-desktop" ]
+conflicts = [
+	"hologram-desktop-cinnamon",
+	"hologram-desktop-gnome",
+	"hologram-desktop-i3",
+]
+description = "sway dm and basic desktop utilities"
+requires = [
+
+# console
+	"gnome-terminal",
+
+# window manager (with status bar and application starter)
+	"sway",
+	"xorg-xwayland",
+	"i3status",
+	"bemenu-wlroots", # wayland-native replacement for dmenu
+	"dmenu", # for dmenu_path, which we need to give bemenu input
+
+# fonts
+	"gnu-free-fonts", # replaces ttf-freefont
+	"adobe-source-code-pro-fonts",
+
+# other
+	"nautilus",
+	"gnome-photos",
+]
+
+
+[[file]]
+# path can't be specified directly due to it already existing
+path = "/usr/share/holo/files/01-gui/etc/sway/config"
+mode = "0755"
+contentFrom = "files/sway_config"
+
+# gnome-terminal doesn't start without this
+[[file]]
+path = "/etc/locale.conf"
+content = "LANG=en_US.UTF-8"
