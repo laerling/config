@@ -26,6 +26,6 @@ fi
 
 else
 
-screen -DR
+ps -e | grep 'Xorg\|sway\|gnome-sess' && screen -DR
 
 fi
