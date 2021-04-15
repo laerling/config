@@ -1,6 +1,6 @@
 [package]
 name = "hologram-desktop-sway"
-version = "1.5.0"
+version = "1.6.0"
 release = 1
 provides = [ "hologram-desktop" ]
 conflicts = [
@@ -20,6 +20,7 @@ requires = [
 	"i3status",
 	"bemenu-wlroots", # wayland-native replacement for dmenu
 	"dmenu", # for dmenu_path, which we need to give bemenu input
+	"swaylock",
 
 # fonts
 	"gnu-free-fonts", # replaces ttf-freefont
@@ -41,3 +42,23 @@ contentFrom = "files/sway_config"
 [[file]]
 path = "/etc/locale.conf"
 content = "LANG=en_US.UTF-8"
+
+[[file]]
+path = "/usr/bin/slock"
+mode = "0755"
+contentFrom = "files/slock.sway"
+
+[[file]]
+path = "/usr/bin/slocksus"
+mode = "0755"
+contentFrom = "files/slocksus.sway"
+
+[[file]]
+path = "/usr/bin/slockhib"
+mode = "0755"
+contentFrom = "files/slockhib.sway"
+
+[[file]]
+path = "/usr/bin/scrots"
+mode = "0755"
+contentFrom = "files/scrots"
