@@ -44,10 +44,10 @@ target | description
 ## FIXMEs and TODOs
 
 ### Build:
-  - Make make return non-zero when a holo-build failed
   - Write holo plugin for cloning git repos (holo-git-repo)
 
 ### General:
+  - Make it possible to provision home directory by parameterizing holodecks/holograms and run a preprocessor in the corresponding Makefile rules
   - ebox
   - vimrc (git clone ... && cd .vim && make && ...)
   - Backup mechanism (backuplocal script or borg)
