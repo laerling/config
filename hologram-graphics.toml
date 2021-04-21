@@ -1,6 +1,6 @@
 [package]
 name = "hologram-graphics"
-version = "2.1.0"
+version = "2.2.0"
 release = 1
 description = "graphics and drawing programs"
 requires = [
@@ -10,5 +10,10 @@ requires = [
 	"feh",
 	"graphviz",
 	"kolourpaint",
-  "breeze-icons", # icons for kolourpaint
+	"breeze-icons", # icons for kolourpaint
 ]
+
+[[file]]
+path = "/usr/local/bin/feh"
+mode = "0755"
+content = "/usr/bin/feh --scale-down $@"
