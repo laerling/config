@@ -1,6 +1,6 @@
 [package]
 name = "hologram-desktop-i3"
-version = "1.6.0"
+version = "1.6.4"
 release = 1
 provides = [ "hologram-desktop" ]
 description = "i3 wm and basic desktop utilities. Can be installed alongside any hologram-desktop-*"
@@ -8,6 +8,7 @@ requires = [
 
 	# console
 	"guake",
+	"xterm", # needed due to /etc/X11/xinit/xinitrc
 
 	# window manager (with status bar and application starter)
 	"xorg-server",
@@ -28,14 +29,14 @@ requires = [
 
 
 [[file]]
-path = "/usr/share/holo/files/01-gui/etc/i3/config"
+path = "/usr/share/holo/files/02-desktop-i3/etc/i3/config"
 mode = "0755"
 contentFrom = "files/i3_config"
 
 [[file]]
-path = "/etc/X11/xinit/xinitrc.d/hologram-desktop-i3"
-mode = "0644"
-contentFrom = "files/xinitrc_hologram-desktop-i3"
+path = "/etc/X11/xinit/xinitrc.d/hologram-desktop-i3.sh"
+mode = "0755"
+contentFrom = "files/xinitrc_hologram-desktop-i3.sh"
 
 
 # own binaries

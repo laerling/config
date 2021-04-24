@@ -1,6 +1,6 @@
 [package]
 name = "hologram-desktop-cinnamon"
-version = "1.5.0"
+version = "1.5.1"
 release = 1
 provides = [ "hologram-desktop" ]
 conflicts = [
@@ -26,6 +26,6 @@ requires = [
 
 
 [[file]]
-path = "/etc/X11/xinit/xinitrc.d/cinnamon"
+path = "/etc/X11/xinit/xinitrc.d/cinnamon.sh"
 mode = "0755"
-contentFrom = "files/xinitrc_hologram-desktop-cinnamon"
+contentFrom = "files/xinitrc_hologram-desktop-cinnamon.sh"
