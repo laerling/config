@@ -1,6 +1,6 @@
 [package]
 name = "hologram-desktop-sway"
-version = "1.7.0"
+version = "1.9.0"
 release = 1
 provides = [ "hologram-desktop" ]
 conflicts = [
