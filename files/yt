@@ -1,6 +1,9 @@
 #!/usr/bin/bash
 
 link="$(xsel -b)"
+if [ -z "$link" ]; then
+    link="$(wl-paste)"
+fi
 echo "Clipboard: $link"
 
 # if it's a list, play it whole instead of just one video

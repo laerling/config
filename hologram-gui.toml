@@ -1,8 +1,8 @@
 [package]
 name = "hologram-gui"
-version = "3.3.2"
+version = "3.4.1"
 release = 1
-description = "X configuration without desktop environment"
+description = "Things needed for every desktop"
 requires = [
 
   # graphics drivers have to be included in holodecks
@@ -18,7 +18,10 @@ requires = [
 
 	# programs independent of desktop environment
 	"scrot",
+	# since many desktops can be started with either X or wayland, we might
+	# as well depend on both clipboard frontends already
 	"xsel",
+	"wl-clipboard"
 ]
 
 
@@ -26,3 +29,9 @@ requires = [
 path = "/usr/share/holo/files/01-gui/etc/inputrc.holoscript"
 mode = "0755"
 contentFrom = "files/inputrc.sed"
+
+# remove unnecessary stuff from xinitrc
+[[file]]
+path = "/usr/share/holo/files/02-desktop-i3/etc/X11/xinit/xinitrc.holoscript"
+mode = "0755"
+contentFrom = "holoscripts/xinitrc.sh"
