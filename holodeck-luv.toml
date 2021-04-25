@@ -4,17 +4,27 @@ version = "4.11.2"
 release = 1
 description = "configuration of laptop 'luv'"
 requires = [
+	# holo
 	"holo-users-groups",
 
+	# other holograms
 	"hologram-base-arch",
 	"hologram-dev",
 	"hologram-multimedia",
 
-	"android-file-transfer",
-	"dhcpcd",
+	# basic
 	"intel-ucode",
-	"iwd",
+
+	# networking
+	"dhcpcd",
 	"openssh",
+	"iwd",
+	"bluez",
+	"bluez-utils",
+
+	# other
+	"android-file-transfer",
+	"pulseaudio-bluetooth",
 ]
 
 
@@ -29,7 +39,7 @@ name    = "laerling"
 system  = false
 comment = "Benjamin Ludwig"
 uid     = 1000
-groups  = [ "audio", "video", "sudo" ]
+groups  = [ "audio", "video", "sudo", "lp" ] # lp = bluetooth
 home    = "/home/laerling"
 shell   = "/bin/bash"
 
