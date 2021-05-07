@@ -46,6 +46,9 @@ sub hashes {
         $loc = $loc . "/" unless substr($loc, -1) eq '/';
         my $itempath = "$loc$item";
 
+	# ignore symbolic links
+	next if(-l $itempath);
+
         # traverse or hash
         if(-d $itempath){
 
