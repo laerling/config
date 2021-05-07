@@ -54,11 +54,11 @@ sub hashes {
         } else {
 
             # make sanitized itempath
-            my $itempathSan = $itempath;
-            $itempathSan =~ s/"/\\"/;
+            my $itempathSanitized = $itempath;
+            $itempathSanitized =~ s/'/'\\''/g;
 
             # calculate hash
-            `$HASH_BIN "$itempathSan"` =~ /(^[\S]+)/;
+            `$HASH_BIN '$itempathSanitized'` =~ /(^[\S]+)/;
             die "$HASH_BIN output could not be parsed for '$itempath'" if not defined $1;
             my $hash = $1;
 
