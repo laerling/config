@@ -1,6 +1,6 @@
 [package]
 name = "hologram-desktop-i3"
-version = "1.6.4"
+version = "1.7.0"
 release = 1
 provides = [ "hologram-desktop" ]
 description = "i3 wm and basic desktop utilities. Can be installed alongside any hologram-desktop-*"
@@ -25,6 +25,7 @@ requires = [
 	# standard programs depending on GUI
 	"slock",
 	"scrot",
+	"shotwell", # photo viewer
 ]
 
 
