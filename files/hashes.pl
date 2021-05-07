@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 # constants
-my $HASH_BIN = "md5sum";
+my $HASH_BIN = "xxhsum";
 
 # initialize
 my $loc = shift || "."; # location to traverse
