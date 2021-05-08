@@ -1,6 +1,6 @@
 [package]
 name = "holodeck-titus"
-version = "1.1.0"
+version = "1.2.0"
 release = 1
 description = "configuration of PC 'Titus'"
 requires = [
@@ -71,3 +71,16 @@ content = "blacklist i2c_nvidia_gpu"
 path = "/usr/share/holo/files/99-titus/usr/lib/systemd/system/gdm.service.holoscript"
 mode = "0755"
 contentFrom = "holoscripts/gdm.service.sh"
+
+
+# setup the drawing tablet for the right screen
+
+# crop usable area on the tablet to screen ratio (assuming 16/9 ratio)
+[[action]]
+on = "setup"
+script = "xsetwacom set 8 Area 0 460 14720 8740"
+
+# map to the right screen (assuming both are 1920x1080 pixels)
+[[action]]
+on = "setup"
+script = "xsetwacom set 8 MapToOutput 1920x1080+1920+0"
