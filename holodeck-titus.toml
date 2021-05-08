@@ -1,6 +1,6 @@
 [package]
 name = "holodeck-titus"
-version = "1.0.0"
+version = "1.1.0"
 release = 1
 description = "configuration of PC 'Titus'"
 requires = [
@@ -20,6 +20,7 @@ requires = [
 	"nvidia-settings",
 	"nvidia-utils",
 	"nvtop",
+	"xf86-input-wacom",
 
 	# other packages
 	"android-file-transfer",
