@@ -74,6 +74,7 @@ contentFrom = "holoscripts/gdm.service.sh"
 
 
 # setup the drawing tablet for the right screen
+# FIXME: This gets reset when unplugging the tablet...
 
 # crop usable area on the tablet to screen ratio (assuming 16/9 ratio)
 [[action]]

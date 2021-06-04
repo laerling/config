@@ -1,10 +1,23 @@
 [package]
 name = "hologram-audio"
-version = "1.1"
+version = "2.0.0"
 release = 1
 description = "basic audio infrastructure"
 requires = [
-	"alsa-utils",
-	"pavucontrol",
-	"pulseaudio-alsa",
+	"pavucontrol", # frontend for pipewire-jack, basically
+  "pipewire",
+  "pipewire-alsa",
+  "pipewire-jack",
+  "pipewire-pulse",
+
+  "youtube-dl",
+  "mp3splt", # contains oggsplt
 ]
+
+# as created by `systemctl --user enable pipewire`
+[[symlink]]
+path = "/home/laerling/.config/systemd/user/default.target.wants/pipewire.service"
+target = "/usr/lib/systemd/user/pipewire.service"
+[[symlink]]
+path = "/home/laerling/.config/systemd/user/sockets.target.wants/pipewire.socket"
+target = "/usr/lib/systemd/user/pipewire.socket"
