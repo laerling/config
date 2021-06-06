@@ -1,16 +1,17 @@
 [package]
 name = "hologram-studio-audio"
-version = "1.0.0"
+version = "1.2.0"
 release = 1
 description = "Audio production software"
 requires = [
-	"hologram-gui",
-	"hologram-audio",
+  "hologram-gui",
+  "hologram-audio",
 
   # Good read: https://wiki.archlinux.org/index.php/Professional_audio
   "group:pro-audio",
 ]
 
+# TODO can this be done via /etc/modprobe.d/ files?
 # needs restart, followed by manual reinstallation of this hologram
 [[action]]
 on = "setup"
@@ -19,3 +20,64 @@ script = "modprobe snd-seq-midi"
 [[action]]
 on = "cleanup"
 script = "modprobe -r snd-seq-midi"
+
+# Shills for programs that I want to start with pw-jack, as well as fittingly altered desktop files.
+# Note that the argument to pw-jack in the desktop file has to be an absolute path, else it will recurse infinitely.
+
+# qjackctl
+[[file]]
+path = "/usr/local/bin/qjackctl"
+mode = "0755"
+content = "pw-jack /usr/bin/qjackctl $@"
+[[file]]
+path = "/usr/share/holo/files/02-studio-audio/usr/share/applications/qjackctl.desktop.holoscript"
+mode = "0755"
+contentFrom = "holoscripts/qjackctl.desktop.sh"
+
+# qtractor
+[[file]]
+path = "/usr/local/bin/qtractor"
+mode = "0755"
+content = "pw-jack /usr/bin/qtractor $@"
+[[file]]
+path = "/usr/share/holo/files/02-studio-audio/usr/share/applications/qtractor.desktop.holoscript"
+mode = "0755"
+contentFrom = "holoscripts/qtractor.desktop.sh"
+
+# zynaddsubfx
+[[file]]
+path = "/usr/local/bin/zynaddsubfx"
+mode = "0755"
+content = "pw-jack /usr/bin/zynaddsubfx $@"
+[[file]]
+path = "/usr/share/holo/files/02-studio-audio/usr/share/applications/zynaddsubfx-jack.desktop.holoscript"
+mode = "0755"
+contentFrom = "holoscripts/zynaddsubfx.desktop.sh"
+
+# vital (package vital-synth in AUR)
+# interestingly enough vital works fine without pw-jack. I'm keeping this for completeness though.
+[[file]]
+path = "/usr/local/bin/vital"
+mode = "0755"
+content = "pw-jack /usr/bin/vital $@"
+[[file]]
+path = "/usr/share/holo/files/02-studio-audio/usr/share/applications/vital.desktop.holoscript"
+mode = "0755"
+contentFrom = "holoscripts/vital.desktop.sh"
+
+# Ardour
+[[symlink]]
+path = "/usr/local/bin/ardour"
+target = "/usr/local/bin/ardour6"
+[[file]]
+path = "/usr/local/bin/ardour6"
+mode = "0755"
+content = "pw-jack /usr/bin/ardour6 $@"
+[[file]]
+path = "/usr/share/holo/files/02-studio-audio/usr/share/applications/ardour6.desktop.holoscript"
+mode = "0755"
+contentFrom = "holoscripts/ardour.desktop.sh"
+
+# TODO
+# - carla (?)
+# others from group:pro-audio (?)
