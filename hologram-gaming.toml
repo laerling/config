@@ -1,0 +1,18 @@
+[package]
+name = "hologram-gaming"
+version = "1.0.0"
+release = 1
+description = "Steam and other relevant packages for gaming"
+requires = [
+	"hologram-gui",
+  "hologram-base-arch", # provides multilib
+
+  "steam",
+
+  # Currently this hologram is only for my nvidia machine, so the drivers are
+  # provisioned in this hologram instead of the holodeck.
+  # Visit this link to see which drivers are needed for what configuration:
+  # https://wiki.archlinux.org/title/Xorg#Driver_installation
+  "lib32-nvidia-utils",
+  "ttf-liberation",
+]
