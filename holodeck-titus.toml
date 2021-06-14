@@ -1,6 +1,6 @@
 [package]
 name = "holodeck-titus"
-version = "1.2.0"
+version = "1.3.0"
 release = 1
 description = "configuration of PC 'Titus'"
 requires = [
@@ -12,24 +12,29 @@ requires = [
 	"hologram-dev",
 	"hologram-multimedia",
 
-	# low-level
+	# drivers, compatibility layers, (driver) utilities
 	"amd-ucode",
-
-	# drivers and utilities
 	"nvidia",
 	"nvidia-settings",
 	"nvidia-utils",
 	"nvtop",
 	"xf86-input-wacom",
+	"wine",
 
-	# other packages
-	"android-file-transfer",
-	"android-tools",
+	# basic
+	"borg",
+
+	# networking
+	"openssh",
+	"wireguard-tools",
+
+	# creative
 	"blender",
 	"krita",
-	"openssh",
-	"wine",
-	"wireguard-tools",
+
+	# mobile
+	"android-file-transfer",
+	"android-tools",
 ]
 
 
