@@ -12,7 +12,7 @@ requires = [
 name = "docker"
 system = false
 
-# This will need manuel `holo apply --force`
+# This will need manual `holo apply --force`
 [[user]]
 name    = "laerling"
 groups  = [ "docker" ]

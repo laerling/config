@@ -1,6 +1,6 @@
 [package]
 name = "hologram-studio-audio"
-version = "1.2.0"
+version = "1.2.2"
 release = 1
 description = "Audio production software"
 requires = [
@@ -20,6 +20,12 @@ script = "modprobe snd-seq-midi"
 [[action]]
 on = "cleanup"
 script = "modprobe -r snd-seq-midi"
+
+# Free Ardour from memory limits
+[[file]]
+path = "/etc/security/limits.d/hologram-studio-audio.conf"
+mode = "0644"
+content = "@audio - memlock unlimited"
 
 # Shills for programs that I want to start with pw-jack, as well as fittingly altered desktop files.
 # Note that the argument to pw-jack in the desktop file has to be an absolute path, else it will recurse infinitely.
