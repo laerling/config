@@ -21,7 +21,7 @@ update: clean repo
 PHONY+=config-repo_registration
 config-repo_registration:
 	@if [ -z $(shell grep '^\[$(repo_name)\]' /etc/pacman.conf) ]; then \
-		sudo echo -e "\n[$(repo_name)]\nSigLevel = Optional TrustAll\nServer = file://$(shell pwd)/$(repo_dir)" >> /etc/pacman.conf; \
+		sudo bash -c "echo -e \"\n[$(repo_name)]\nSigLevel = Optional TrustAll\nServer = file://$(shell pwd)/$(repo_dir)\" >> /etc/pacman.conf"; \
 	else \
 		echo "$(repo_name) already registered in pacman.conf"; \
 	fi
