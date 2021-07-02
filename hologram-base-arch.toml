@@ -1,6 +1,6 @@
 [package]
 name = "hologram-base-arch"
-version = "1.10.0"
+version = "1.10.3"
 release = 1
 description = "Minimal configuration, specific to Arch Linux"
 requires = [
@@ -30,10 +30,14 @@ requires = [
 ]
 
 
+# This is an action in order for holo-apply not to complain about a changed mirrorlist
 [[file]]
-path = "/usr/share/holo/files/01-base-arch/etc/pacman.d/mirrorlist.holoscript"
+path = "/usr/bin/get_mirrorlist"
 mode = "0755"
-contentFrom = "holoscripts/mirrorlist"
+contentFrom = "files/get_mirrorlist.sh"
+[[action]]
+on = "setup"
+script = "/usr/bin/get_mirrorlist > /etc/pacman.d/mirrorlist"
 
 [[file]]
 path = "/usr/share/holo/files/01-base-arch/etc/bash.bashrc.holoscript"
@@ -46,8 +50,13 @@ path = "/usr/share/holo/files/00-base-arch/etc/security/faillock.conf.holoscript
 mode = "0755"
 contentFrom = "holoscripts/faillock.conf"
 
+# This is an action in order for holo-apply not to complain about a changed pacman.conf (it's being changed by Makefile anyway)
 # enable multilib
 [[file]]
-path = "/usr/share/holo/files/00-base-arch/etc/pacman.conf.holoscript"
+#path = "/usr/share/holo/files/00-base-arch/etc/pacman.conf.holoscript"
+path = "/usr/bin/enable_multilib"
 mode = "0755"
-contentFrom = "holoscripts/pacman.conf"
+contentFrom = "files/enable_multilib.sh"
+[[action]]
+on = "setup"
+script = "/usr/bin/enable_multilib"
