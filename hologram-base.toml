@@ -1,6 +1,6 @@
 [package]
 name = "hologram-base"
-version = "4.10.5"
+version = "4.12.2"
 release = 1
 description = "Minimal configuration for all systems"
 requires = [
@@ -46,6 +46,16 @@ target = "/usr/lib/systemd/system/systemd-timesyncd.service"
 
 
 # some binaries
+
+[[file]]
+path = "/usr/bin/open"
+mode = "0755"
+contentFrom = "files/open.sh"
+
+[[file]]
+path = "/usr/bin/close"
+mode = "0755"
+contentFrom = "files/close.sh"
 
 [[file]]
 path = "/usr/bin/hashes"
