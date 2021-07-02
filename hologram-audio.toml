@@ -1,18 +1,26 @@
 [package]
 name = "hologram-audio"
-version = "2.0.0"
+version = "2.1.0"
 release = 1
 description = "basic audio infrastructure"
 requires = [
+	"alsa-utils",
 	"pavucontrol", # frontend for pipewire-jack, basically
-  "pipewire",
-  "pipewire-alsa",
-  "pipewire-jack",
-  "pipewire-pulse",
+	"pipewire",
+	"pipewire-alsa",
+	"pipewire-jack", # TODO Why doesn't pipewire-jack replace jack2?
+	"pipewire-pulse",
 
-  "youtube-dl",
-  "mp3splt", # contains oggsplt
+	"youtube-dl",
+	"mp3splt", # contains oggsplt
 ]
+
+# FIXME: Still loaded
+# blacklist HDMI audio module
+[[file]]
+path = "/etc/modprobe.d/blacklist_hdmi_audio.conf"
+mode = "0444"
+content = "blacklist snd_hda_codec_hdmi"
 
 # as created by `systemctl --user enable pipewire`
 [[symlink]]
