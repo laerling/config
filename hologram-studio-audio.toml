@@ -8,7 +8,7 @@ requires = [
   "hologram-audio",
 
   # Good read: https://wiki.archlinux.org/index.php/Professional_audio
-  "group:pro-audio",
+  "group:pro-audio", # FIXME: Dissolve this into packages, remove audacity (and other stuff I don't need)
 ]
 
 # TODO can this be done via /etc/modprobe.d/ files?
