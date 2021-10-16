@@ -1,6 +1,6 @@
 [package]
 name = "holodeck-titus"
-version = "1.3.0"
+version = "1.4.0"
 release = 1
 description = "configuration of PC 'Titus'"
 requires = [
@@ -27,6 +27,11 @@ requires = [
 	# networking
 	"openssh",
 	"wireguard-tools",
+
+	# GUI
+	# Depend on both gnome and cinnamon
+	"hologram-desktop-gnome",
+	"hologram-desktop-cinnamon",
 
 	# creative
 	"blender",

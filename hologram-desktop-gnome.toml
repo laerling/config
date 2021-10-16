@@ -1,12 +1,13 @@
 [package]
 name = "hologram-desktop-gnome"
-version = "1.7.0"
+version = "1.9.2"
 release = 1
-provides = [ "hologram-desktop" ]
-conflicts = [
-	"hologram-desktop-cinnamon",
-	"hologram-dm", # gnome comes with gdm
-	]
+# gnome comes with gdm
+conflicts = [ "hologram-dm" ]
+provides = [
+  "hologram-desktop",
+  "hologram-dm",
+]
 description = "gnome desktop environment"
 requires = [
 	"group:gnome",
