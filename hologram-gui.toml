@@ -1,6 +1,6 @@
 [package]
 name = "hologram-gui"
-version = "3.4.1"
+version = "3.5.0"
 release = 1
 description = "Things needed for every desktop"
 requires = [
@@ -16,12 +16,13 @@ requires = [
 	# locales
 	"hologram-lang",
 
-	# programs independent of desktop environment
+	# packages independent of desktop environment
 	"scrot",
 	# since many desktops can be started with either X or wayland, we might
 	# as well depend on both clipboard frontends already
 	"xsel",
-	"wl-clipboard"
+	"wl-clipboard",
+	"ttf-joypixels",
 ]
 
 
