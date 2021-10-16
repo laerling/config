@@ -29,6 +29,6 @@ fi
 
 else
 
-ps -e | grep 'Xorg\|sway\|gnome-sess' > /dev/null && screen -DR
+ps -e | grep 'Xorg\|sway\|gnome-sess' > /dev/null && screen -DRUe^zz
 
 fi

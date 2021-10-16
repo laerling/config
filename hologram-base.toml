@@ -1,6 +1,6 @@
 [package]
 name = "hologram-base"
-version = "4.12.2"
+version = "4.21.2"
 release = 1
 description = "Minimal configuration for all systems"
 requires = [
@@ -11,13 +11,24 @@ requires = [
 	"gvim", # gvim instead of vim, so we have clipboard support
 	"holo",
 	"man-db",
+	"nmap",
 	"screen", # TODO write /etc/screenrc - See ~/.screenrc
+	"sshpass",
+	"tcpdump",
 	"tree",
 	"unzip",
 	"wget",
 	"xxhash",
 	# emacs in hologram-dev since it is too big for a minimal installation
 	# intel-ucode/intel-microcode in holodecks since it is machine specific
+
+	# network stuff
+	"arp-scan",
+	"ipcalc",
+	"iputils",
+	"mtr",
+	"vulscan",
+	"wireshark-cli",
 ]
 
 
