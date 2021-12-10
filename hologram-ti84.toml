@@ -1,0 +1,11 @@
+[package]
+name = "hologram-ti84"
+version = "0.0.1"
+release = 1
+description = "Programs for interacting with and developing for the Ti84 (or z80 processors in general)"
+requires = [
+	# TODO: These are all AUR packages, so we can't build this until AUR plugin is finished
+	"z80e",
+	"z88dk",
+	"zesarux-bin",
+]
