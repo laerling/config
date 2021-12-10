@@ -21,12 +21,9 @@ requires = [
 
 	# ubuntu look
 	"ttf-ubuntu-font-family",
-	# install from AUR:
-	# - yaru-gtk-theme
-	# - yaru-icon-theme
-	# - yaru-session
-	# - yaru-sound-theme
-	# - yaru-unity-theme (?)
+	# yaourt -Sy ubuntu-themes humanity-icon-theme
+	# or for a more modern ubuntu look
+	# yaourt -Sy yaru-gtk-theme yaru-icon-theme yaru-session yaru-sound-theme yaru-unity-theme
 ]
 
 # TODO write holo plugin for dconf configuration and provision that

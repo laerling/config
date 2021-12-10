@@ -34,7 +34,7 @@ target | description
 
 ![hologram dependency tree rendering](./tree.png)
 
-- hologram packages shall be named `hologram-name` where `name` is an arbitrary descriptive name, e. g. `hologram-games`
+- hologram packages shall be named `hologram-name` where `name` is an arbitrary descriptive name, e.&nbsp;g. `hologram-games`
 - In the tree (see above) holograms are displayed not by their actual package name but by the name of their ambiguators (The directory names used below `/usr/share/holo/*/`).
 - The number of a disambiguator shall be two digits long and as low as possible without being lower than the number of any dependency. The following exceptions exist:
   - The number of the disambiguator of `hologram-base` shall be `00` always. No other hologram must have this number. This means that other holograms have at least `01`. Every holodeck must depend on `hologram-base`.
@@ -50,8 +50,9 @@ target | description
     - While we're at it, using generators, maybe we can somehow automatically generate shills for all jack clients in [hologram-studio-audio](./hologram-studio-audio)?
 
 ### General:
+  - AUR plugin for AUR packages. To see which ones are needed, run `yaourt -Q|grep ^local' on e.&nbsp;g. Eve
   - Make it possible to provision home directory by parameterizing holodecks/holograms and run a preprocessor in the corresponding Makefile rules
-  - ebox
+  - git plugin: ebox
   - vimrc (git clone ... && cd .vim && make && ...)
   - Backup mechanism (backuplocal script or borg)
   - Move aliases from bash.bashrc into profile (?)
@@ -60,8 +61,6 @@ target | description
   - Rerun GRUB config after holodeck install in order to include the intel-ucode initrd
   - C3D2 chat (z. B. profanity, (or if handling is simpler than profanity, bitlbee oder irssi+irssi-xmpp))
   - shell prompt by pattern <git-repo-name>/path/to/subdir/
-  - Put recommendations for AUR packages into holograms?
-    - E. g. hologram-audio: $(yaourt -Qi mp3splt) for splitting audio files (e. g. flies which are an entire album)
   - hologram-base: Activate numlock (not only the LEDs but really...)
   - firefox config via autoconfig (also see https://wiki.archlinux.org/index.php/Firefox ) (/usr/lib/firefox/defaults/pref/ etc....)
     - Make default browser
