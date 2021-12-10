@@ -1,6 +1,6 @@
 [package]
 name = "holodeck-titus"
-version = "1.4.0"
+version = "1.4.1"
 release = 1
 description = "configuration of PC 'Titus'"
 requires = [
@@ -23,6 +23,7 @@ requires = [
 
 	# basic
 	"borg",
+	"python-llfuse", # for mounting borg archives
 
 	# networking
 	"openssh",
