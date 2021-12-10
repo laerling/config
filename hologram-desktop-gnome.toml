@@ -1,6 +1,6 @@
 [package]
 name = "hologram-desktop-gnome"
-version = "1.9.2"
+version = "1.9.3"
 release = 1
 # gnome comes with gdm
 conflicts = [ "hologram-dm" ]
@@ -17,6 +17,7 @@ requires = [
 	#"gnome-shell-extension-windowoverlay-icons",
 	"gnome-tweaks",
 	"dconf-editor",
+	"networkmanager",
 
 	# ubuntu look
 	"ttf-ubuntu-font-family",
