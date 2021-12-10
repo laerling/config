@@ -1,0 +1,60 @@
+[package]
+name = "holodeck-eve"
+version = "0.1.0"
+release = 1
+description = "configuration of laptop 'Eve'"
+requires = [
+	# holo
+	"holo-users-groups",
+
+	# holograms
+	"hologram-base-arch",
+	"hologram-dev",
+	"hologram-multimedia",
+
+	# drivers, compatibility layers, (driver) utilities
+	"intel-ucode",
+	"xf86-input-wacom",
+	"wine",
+
+	# basic
+	"borg",
+	"python-llfuse", # for mounting borg archives
+
+	# networking
+	"openssh",
+	"wireguard-tools",
+
+	# GUI
+	"hologram-desktop-gnome",
+
+	# creative
+	"blender",
+	"krita",
+
+	# mobile
+	"android-file-transfer",
+	"android-tools",
+]
+
+
+# user
+
+[[group]]
+name = "sudo"
+system = false
+
+[[user]]
+name    = "laerling"
+system  = false
+comment = "Benjamin Ludwig"
+uid     = 1000
+groups  = [ "audio", "video", "sudo" ]
+home    = "/home/laerling"
+shell   = "/bin/bash"
+
+[[directory]]
+path = "/home/laerling"
+mode = "0700"
+owner = "laerling"
+group = "laerling"
