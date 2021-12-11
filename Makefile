@@ -63,6 +63,15 @@ holograms:
 	)
 
 
+PHONY+=docker
+docker:
+	$(sudo) docker build . -t laerling-config
+
+PHONY+=docker_run
+docker_run: docker
+	$(sudo) docker run -ti --rm laerling-config
+
+
 PHONY+=tree
 tree: tree.png
 
