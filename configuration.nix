@@ -84,4 +84,5 @@ with builtins; {
 
   # other programs
   programs.adb.enable = true;
+  virtualisation.docker.enable = true;
 }
