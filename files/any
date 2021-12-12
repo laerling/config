@@ -1,0 +1,8 @@
+#!/usr/bin/bash
+
+ps_output="$(ps -e)"
+if [ -n "$1" ]; then
+    echo "$output" | grep -i "$1"
+else
+    echo "$output"
+fi

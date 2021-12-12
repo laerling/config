@@ -1,6 +1,6 @@
 [package]
 name = "hologram-base"
-version = "4.21.2"
+version = "4.22.0"
 release = 1
 description = "Minimal configuration for all systems"
 requires = [
@@ -59,21 +59,26 @@ target = "/usr/lib/systemd/system/systemd-timesyncd.service"
 # some binaries
 
 [[file]]
-path = "/usr/bin/open"
+path = "/usr/local/bin/open"
 mode = "0755"
-contentFrom = "files/open.sh"
+contentFrom = "files/open"
 
 [[file]]
-path = "/usr/bin/close"
+path = "/usr/local/bin/close"
 mode = "0755"
-contentFrom = "files/close.sh"
+contentFrom = "files/close"
 
 [[file]]
-path = "/usr/bin/hashes"
+path = "/usr/local/bin/hashes"
 mode = "0755"
-contentFrom = "files/hashes.pl"
+contentFrom = "files/hashes"
 
 [[file]]
-path = "/usr/bin/flatten"
+path = "/usr/local/bin/flatten"
 mode = "0755"
-contentFrom = "files/flatten.pl"
+contentFrom = "files/flatten"
+
+[[file]]
+path = "/usr/local/bin/any"
+mode = "0755"
+contentFrom = "files/any"
