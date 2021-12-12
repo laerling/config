@@ -1,0 +1,4 @@
+#!/usr/bin/bash
+
+# This environment variable enables multitouch
+MOZ_USE_XINPUT2=1 /usr/bin/firefox "$@"

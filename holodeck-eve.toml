@@ -1,6 +1,6 @@
 [package]
 name = "holodeck-eve"
-version = "0.1.0"
+version = "1.1.1"
 release = 1
 description = "configuration of laptop 'Eve'"
 requires = [
@@ -58,3 +58,16 @@ path = "/home/laerling"
 mode = "0700"
 owner = "laerling"
 group = "laerling"
+
+
+# bins and shims
+
+# shadow firefox to enable multitouch (scrolling, pinching)
+[[file]]
+path = "/usr/local/bin/firefox"
+mode = "0755"
+contentFrom = "files/firefox"
+[[file]]
+path = "/usr/share/holo/files/99-eve/usr/share/applications/firefox.desktop.holoscript"
+mode = "0755"
+contentFrom = "holoscripts/firefox"
