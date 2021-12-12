@@ -1,0 +1,19 @@
+[package]
+name = "hologram-ipod"
+version = "1.0"
+release = 1
+description = "Ipod Touch restore. WARNING: This package must be managed by a AUR-capable package manager"
+requires = [
+	"ifuse",
+	"libimobiledevice", # also a dependency of ifuse
+	"ideviceinstaller-git", # AUR
+]
+
+[[file]]
+path = "/etc/modules-load.d/ipod.conf"
+mode = "0755"
+content = "fuse"
+
+[[action]]
+on = "setup"
+script = "modprobe fuse"
