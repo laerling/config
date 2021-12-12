@@ -56,7 +56,7 @@ path = "/etc/systemd/system/sysinit.target.wants/systemd-timesyncd.service"
 target = "/usr/lib/systemd/system/systemd-timesyncd.service"
 
 
-# some binaries
+# bins and shims
 
 [[file]]
 path = "/usr/local/bin/open"
