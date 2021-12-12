@@ -54,9 +54,9 @@ contentFrom = "holoscripts/faillock.conf"
 # enable multilib
 [[file]]
 #path = "/usr/share/holo/files/00-base-arch/etc/pacman.conf.holoscript"
-path = "/usr/bin/enable_multilib"
+path = "/usr/local/bin/enable_multilib"
 mode = "0755"
 contentFrom = "files/enable_multilib.sh"
 [[action]]
 on = "setup"
-script = "/usr/bin/enable_multilib"
+script = "/usr/local/bin/enable_multilib"
