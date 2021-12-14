@@ -1,6 +1,6 @@
 [package]
 name = "hologram-gui"
-version = "3.6.0"
+version = "3.6.1"
 release = 1
 description = "Things needed for every desktop"
 requires = [
@@ -24,6 +24,7 @@ requires = [
 	"xclip",
 	"wl-clipboard",
 	"ttf-joypixels",
+	"otf-ipafont", # japanese fonts. You think you don't need them? Think again ¯\_(ツ)_/¯
 ]
 
 
