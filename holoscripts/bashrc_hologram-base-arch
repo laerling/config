@@ -16,8 +16,8 @@ touch "$upgradefile" # just so that it exists
 parent_pid="$(ps -o ppid= -p $$|sed 's/ \+//g')"
 parent_name="$(ps -o cmd= -p "$parent_pid"|sed 's/ .\+//'|tr '[:upper:]' '[:lower:]')"
 if [ "$(cat "$upgradefile")" != $(date -I) ] && [ "$parent_name" = "screen" ]; then
-    read -p "Upgrade system (Y/n)" upgrade
-    if [ "$upgrade" = "" ] || [ "$upgrade" = y ] || [ "$upgrade" = Y ]; then
+    read -p "Upgrade system (y/N)" upgrade
+    if [ "$upgrade" = y ] || [ "$upgrade" = Y ]; then
         date -I > "$upgradefile"
         if hash yaourt 2>/dev/null; then
             yaourt -Syu || rm "$upgradefile"
