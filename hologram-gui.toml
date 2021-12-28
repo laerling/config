@@ -1,6 +1,6 @@
 [package]
 name = "hologram-gui"
-version = "3.6.1"
+version = "3.6.2"
 release = 1
 description = "Things needed for every desktop"
 requires = [
@@ -35,6 +35,6 @@ contentFrom = "files/inputrc.sed"
 
 # remove unnecessary stuff from xinitrc
 [[file]]
-path = "/usr/share/holo/files/02-desktop-i3/etc/X11/xinit/xinitrc.holoscript"
+path = "/usr/share/holo/files/01-gui/etc/X11/xinit/xinitrc.holoscript"
 mode = "0755"
 contentFrom = "holoscripts/xinitrc.sh"
