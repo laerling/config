@@ -11,7 +11,7 @@ It is recommended to use GNU screen!
    Note that we're not using a separate boot partition in this case, but mount the ESP as `/boot`.
    I'm not sure, but I think this might be necessary for `systemd-boot` to find the kernel, initrds etc.
 7) select mirrors (they're already ranked)
-8) `pacstrap /mnt base linux linux-firmware sudo which dhcpcd git nano screen` and on the laptop `iwd`
+8) `pacstrap /mnt base linux linux-firmware sudo make which dhcpcd git nano screen` and on the laptop `iwd`
 9) `genfstab -U /mnt >> /mnt/etc/fstab`
 10) `arch-chroot /mnt` (all following steps have to be done in the arch-chroot environment!)
 
@@ -51,7 +51,7 @@ timeout 2
 ## installed system
 24) Connect to internet (use `iwctl` for WLAN) and get a DHCP lease: `systemctl start dhcpcd`
 25) clone this repo: `git clone https://github.com/laerling/config ~/config && cd ~/config`
-26) execute `./bootstrap.sh` and install a holodeck
+26) run `make all` and install a holodeck
 27) reboot and logon as user
 28) delete `/root/config` and adjust entry in `/etc/pacman.conf`, then `make update`
 
