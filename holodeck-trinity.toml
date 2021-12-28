@@ -1,6 +1,6 @@
 [package]
 name = "holodeck-trinity"
-version = "0.3.0"
+version = "0.3.1"
 release = 1
 description = "configuration of server 'trinity'"
 requires = [
@@ -28,8 +28,8 @@ shell   = "/bin/bash"
 [[directory]]
 path = "/home/lsf"
 mode = "0700"
-owner = "lsf"
-group = "lsf"
+owner = 1000 # name doesn't work here
+group = 1000 # name doesn't work here
 
 
 # DHCP

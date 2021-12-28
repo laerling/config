@@ -1,6 +1,6 @@
 [package]
 name = "holodeck-luv"
-version = "4.11.2"
+version = "4.11.3"
 release = 1
 description = "configuration of laptop 'luv'"
 requires = [
@@ -36,8 +36,8 @@ shell   = "/bin/bash"
 [[directory]]
 path = "/home/laerling"
 mode = "0700"
-owner = "laerling"
-group = "laerling"
+owner = 1000 # name doesn't work here
+group = 1000 # name doesn't work here
 
 
 # network

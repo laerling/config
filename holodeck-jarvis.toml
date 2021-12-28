@@ -25,8 +25,8 @@ shell   = "/bin/bash"
 [[directory]]
 path = "/home/laerling"
 mode = "0700"
-owner = 1001
-group = 1001
+owner = 1001 # name doesn't work here
+group = 1001 # name doesn't work here
 
 
 # networking

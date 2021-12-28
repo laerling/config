@@ -1,6 +1,6 @@
 [package]
 name = "holodeck-titus"
-version = "1.5.1"
+version = "1.5.2"
 release = 1
 description = "configuration of PC 'Titus'"
 requires = [
@@ -59,9 +59,8 @@ shell   = "/bin/bash"
 [[directory]]
 path = "/home/laerling"
 mode = "0700"
-owner = "laerling"
-group = "laerling"
-
+owner = 1000 # name doesn't work here
+group = 1000 # name doesn't work here
 
 # Fixes and workarounds
 

@@ -1,6 +1,6 @@
 [package]
 name = "holodeck-eve"
-version = "1.2.0"
+version = "1.2.1"
 release = 1
 description = "configuration of laptop 'Eve'"
 requires = [
@@ -55,8 +55,8 @@ shell   = "/bin/bash"
 [[directory]]
 path = "/home/laerling"
 mode = "0700"
-owner = "laerling"
-group = "laerling"
+owner = 1000 # name doesn't work here
+group = 1000 # name doesn't work here
 
 
 # bins and shims
