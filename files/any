@@ -2,7 +2,7 @@
 
 ps_output="$(ps -e)"
 if [ -n "$1" ]; then
-    echo "$output" | grep -i "$1"
+    echo "$ps_output" | grep -i "$1"
 else
-    echo "$output"
+    echo "$ps_output"
 fi
