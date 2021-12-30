@@ -1,6 +1,6 @@
 [package]
 name = "holodeck-eve"
-version = "1.2.1"
+version = "1.2.2"
 release = 1
 description = "configuration of laptop 'Eve'"
 requires = [
@@ -48,7 +48,7 @@ name    = "laerling"
 system  = false
 comment = "Benjamin Ludwig"
 uid     = 1000
-groups  = [ "audio", "video", "sudo" ]
+groups  = [ "video", "sudo" ]
 home    = "/home/laerling"
 shell   = "/bin/bash"
 

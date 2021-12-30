@@ -1,6 +1,6 @@
 [package]
 name = "holodeck-jarvis"
-version = "2.1.0"
+version = "2.1.1"
 release = 1
 description = "configuration for raspberry pi 'jarvis'"
 requires = [
@@ -18,7 +18,7 @@ name    = "laerling"
 system  = false
 comment = "Benjamin Ludwig"
 uid     = 1001
-groups  = [ "audio", "video", "sudo" ]
+groups  = [ "video", "sudo" ]
 home    = "/home/laerling"
 shell   = "/bin/bash"
 

@@ -1,6 +1,6 @@
 [package]
 name = "holodeck-luv"
-version = "4.11.3"
+version = "4.11.4"
 release = 1
 description = "configuration of laptop 'luv'"
 requires = [
@@ -29,7 +29,7 @@ name    = "laerling"
 system  = false
 comment = "Benjamin Ludwig"
 uid     = 1000
-groups  = [ "audio", "video", "sudo" ]
+groups  = [ "video", "sudo" ]
 home    = "/home/laerling"
 shell   = "/bin/bash"
 

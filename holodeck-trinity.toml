@@ -1,6 +1,6 @@
 [package]
 name = "holodeck-trinity"
-version = "0.3.1"
+version = "0.3.2"
 release = 1
 description = "configuration of server 'trinity'"
 requires = [
@@ -21,7 +21,7 @@ system = false
 name    = "lsf"
 system  = false
 uid     = 1000
-groups  = [ "audio", "sudo" ]
+groups  = [ "sudo" ]
 home    = "/home/lsf"
 shell   = "/bin/bash"
 
