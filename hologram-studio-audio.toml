@@ -1,6 +1,6 @@
 [package]
-name = "hologram-studio-audio"
-version = "1.3.0"
+name = "hologram-audio-professional"
+version = "1.4.0"
 release = 1
 description = "Audio production software"
 requires = [
@@ -8,38 +8,7 @@ requires = [
   "hologram-audio",
 
   # Good read: https://wiki.archlinux.org/index.php/Professional_audio
-  # This is the package group pro-audio dissolved into single packages, with
-  # audacity removed (install tenacity-git from AUR instead)
-  "fluidsynth", "a2jmidid", "adljack", "adlplug", "aeolus", "agordejo",
-  "aj-snapshot", "aliki", "amb-plugins", "ambdec", "ambix", "ams", "ams-lv2",
-  "amsynth", "ardour", "artyfx", "aubio", "avldrums.lv2", "bchoppr",
-  "beatslash-lv2", "blop", "blop.lv2", "bsequencer", "bshapr", "bslizr",
-  "cadence", "calf", "caps", "carla", "chuck", "cmt", "csound", "csoundqt",
-  "deteriorate-lv2", "dgedit", "din", "distrho-ports", "dpf-plugins",
-  "dragonfly-reverb", "drumgizmo", "drumkv1", "ebumeter", "ecasound",
-  "element", "eq10q", "eteroj.lv2", "fabla", "faust", "fil-plugins", "fluajho",
-  "fomp.lv2", "foxdot", "freewheeling", "g2reverb", "geonkick", "giada",
-  "gigedit", "gmsynth.lv2", "guitarix", "haskell-tidal", "helm-synth",
-  "hexter", "hydrogen", "iempluginsuite", "infamousplugins", "ir.lv2", "jaaa",
-  "jack-stdio", "jack_capture", "jack_delay", "jack_mixer", "jack_utils",
-  "jackmeter", "jackminimix", "jacktrip", "jalv", "japa", "jconvolver",
-  "jnoisemeter", "jsampler", "lilypond", "linuxsampler", "liquidsfz", "lmms",
-  "lsp-plugins", "luppp", "lv2file", "marsyas", "mcp-plugins", "mda.lv2",
-  "mellite", "mephisto.lv2", "meterbridge", "midi_matrix.lv2", "midimsg-lv2",
-  "mixxx", "moony.lv2", "muse", "musescore", "ninjas2", "njconnect",
-  "noise-repellent", "non-mixer", "non-sequencer", "non-timeline", "opnplug",
-  "osc2midi", "osmid", "padthv1", "patchmatrix", "patroneo", "pd", "pd-lua",
-  "polyphone", "pvoc", "qastools", "qjackctl", "qmidiarp", "qmidictl",
-  "qmidinet", "qmidiroute", "qsampler", "qsynth", "qtractor", "qxgedit",
-  "realtime-privileges", "rev-plugins", "rosegarden", "samplv1", "sc3-plugins",
-  "setbfree", "sfizz", "sherlock.lv2", "snd", "solfege", "sonic-pi",
-  "sonic-visualiser", "sorcer", "sound-gambit", "spectmorph", "ssr", "stochas",
-  "supercollider", "surge", "sweep", "swh-plugins", "synthv1", "tap-plugins",
-  "timidity++", "vamp-aubio-plugins", "vamp-plugin-sdk", "vco-plugins", "vico",
-  "vm.lv2", "vmpk", "wah-plugins", "wolf-shaper", "wolf-spectrum",
-  "x42-plugins", "xmonk.lv2", "yass", "yoshimi", "zam-plugins",
-  "zita-ajbridge", "zita-at1", "zita-bls1", "zita-dc1", "zita-dpl1",
-  "zita-lrx", "zita-mu1", "zita-njbridge", "zita-rev1", "zynaddsubfx",
+  "group:pro-audio",
 ]
 
 # TODO can this be done via /etc/modprobe.d/ files?
@@ -54,7 +23,7 @@ script = "modprobe -r snd-seq-midi"
 
 # Free Ardour from memory limits
 [[file]]
-path = "/etc/security/limits.d/hologram-studio-audio.conf"
+path = "/etc/security/limits.d/hologram-audio-professional.conf"
 mode = "0644"
 content = "@audio - memlock unlimited"
 
@@ -67,7 +36,7 @@ path = "/usr/local/bin/qjackctl"
 mode = "0755"
 content = "pw-jack /usr/bin/qjackctl $@"
 [[file]]
-path = "/usr/share/holo/files/02-studio-audio/usr/share/applications/qjackctl.desktop.holoscript"
+path = "/usr/share/holo/files/02-audio-professional/usr/share/applications/qjackctl.desktop.holoscript"
 mode = "0755"
 contentFrom = "holoscripts/qjackctl.desktop.sh"
 
@@ -77,7 +46,7 @@ path = "/usr/local/bin/qtractor"
 mode = "0755"
 content = "pw-jack /usr/bin/qtractor $@"
 [[file]]
-path = "/usr/share/holo/files/02-studio-audio/usr/share/applications/qtractor.desktop.holoscript"
+path = "/usr/share/holo/files/02-audio-professional/usr/share/applications/qtractor.desktop.holoscript"
 mode = "0755"
 contentFrom = "holoscripts/qtractor.desktop.sh"
 
@@ -87,7 +56,7 @@ path = "/usr/local/bin/zynaddsubfx"
 mode = "0755"
 content = "pw-jack /usr/bin/zynaddsubfx $@"
 [[file]]
-path = "/usr/share/holo/files/02-studio-audio/usr/share/applications/zynaddsubfx-jack.desktop.holoscript"
+path = "/usr/share/holo/files/02-audio-professional/usr/share/applications/zynaddsubfx-jack.desktop.holoscript"
 mode = "0755"
 contentFrom = "holoscripts/zynaddsubfx.desktop.sh"
 
@@ -98,7 +67,7 @@ path = "/usr/local/bin/vital"
 mode = "0755"
 content = "pw-jack /usr/bin/vital $@"
 [[file]]
-path = "/usr/share/holo/files/02-studio-audio/usr/share/applications/vital.desktop.holoscript"
+path = "/usr/share/holo/files/02-audio-professional/usr/share/applications/vital.desktop.holoscript"
 mode = "0755"
 contentFrom = "holoscripts/vital.desktop.sh"
 
@@ -111,7 +80,7 @@ path = "/usr/local/bin/ardour6"
 mode = "0755"
 content = "pw-jack /usr/bin/ardour6 $@"
 [[file]]
-path = "/usr/share/holo/files/02-studio-audio/usr/share/applications/ardour6.desktop.holoscript"
+path = "/usr/share/holo/files/02-audio-professional/usr/share/applications/ardour6.desktop.holoscript"
 mode = "0755"
 contentFrom = "holoscripts/ardour.desktop.sh"
 
