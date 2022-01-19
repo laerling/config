@@ -1,16 +1,21 @@
 [package]
 name = "hologram-audio"
-version = "2.1.0"
+version = "2.1.3"
 release = 1
 description = "basic audio infrastructure"
 requires = [
 	"alsa-utils",
-	"pavucontrol", # frontend for pipewire-jack, basically
+	"pavucontrol",
 	"pipewire",
-	"pipewire-alsa",
+
+	# E. g. gnome packages depend on pulseaudio and
+	# pulseaudio-alsa, so we need to replace them with the
+	# pipewire packages that provide those dependencies:
+	"pipewire-alsa", # Make sure that pulseaudio-alsa is not installed
 	"pipewire-jack", # TODO Why doesn't pipewire-jack replace jack2?
 	"pipewire-pulse",
 
+	# auxiliary software:
 	"youtube-dl",
 	"mp3splt", # contains oggsplt
 ]
