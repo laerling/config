@@ -29,7 +29,7 @@ alias lld='ll -d'
 alias r=rm
 alias rf='r -f'
 alias cal='cal -m -3' # start week on Monday and display adjecent months
-alias s='screen -DRUe^zz'
+alias s='screen -DRUe^xx'
 
 # system tools and dev
 alias grepi='grep -i'
