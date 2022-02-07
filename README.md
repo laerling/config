@@ -47,7 +47,7 @@ target | description
   - Write holo plugin for cloning git repos (holo-git-repo)
   - Since `pacman.conf` is being holoscript'ed by [hologram-base-arch](./hologram-base-arch) (in [holoscripts/pacman.conf](./holoscripts/pacman.conf)), holo apply keeps nagging about it being altered by the user, after they run `make config-repo_registration`. I suppose holo generators can be used here to provision the repo into `/etc/pacman.conf` by using the absolute path of the current directory at hologram build time. All we'd need for an initial setup then is to run `pacman -U repo/holodeck-something.pkg.tar.gz`.
     - *However* when we move the config repo (e.&nbsp;g. after I clone it in `/root/` and then provision laerling and then move it to `/home/laerling/`), what happens then?
-    - While we're at it, using generators, maybe we can somehow automatically generate shims for all jack clients in [hologram-studio-audio](./hologram-studio-audio)?
+    - While we're at it, using generators, maybe we can somehow automatically generate shims for all jack clients in [hologram-audio-professional](./hologram-audio-professional)?
 
 ### General:
   - AUR plugin for AUR packages. To see which ones are needed, run `yaourt -Q|grep ^local' on e.&nbsp;g. Eve
