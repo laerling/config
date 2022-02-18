@@ -3,6 +3,33 @@ repo_dir=repo
 repo_name=config
 
 
+# Dispatch to NixOS or Arch Linux targets
+
+PHONY+=default
+default:
+	grep -qxiF ID=nixos /etc/os-release && make switch || make repo
+
+
+# NixOS
+
+PHONY+=boot build build-vm build-vm-with-bootloader dry-activate dry-build edit switch test
+boot: nixos-boot
+build: nixos-build
+build-vm: nixos-build-vm
+build-vm-with-bootloader: nixos-build-vm-with-bootloader
+dry-activate: nixos-dry-activate
+dry-build: nixos-dry-build
+edit: nixos-edit
+switch: nixos-switch
+test: nixos-test
+
+nixos-%:
+	(echo;date) >> /tmp/$@
+	sudo nixos-rebuild $* --show-trace 2>&1 | tee -a /tmp/$@
+
+
+# Arch Linux
+
 PHONY+=repo
 repo: holograms holodecks
 	repo-add $(repo_dir)/$(repo_name).db.tar.gz $(repo_dir)/$(package_files)
