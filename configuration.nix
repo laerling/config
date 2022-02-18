@@ -4,52 +4,75 @@
 
 { config, pkgs, ... }:
 
-with builtins; {
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "20.03"; # Did you read the comment?
-  # hardware scan
+{
   imports = [ /etc/nixos/hardware-configuration.nix ];
 
   # boot
-  boot.loader.grub = {
-    enable = true;
-    version = 2;
-    device = "/dev/sda";
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
   };
 
   # low-level settings
-  hardware.pulseaudio.enable = true;
-  i18n.defaultLocale = "en_US.UTF-8";
-  sound.enable = true;
   time.timeZone = "Europe/Berlin";
+  i18n.defaultLocale = "en_US.UTF-8";
   networking = {
-    hostName = "ana";
+
+    # names
+    hostName = "gem";
     hosts = let hostsPath = ./hosts.nix; in
-      if pathExists hostsPath then import hostsPath else {};
+            if builtins.pathExists hostsPath then import hostsPath else {};
+
+    # DHCP
     useDHCP = false; # Deprecated. ALWAYS set to false!
-    interfaces.enp0s25.useDHCP = true;
-    interfaces.wlp2s0.useDHCP = true;
+    interfaces.enp0s31f6.useDHCP = true;
+    interfaces.wlp61s0.useDHCP = true;
+
+    # firewall.allowedTCPPorts = [ ... ];
+    # firewall.allowedUDPPorts = [ ... ];
   };
 
   # GUI
   services.xserver = {
     enable = true;
+    layout = "us";
+    xkbVariant = "altgr-intl";
+    xkbOptions = "eurosign:e";
     displayManager.gdm.enable = true;
-    desktopManager.gnome3.enable = true;
+    desktopManager.gnome.enable = true;
   };
 
+  # sound
+  sound.enable = true;
+  hardware.pulseaudio.enable = true;
+
+  # system packages - only bare necessities
+  nixpkgs.config.allowUnfree = true;
+  environment.systemPackages = with pkgs; [ screen vim wget ];
+
   # Users - Don't forget to set a password with ‘passwd’!
+  users.groups."laerling".gid = 1001;
   users.users.laerling = {
+    description = "Benjamin Ludwig";
     isNormalUser = true;
+    uid = 1000;
+    group = "laerling";
     createHome = true;
     home = "/home/laerling";
     extraGroups = [ "wheel" "adbusers" ];
+
+    packages = with pkgs; let
+      base       = [ file git gnumake screen tree unzip vim wget ];
+      # breeze-icons contains icons for kolourpaint
+      gui_base   = [ breeze-icons firefox gnome3.gnome-tweaks kolourpaint pavucontrol source-code-pro ];
+      gui_ubuntu = [ gnomeExtensions.dash-to-dock ubuntu_font_family ubuntu-themes yaru-theme ];
+      dev        = [ emacs ];
+      leisure    = [ mpv tdesktop thunderbird-bin youtube-dl ];
+    in base ++ gui_base ++ gui_ubuntu ++ dev ++ leisure;
   };
+
+  # other programs and services
+  programs.adb.enable = true;
 
   # shell
   programs.bash.interactiveShellInit = ''
@@ -71,17 +94,12 @@ with builtins; {
     alias music='play --no-video ~/Music/'
   '';
 
-  # packages
-  nixpkgs.config.allowUnfree = true;
-  environment.systemPackages = with pkgs; let
-    base       = [ file git gnumake screen tree unzip vim wget ];
-    # breeze-icons contains icons for kolourpaint
-    gui_base   = [ breeze-icons gnome3.gnome-tweaks kolourpaint source-code-pro ];
-    gui_ubuntu = [ gnomeExtensions.dash-to-dock ubuntu_font_family ubuntu-themes yaru-theme ];
-    dev        = [ emacs rustup ];
-    leisure    = [ ffmpeg mpv qutebrowser tdesktop thunderbird-bin youtube-dl ];
-  in base ++ gui_base ++ gui_ubuntu ++ dev ++ leisure;
-
-  # other programs
-  programs.adb.enable = true;
+  # This value determines the NixOS release from which the default
+  # settings for stateful data, like file locations and database versions
+  # on your system were taken. It‘s perfectly fine and recommended to leave
+  # this value at the release version of the first install of this system.
+  # Before changing this value read the documentation for this option
+  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+  system.stateVersion = "21.11"; # Did you read the comment?
 }
+
