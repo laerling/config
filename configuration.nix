@@ -92,6 +92,8 @@
     alias loop='mpv --loop-playlist'
     alias play='loop --shuffle'
     alias music='play --no-video ~/Music/'
+
+    alias s='screen -DRU -e ^xx'
   '';
 
   # This value determines the NixOS release from which the default
