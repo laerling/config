@@ -23,6 +23,9 @@ edit: nixos-edit
 switch: nixos-switch
 test: nixos-test
 
+nixos-update:
+	sudo nix-channel --update
+
 nixos-%:
 	(echo;date) >> /tmp/$@
 	sudo nixos-rebuild $* --show-trace 2>&1 | tee -a /tmp/$@
