@@ -61,20 +61,29 @@
     home = "/home/laerling";
     extraGroups = [ "wheel" "adbusers" ];
 
-    packages = with pkgs; let
-      base       = [ file git gnumake screen tree unzip vim wget ];
-      # breeze-icons contains icons for kolourpaint
-      gui_base   = [ breeze-icons firefox gnome3.gnome-tweaks kolourpaint pavucontrol source-code-pro ];
-      gui_ubuntu = [ gnomeExtensions.dash-to-dock ubuntu_font_family ubuntu-themes yaru-theme ];
-      dev        = [ emacs ];
-      leisure    = [ mpv tdesktop thunderbird-bin youtube-dl ];
-    in base ++ gui_base ++ gui_ubuntu ++ dev ++ leisure;
+    packages = let
+      ownPkgs = import ./pkgs { inherit pkgs; };
+      allPkgs = pkgs // ownPkgs;
+    in
+      with allPkgs; let
+        base       = [ file git gnumake screen tree unzip vim wget ];
+        # breeze-icons contains icons for kolourpaint
+        gui_base   = [ breeze-icons firefox gnome3.gnome-tweaks kolourpaint pavucontrol source-code-pro ];
+        gui_ubuntu = [ gnomeExtensions.dash-to-dock ubuntu_font_family ubuntu-themes yaru-theme ];
+        dev        = [ emacs ];
+        leisure    = [ discord mpv tdesktop thunderbird-bin youtube-dl ];
+      in base ++ gui_base ++ gui_ubuntu ++ dev ++ leisure;
   };
 
   # other programs and services
   programs.adb.enable = true;
 
-  # shell
+  # environment and shell
+  environment.variables = {
+    NIXPKGS_ALLOW_UNFREE = "1";
+    EDITOR = "vim";
+    VISUAL = "vim";
+  };
   programs.bash.interactiveShellInit = ''
     # Add colors to less/man/...
     export LESS_TERMCAP_mb=$'\E[1;31m'     # begin bold
