@@ -66,7 +66,7 @@
       allPkgs = pkgs // ownPkgs;
     in
       with allPkgs; let
-        base       = [ borgbackup file git gnumake screen tree unzip vim wget ];
+        base       = [ borgbackup file git gnumake killall screen tree unzip vim wget ];
         # breeze-icons contains icons for kolourpaint
         gui_base   = [ breeze-icons firefox gnome-passwordsafe gnome.gnome-tweaks kolourpaint pavucontrol source-code-pro ];
         gui_ubuntu = [ gnomeExtensions.dash-to-dock ubuntu_font_family ubuntu-themes yaru-theme ];
