@@ -9,6 +9,10 @@ PHONY+=default
 default:
 	grep -qxiF ID=nixos /etc/os-release && make switch || make repo
 
+PHONY+=update
+update:
+	grep -qxiF ID=nixos /etc/os-release && make nixos-update || make arch-update
+
 
 # NixOS
 
@@ -38,14 +42,14 @@ repo: holograms holodecks
 	repo-add $(repo_dir)/$(repo_name).db.tar.gz $(repo_dir)/$(package_files)
 
 PHONY+=all
-all: /usr/bin/holo-build /usr/bin/holo config-repo_registration update
+all: /usr/bin/holo-build /usr/bin/holo config-repo_registration arch-update
 
 PHONY+=upgrade
-upgrade: update
+upgrade: arch-update
 	sudo pacman -Su;
 
-PHONY+=update
-update: clean repo
+PHONY+=arch-update
+arch-update: clean repo
 	sudo pacman -Sy;
 
 PHONY+=config-repo_registration
