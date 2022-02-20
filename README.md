@@ -43,58 +43,66 @@ target | description
 
 ## FIXMEs and TODOs
 
-### Build:
-  - Write holo plugin for cloning git repos (holo-git-repo)
-  - Since `pacman.conf` is being holoscript'ed by [hologram-base-arch](./hologram-base-arch) (in [holoscripts/pacman.conf](./holoscripts/pacman.conf)), holo apply keeps nagging about it being altered by the user, after they run `make config-repo_registration`. I suppose holo generators can be used here to provision the repo into `/etc/pacman.conf` by using the absolute path of the current directory at hologram build time. All we'd need for an initial setup then is to run `pacman -U repo/holodeck-something.pkg.tar.gz`.
-    - *However* when we move the config repo (e.&nbsp;g. after I clone it in `/root/` and then provision laerling and then move it to `/home/laerling/`), what happens then?
-    - While we're at it, using generators, maybe we can somehow automatically generate shims for all jack clients in [hologram-audio-professional](./hologram-audio-professional)?
+### Possibly both, NixOS and Arch Linux
+- firefox config via autoconfig (also see https://wiki.archlinux.org/index.php/Firefox ) (/usr/lib/firefox/defaults/pref/ etc....)
+  - Make default browser
+  - Plugin
+    - umatrix
+    - Decentraleyes
+    - Optionally Tree Style Tab
 
-### General:
-  - AUR plugin for AUR packages. To see which ones are needed, run `yaourt -Q|grep ^local' on e.&nbsp;g. Eve
-  - Make it possible to provision home directory by parameterizing holodecks/holograms and run a preprocessor in the corresponding Makefile rules
-  - git plugin: ebox
-  - vimrc (git clone ... && cd .vim && make && ...)
-  - Backup mechanism (backuplocal script or borg)
-  - Move aliases from bash.bashrc into profile (?)
-  - Move aliases from bash.bashrc to fitting holograms (use #!/usr/bin/tee -a respectively)
-  - Prompt user for password for laerling (passwd somehow doesn't work in the [[action]] hook)
-  - Rerun GRUB config after holodeck install in order to include the intel-ucode initrd
-  - C3D2 chat (z. B. profanity, (or if handling is simpler than profanity, bitlbee oder irssi+irssi-xmpp))
-  - shell prompt by pattern <git-repo-name>/path/to/subdir/
-  - hologram-base: Activate numlock (not only the LEDs but really...)
-  - firefox config via autoconfig (also see https://wiki.archlinux.org/index.php/Firefox ) (/usr/lib/firefox/defaults/pref/ etc....)
-    - Make default browser
-    - Plugin
-      - umatrix
-      - Decentraleyes
-      - Tree Style Tab
-  - vlc config (Allow only one instance, Enqueue items into playlist in one instance mode, use dark theme)
-  - hologram-games
-    - steam (multilib, but activate here, not in hologram-base. Pay attention, for it might already be activated)
-    - minecraft unfortunately is a AUR package
-  - Replace dolphin with another mtp-capable graphical file manager like nautilus, nemo, thunar, this awesome file manager I once tried, ...
-  - hologram-latex: What was scribus for again?
-  - Replace Shift+4 with $ on X for norwegian keyboard layout
-  - Remove slockhib completely? I only use slocksus and hibernation does not work with encrypted swap anyway. Given, that I even use swap.
+### NixOS
+- Override/Overlay: Add ffmpeg from kdenlive closure to kdenlive's PATH, make nixpkgs issue
+- Make nixpkgs PR for overriding discord version
+- Make nixpkgs PR for (optionally) adding `MOZ_USE_XINPUT2=1` to firefox wrapper
+- For more hardware-specific settings (and - according to the NixOS user manual - hardware configuration for known hardware), see https://github.com/NixOS/nixos-hardware
+- system packages gehen nach /, user packages nach /etc/profiles/per-user/<user>, über nix-env installierte Pakete nach /home/<user>/.nix-profile/
 
-### Networking:
-  - DHCP (but no long waiting when IF down) >See majewsky/system-configuration/holodeck-krikkit (also the # network setup: systemd-resolved is important!)
-  - wpa_supplicant (see holodeck-krikkit)
-  - DHCP: Use systemd matching on interface to abstract from LAN NIC
+### Arch Linux
 
-### GUI:
-  - Run xorg-server without root rights with the help of systemd-logind
-    > xorg-server has now the ability to run without root rights with
-    > the help of systemd-logind. xserver will fail to run if not launched
-    > from the same virtual terminal as was used to log in.
-    > Without root rights, log files will be in ~/.local/share/xorg/ directory.
-    > Old behavior can be restored through Xorg.wrap config file.
-    > See Xorg.wrap man page (man xorg.wrap).
-  - gnome terminal: Set config (colorscheme tango-dark, ...)
-  - Use a terminal that doesn't rely on a server part and thus is usable on several ttys. That is, don't use gnome-terminal.
-  - Terminal: Don't beep. Add /etc/modprobe.d/nobeep.conf with content "blacklist pcspkr" to hologram-base
+#### Build
+- Write holo plugin for cloning git repos (holo-git-repo)
+- Since `pacman.conf` is being holoscript'ed by [hologram-base-arch](./hologram-base-arch) (in [holoscripts/pacman.conf](./holoscripts/pacman.conf)), holo apply keeps nagging about it being altered by the user, after they run `make config-repo_registration`. I suppose holo generators can be used here to provision the repo into `/etc/pacman.conf` by using the absolute path of the current directory at hologram build time. All we'd need for an initial setup then is to run `pacman -U repo/holodeck-something.pkg.tar.gz`.
+  - *However* when we move the config repo (e.&nbsp;g. after I clone it in `/root/` and then provision laerling and then move it to `/home/laerling/`), what happens then?
+  - While we're at it, using generators, maybe we can somehow automatically generate shims for all jack clients in [hologram-audio-professional](./hologram-audio-professional)?
 
-### Other:
-  - ebox: Force replacing .emacs.d by symlink when it's not a symlink
-  - ebox: When switching, ask if .emacs.d shall be replaced by symlink if it's not a symlink
-  - Set the EDITOR and VISUAL env vars to emacsclient in the spacemacs hologram (also in hologram-dev?)
+#### General
+- AUR plugin for AUR packages. To see which ones are needed, run `yaourt -Q|grep ^local' on e.&nbsp;g. Eve
+- Make it possible to provision home directory by parameterizing holodecks/holograms and run a preprocessor in the corresponding Makefile rules
+- holo git plugin: ebox
+- vimrc (git clone ... && cd .vim && make && ...)
+- Move aliases from bash.bashrc into profile (?)
+- Move aliases from bash.bashrc to fitting holograms (use #!/usr/bin/tee -a respectively)
+- Prompt user for password for laerling (passwd somehow doesn't work in the [[action]] hook)
+- Rerun GRUB config after holodeck install in order to include the intel-ucode initrd
+- shell prompt by pattern <git-repo-name>/path/to/subdir/
+- hologram-base: Activate numlock (not only the LEDs but really...)
+- vlc config (Allow only one instance, Enqueue items into playlist in one instance mode, use dark theme)
+- hologram-games
+  - steam (multilib, but activate here, not in hologram-base. Pay attention, for it might already be activated)
+  - minecraft unfortunately is a AUR package
+- hologram-latex: What was scribus for again?
+- Replace Shift+4 with $ on X for norwegian keyboard layout
+- Remove slockhib completely? I only use slocksus and hibernation does not work with encrypted swap anyway. Given, that I even use swap.
+
+#### Networking:
+- DHCP (but no long waiting when IF down) >See majewsky/system-configuration/holodeck-krikkit (also the # network setup: systemd-resolved is important!)
+- wpa_supplicant (see holodeck-krikkit)
+- DHCP: Use systemd matching on interface to abstract from LAN NIC
+
+#### GUI:
+- Run xorg-server without root rights with the help of systemd-logind
+  > xorg-server has now the ability to run without root rights with
+  > the help of systemd-logind. xserver will fail to run if not launched
+  > from the same virtual terminal as was used to log in.
+  > Without root rights, log files will be in ~/.local/share/xorg/ directory.
+  > Old behavior can be restored through Xorg.wrap config file.
+  > See Xorg.wrap man page (man xorg.wrap).
+- gnome terminal: Set config (colorscheme tango-dark, ...)
+- Use a terminal that doesn't rely on a server part and thus is usable on several ttys. That is, don't use gnome-terminal.
+- Terminal: Don't beep. Add /etc/modprobe.d/nobeep.conf with content "blacklist pcspkr" to hologram-base
+
+#### Other:
+- ebox: Force replacing .emacs.d by symlink when it's not a symlink
+- ebox: When switching, ask if .emacs.d shall be replaced by symlink if it's not a symlink
+- Set the EDITOR and VISUAL env vars to emacsclient in the spacemacs hologram (also in hologram-dev?)
