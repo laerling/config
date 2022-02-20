@@ -26,6 +26,10 @@ dry-build: nixos-dry-build
 edit: nixos-edit
 switch: nixos-switch
 test: nixos-test
+rollback: nixos-rollback
+
+nixos-rollback:
+	sudo nixos-rebuild switch --rollback 2>&1 | tee -a /tmp/$@
 
 nixos-update:
 	sudo nix-channel --update
