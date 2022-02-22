@@ -35,9 +35,8 @@
   # GUI
   services.xserver = {
     enable = true;
-    layout = "us";
-    xkbVariant = "altgr-intl";
-    xkbOptions = "eurosign:e";
+    layout = "de";
+    xkbVariant = "neo";
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
   };
