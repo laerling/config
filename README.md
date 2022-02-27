@@ -52,6 +52,8 @@ target | description
     - Optionally Tree Style Tab
 
 ### NixOS
+- Find/write and add NixOS utilities (or first compile a cheat sheet from the pills and the manuals etc.)
+  - Remove jq from the user packages, I basically only need it for this utility functionality, that is mostly for parsing output of `nix show-derivation`.
 - Override/Overlay: Add ffmpeg from kdenlive closure to kdenlive's PATH, make nixpkgs issue
 - Make nixpkgs PR for overriding discord version
 - Make nixpkgs PR for (optionally) adding `MOZ_USE_XINPUT2=1` to firefox wrapper
