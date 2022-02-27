@@ -58,7 +58,8 @@ target | description
 - Make nixpkgs PR for overriding discord version
 - Make nixpkgs PR for (optionally) adding `MOZ_USE_XINPUT2=1` to firefox wrapper
 - For more hardware-specific settings (and - according to the NixOS user manual - hardware configuration for known hardware), see https://github.com/NixOS/nixos-hardware
-- system packages gehen nach /, user packages nach /etc/profiles/per-user/<user>, über nix-env installierte Pakete nach /home/<user>/.nix-profile/
+- System packages gehen nach /, user packages nach /etc/profiles/per-user/<user>, über nix-env installierte Pakete nach /home/<user>/.nix-profile/
+- Try home manager
 
 ### Arch Linux
 
