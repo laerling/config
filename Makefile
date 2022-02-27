@@ -35,7 +35,7 @@ nixos-update:
 	sudo nix-channel --update
 
 nixos-%:
-	(echo;date) >> /tmp/$@
+	(echo;date -Iseconds) >> /tmp/$@
 	sudo nixos-rebuild $* --show-trace 2>&1 | tee -a /tmp/$@
 
 
