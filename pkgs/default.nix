@@ -3,6 +3,6 @@
 with pkgs;
 {
 
-  discord = callPackage ./discord {};
+  discord = callPackage ./discord { inherit pkgs; };
 
 }

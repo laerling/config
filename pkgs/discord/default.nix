@@ -24,7 +24,11 @@ let
 
 in
 
-callPackage
+  # use nixpkgs expression if version is at least the one we want
+  if lib.strings.versionAtLeast pkgs.discord.version version
+  then pkgs.discord else
+
+  callPackage
   "${pkgs.path}/pkgs/applications/networking/instant-messengers/discord/linux.nix"
   {
     inherit src version meta;
