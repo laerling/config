@@ -137,7 +137,7 @@ clean:
 	# remove yaourt build artifacts
 	rm -rf yaourt package-query
 	# remove nix build result for GC
-	find . -type l -name result -delete
+	find . -type l -name result -exec ls -l {} \; -delete
 
 
 .PHONY: $(PHONY)
