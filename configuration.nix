@@ -76,6 +76,7 @@
 
   # other programs and services
   programs.adb.enable = true;
+  programs.steam.enable = true;
 
   # environment and shell
   environment.variables = {
