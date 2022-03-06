@@ -4,6 +4,14 @@
 
 { config, pkgs, ... }:
 
+let
+  choose = keyname: let
+    path=./choices.nix;
+    choices = import path;
+  in if builtins.pathExists path && choices ? "${keyname}"
+  then choices."${keyname}" else false;
+in
+
 {
   imports = [ /etc/nixos/hardware-configuration.nix ];
 
@@ -35,8 +43,8 @@
   # GUI
   services.xserver = {
     enable = true;
-    layout = "de";
-    xkbVariant = "neo";
+    layout = if choose "neo" then "de" else "us";
+    xkbVariant = if choose "neo" then "neo" else "altgr-intl";
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
   };
@@ -75,8 +83,9 @@
   };
 
   # other programs and services
-  programs.adb.enable = true;
-  programs.steam.enable = true;
+  programs.adb.enable = choose "adb";
+  programs.steam.enable = choose "steam";
+  virtualisation.virtualbox.host.enable = choose "virtualbox";
 
   # environment and shell
   environment.variables = {
