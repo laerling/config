@@ -5,11 +5,12 @@
 { config, pkgs, ... }:
 
 let
-  choose = keyname: let
+  choose = keyname: chooseOrDefault keyname false;
+  chooseOrDefault = keyname: default: let
     path=./choices.nix;
     choices = import path;
   in if builtins.pathExists path && choices ? "${keyname}"
-  then choices."${keyname}" else false;
+  then choices."${keyname}" else default;
 in
 
 {
