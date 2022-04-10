@@ -1,6 +1,6 @@
 [package]
 name = "holodeck-titus"
-version = "1.5.3"
+version = "1.6.0"
 release = 1
 description = "configuration of PC 'Titus'"
 requires = [
@@ -47,12 +47,16 @@ requires = [
 name = "sudo"
 system = false
 
+[[group]]
+name = "nix-users"
+system = false
+
 [[user]]
 name    = "laerling"
 system  = false
 comment = "Benjamin Ludwig"
 uid     = 1000
-groups  = [ "video", "sudo" ]
+groups  = [ "video", "sudo", "nix-users" ]
 home    = "/home/laerling"
 shell   = "/bin/bash"
 
