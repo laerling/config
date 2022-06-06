@@ -88,6 +88,8 @@ in
   # other programs and services
   programs.adb.enable = choose "adb";
   programs.steam.enable = choose "steam";
+  programs.wireshark.enable = choose "wireshark";
+  services.postgresql = choose "postgres";
   virtualisation.virtualbox.host.enable = choose "virtualbox";
 
   # environment and shell
