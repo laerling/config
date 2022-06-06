@@ -80,8 +80,9 @@ in
         gui_base   = [ breeze-icons firefox gnome-passwordsafe gnome.gnome-tweaks kolourpaint pavucontrol source-code-pro ];
         gui_ubuntu = [ gnomeExtensions.dash-to-dock ubuntu_font_family ubuntu-themes yaru-theme ];
         dev        = [ emacs ];
+        dev_rust   = [ cargo gcc rustc ]; # see https://nixos.wiki/wiki/Rust
         leisure    = [ discord mpv tdesktop thunderbird-bin youtube-dl ];
-      in base ++ gui_base ++ gui_ubuntu ++ dev ++ leisure;
+      in base ++ gui_base ++ gui_ubuntu ++ dev ++ dev_rust ++ leisure;
   };
 
   # other programs and services
