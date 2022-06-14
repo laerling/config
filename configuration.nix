@@ -93,10 +93,13 @@ in
   virtualisation.virtualbox.host.enable = choose "virtualbox";
 
   # environment and shell
-  environment.variables = {
-    NIXPKGS_ALLOW_UNFREE = "1";
-    EDITOR = "vim";
-    VISUAL = "vim";
+  environment = {
+    etc."mpv/mpv.conf".text = "audio-display=no";
+    variables = {
+      NIXPKGS_ALLOW_UNFREE = "1";
+      EDITOR = "vim";
+      VISUAL = "vim";
+    };
   };
   programs.bash.interactiveShellInit = ''
     # Add colors to less/man/...
