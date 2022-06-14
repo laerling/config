@@ -3,7 +3,7 @@
   lib ? pkgs.lib,
   stdenv ? pkgs.stdenv,
 
-  version ? "0.0.17",
+  version ? "0.0.18",
 }:
 
 let
@@ -11,7 +11,7 @@ let
 
   src = fetchurl {
     url = "https://dl.discordapp.net/apps/linux/${version}/discord-${version}.tar.gz";
-    sha256 = "058k0cmbm4y572jqw83bayb2zzl2fw2aaz0zj1gvg6sxblp76qil";
+    sha256 = "1hl01rf3l6kblx5v7rwnwms30iz8zw6dwlkjsx2f1iipljgkh5q4";
   };
 
   meta = with lib; {
