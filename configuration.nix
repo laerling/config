@@ -50,6 +50,8 @@ in
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
   };
+  # explicitely enable gnome-terminal, because the new one is still shit
+  programs.gnome-terminal.enable = true;
 
   # sound
   sound.enable = true;
