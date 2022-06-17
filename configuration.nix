@@ -103,26 +103,44 @@ in
       VISUAL = "vim";
     };
   };
-  programs.bash.interactiveShellInit = ''
-    # Add colors to less/man/...
-    export LESS_TERMCAP_mb=$'\E[1;31m'     # begin bold
-    export LESS_TERMCAP_md=$'\E[1;36m'     # begin blink
-    export LESS_TERMCAP_me=$'\E[0m'        # reset bold/blink
-    export LESS_TERMCAP_so=$'\E[01;44;33m' # begin reverse video
-    export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
-    export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
-    export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
-    export GROFF_NO_SGR=1                  # for konsole and gnome-terminal
+  programs.bash = {
+    interactiveShellInit = ''
+      # Add colors to less/man/...
+      export LESS_TERMCAP_mb=$'\E[1;31m'     # begin bold
+      export LESS_TERMCAP_md=$'\E[1;36m'     # begin blink
+      export LESS_TERMCAP_me=$'\E[0m'        # reset bold/blink
+      export LESS_TERMCAP_so=$'\E[01;44;33m' # begin reverse video
+      export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
+      export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
+      export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
+      export GROFF_NO_SGR=1                  # for konsole and gnome-terminal
 
-    alias l='ls -Alh'
-    alias la='ls -A'
+      alias l='ls -Alh'
+      alias la='ls -A'
 
-    alias loop='mpv --loop-playlist'
-    alias play='loop --shuffle'
-    alias music='play --no-video ~/Music/'
+      alias loop='mpv --loop-playlist'
+      alias play='loop --shuffle'
+      alias music='play --no-video ~/Music/'
 
-    alias s='screen -DRU -e ^xx'
-  '';
+      alias s='screen -DRU -e ^xx'
+    '';
+    promptInit = ''
+      # Provide a nice prompt if the terminal supports it.
+      if [ "$TERM" != "dumb" ] || [ -n "$INSIDE_EMACS" ]; then
+        PROMPT_COLOR="1;31m"
+        ((UID)) && PROMPT_COLOR="1;32m"
+        if [ -n "$INSIDE_EMACS" ] || [ "$TERM" = "eterm" ] || [ "$TERM" = "eterm-color" ]; then
+          # Emacs term mode doesn't support xterm title escape sequence (\e]0;)
+          PS1="\[\033[$PROMPT_COLOR\][\u@\h:\w]\\$\[\033[0m\] "
+        else
+          PS1="\[\033[$PROMPT_COLOR\][\[\e]0;\u@\h: \w\a\]\u@\h:\w]\\$\[\033[0m\] "
+        fi
+        if test "$TERM" = "xterm"; then
+          PS1="\[\033]2;\h:\u:\w\007\]$PS1"
+        fi
+      fi
+    '';
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
