@@ -27,6 +27,7 @@ in
   i18n.defaultLocale = "en_US.UTF-8";
   services.logind.lidSwitch = "ignore";
   networking = {
+    networkmanager.enable = true;
 
     # names
     hostName = "gem";
@@ -47,9 +48,21 @@ in
     enable = true;
     layout = if choose "neo" then "de" else "us";
     xkbVariant = if choose "neo" then "neo" else "altgr-intl";
-    displayManager.gdm.enable = true;
-    desktopManager.gnome.enable = true;
-  };
+  } // (let
+    kde = false;
+  in
+    if kde then {
+      displayManager.sddm.enable = true;
+      desktopManager.plasma5.enable = true;
+    } else {
+      displayManager.gdm.enable = true;
+      # ToDo:
+      # wm/compositor: compiz (zukünftig unityx)
+      # shell: unity 7 (zukünftig unityx)
+      # theme: ambiance
+      # icons: humanity
+      desktopManager.gnome.enable = true;
+    });
   # explicitely enable gnome-terminal, because the new one is still shit
   programs.gnome-terminal.enable = true;
 
