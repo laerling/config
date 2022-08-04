@@ -29,14 +29,14 @@ test: nixos-test
 rollback: nixos-rollback
 
 nixos-rollback:
-	sudo nixos-rebuild switch --rollback 2>&1 | tee -a /tmp/$@
+	sudo nixos-rebuild switch --rollback |& tee -a /tmp/$@
 
 nixos-update:
 	sudo nix-channel --update
 
 nixos-%:
 	(echo;date -Iseconds) >> /tmp/$@
-	sudo nixos-rebuild $* --show-trace 2>&1 | tee -a /tmp/$@
+	sudo nixos-rebuild $* --show-trace |& tee -a /tmp/$@
 
 
 # Arch Linux
