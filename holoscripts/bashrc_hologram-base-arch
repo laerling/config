@@ -9,26 +9,26 @@ cat;tail --lines=+4 "$0";exit
 # only update system if screen is running
 if (ps -e | grep '\<screen\>' >/dev/null); then
 
-# upgrade system
-upgradefile=~/.last_upgrade
-touch "$upgradefile" # just so that it exists
+    # upgrade system
+    upgradefile=~/.last_upgrade
+    touch "$upgradefile" # just so that it exists
 
-parent_pid="$(ps -o ppid= -p $$|sed 's/ \+//g')"
-parent_name="$(ps -o cmd= -p "$parent_pid"|sed 's/ .\+//'|tr '[:upper:]' '[:lower:]')"
-if [ "$(cat "$upgradefile")" != $(date -I) ] && [ "$parent_name" = "screen" ]; then
-    read -p "Upgrade system (y/N)" upgrade
-    if [ "$upgrade" = y ] || [ "$upgrade" = Y ]; then
-        date -I > "$upgradefile"
-        if hash yaourt 2>/dev/null; then
-            yaourt -Syu || rm "$upgradefile"
-        else
-            sudo pacman -Syu || rm "$upgradefile"
-        fi
+    parent_pid="$(ps -o ppid= -p $$|sed 's/ \+//g')"
+    parent_name="$(ps -o cmd= -p "$parent_pid"|sed 's/ .\+//'|tr '[:upper:]' '[:lower:]')"
+    if [ "$(cat "$upgradefile")" != $(date -I) ] && [ "$parent_name" = "screen" ]; then
+	read -p "Upgrade system (y/N)" upgrade
+	if [ "$upgrade" = y ] || [ "$upgrade" = Y ]; then
+            date -I > "$upgradefile"
+            if hash yaourt 2>/dev/null; then
+		yaourt -Syu || rm "$upgradefile"
+            else
+		sudo pacman -Syu || rm "$upgradefile"
+            fi
+	fi
     fi
-fi
 
 else
 
-ps -e | grep 'Xorg\|sway\|gnome-sess' > /dev/null && screen -DRUe^xx
+    ps -e | grep -q 'Xorg\|sway\|gnome-sess' && screen -DRUe^xx
 
 fi
