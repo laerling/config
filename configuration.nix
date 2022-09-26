@@ -120,6 +120,8 @@ in
   programs.steam.enable = choose "steam";
   programs.wireshark.enable = choose "wireshark";
   services.postgresql = choose "postgres";
+  virtualisation.anbox.enable = choose "anbox";
+  virtualisation.docker.enable = choose "docker";
   virtualisation.virtualbox.host.enable = choose "virtualbox";
 
   # environment and shell
