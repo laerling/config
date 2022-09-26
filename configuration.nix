@@ -6,6 +6,9 @@
 
 let
   choose = keyname: chooseOrDefault keyname false;
+  # TODO rename to chooseOrCustomDefault (including all occurences)
+  # and define chooseOrDefault with default being the NixOS option
+  # default value.
   chooseOrDefault = keyname: default: let
     path=./choices.nix;
     choices = import path;
@@ -15,6 +18,7 @@ in
 
 {
   imports = [ /etc/nixos/hardware-configuration.nix ];
+  # TODO For more hardware-specific settings (and - according to the NixOS user manual - hardware configuration for known hardware), see https://github.com/NixOS/nixos-hardware
 
   # boot
   boot.loader = {
@@ -66,6 +70,16 @@ in
   # explicitely enable gnome-terminal, because the new one is still shit
   programs.gnome-terminal.enable = true;
 
+  # TODO: Changes in generation update that might be connected to the
+  # root cause of the terminal vs. screen bug:
+
+  # freetype-2.11.0 => freetype-2.12.0
+  # => freeglut-3.2.1
+  # fribidi-1.0.10 => fribidi-1.0.12
+  # gpm-1.20.7 => gpm-unstable-2020-06-17
+  # harfbuzz-3.0.0 => harfbuzz-3.3.2
+  # harfbuzz-icu-3.0.0 => harfbuzz-icu-3.3.2
+
   # sound
   sound.enable = true;
   hardware.pulseaudio.enable = true;
@@ -85,6 +99,7 @@ in
     home = "/home/laerling";
     extraGroups = [ "wheel" "adbusers" ];
 
+    # TODO: system packages go to /, user packages go to /etc/profiles/per-user/<user>, packages installed via nix-env go to /home/<user>/.nix-profile/
     packages = let
       ownPkgs = import ./pkgs { inherit pkgs; };
       allPkgs = pkgs // ownPkgs;
