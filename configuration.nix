@@ -152,7 +152,7 @@ in
       alias play='loop --shuffle'
       alias music='play --no-video ~/Music/'
 
-      alias s='screen -DRU -e ^xx'
+      alias s='screen -h 1024 -DRU -e ^xx'
     '';
     promptInit = ''
       # Provide a nice prompt if the terminal supports it.
