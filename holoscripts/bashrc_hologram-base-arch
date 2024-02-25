@@ -29,6 +29,6 @@ if (ps -e | grep '\<screen\>' >/dev/null); then
 
 else
 
-    ps -e | grep -q 'Xorg\|sway\|gnome-sess' && screen -DRUe^xx
+    ps -e | grep -q 'Xorg\|sway\|gnome-sess' && (screen -DRUe^xx -- bash -c 'ssh irc')
 
 fi
