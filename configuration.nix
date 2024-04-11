@@ -1,8 +1,6 @@
 # Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
+# your system. Help is available in the configuration.nix(5) man page, on
+# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 let
   choose = keyname: chooseOrDefault keyname false;
@@ -16,9 +14,18 @@ let
   then choices."${keyname}" else default;
 in
 
+{ config, lib, pkgs, ... }:
+
 {
-  imports = [ /etc/nixos/hardware-configuration.nix ];
-  # TODO For more hardware-specific settings (and - according to the NixOS user manual - hardware configuration for known hardware), see https://github.com/NixOS/nixos-hardware
+  imports =
+    [ # Include the results of the hardware scan.
+      # For more hardware-specific settings (and - according to the
+      # NixOS user manual - hardware configuration for known
+      # hardware), see https://github.com/NixOS/nixos-hardware
+      /etc/nixos/hardware-configuration.nix
+    ];
+
+  nixpkgs.config.allowUnfree = true;
 
   # boot
   boot.loader = {
@@ -29,29 +36,32 @@ in
   # low-level settings
   time.timeZone = "Europe/Berlin";
   i18n.defaultLocale = "en_US.UTF-8";
-  services.logind.lidSwitch = "ignore";
+  services.logind.lidSwitch = "ignore"; # Also an option: "lock"
   networking = {
+    hostName = "suki";
+    hosts = if builtins.pathExists ./hosts.nix then import ./hosts.nix else {};
+
+    # On desktop managers like Gnome it is enough to enable NetworkManager and
+    # add the user to the "networkmanager" group.
     networkmanager.enable = true;
+    #networkmanager.backend = "iwd";
+    #wireless.iwd.enable = true; # IWD
 
-    # names
-    hostName = "gem";
-    hosts = let hostsPath = ./hosts.nix; in
-            if builtins.pathExists hostsPath then import hostsPath else {};
-
-    # DHCP
-    useDHCP = false; # Deprecated. ALWAYS set to false!
-    interfaces.enp0s31f6.useDHCP = true;
-    interfaces.wlp61s0.useDHCP = true;
-
+    # Open ports in the firewall.
     # firewall.allowedTCPPorts = [ ... ];
     # firewall.allowedUDPPorts = [ ... ];
+    # Or disable the firewall altogether.
+    # firewall.enable = false;
   };
 
   # GUI
   services.xserver = {
     enable = true;
-    layout = if choose "neo" then "de" else "us";
-    xkbVariant = if choose "neo" then "neo" else "altgr-intl";
+
+    xkb.layout = if choose "neo" then "de" else "us";
+    xkb.variant = if choose "neo" then "neo" else "altgr-intl";
+    xkb.options = "eurosign:e"; # Also an option: "caps:escape"
+
   } // (let
     kde = false;
   in
@@ -67,68 +77,52 @@ in
       # icons: humanity
       desktopManager.gnome.enable = true;
     });
-  # explicitely enable gnome-terminal, because the new one is still shit
-  programs.gnome-terminal.enable = true;
 
-  # TODO: Changes in generation update that might be connected to the
-  # root cause of the terminal vs. screen bug:
-
-  # freetype-2.11.0 => freetype-2.12.0
-  # => freeglut-3.2.1
-  # fribidi-1.0.10 => fribidi-1.0.12
-  # gpm-1.20.7 => gpm-unstable-2020-06-17
-  # harfbuzz-3.0.0 => harfbuzz-3.3.2
-  # harfbuzz-icu-3.0.0 => harfbuzz-icu-3.3.2
-
-  # sound
-  sound.enable = true;
+  # Sound
+  sound.enable = true; # ALSA
   hardware.pulseaudio.enable = true;
 
-  # system packages - only bare necessities
-  nixpkgs.config.allowUnfree = true;
-  environment.systemPackages = with pkgs; [ screen vim wget ];
-
-  # Users - Don't forget to set a password with ‘passwd’!
-  users.groups."laerling".gid = 1001;
+  # same GID and UID as on Ubuntu
+  users.groups.laerling.gid = 1000;
   users.users.laerling = {
-    description = "Benjamin Ludwig";
     isNormalUser = true;
     uid = 1000;
     group = "laerling";
-    createHome = true;
-    home = "/home/laerling";
-    extraGroups = [ "wheel" "adbusers" ];
-
-    # TODO: system packages go to /, user packages go to /etc/profiles/per-user/<user>, packages installed via nix-env go to /home/<user>/.nix-profile/
-    packages = let
-      ownPkgs = import ./pkgs { inherit pkgs; };
-      allPkgs = pkgs // ownPkgs;
-    in
-      with allPkgs; let
-        base       = [ borgbackup file git gnumake jq killall nixos-option nixos-utils lm_sensors screen tree unzip vim wget xxHash ];
-        # breeze-icons contains icons for kolourpaint
-        gui_base   = [ breeze-icons firefox gnome-passwordsafe gnome.gnome-tweaks kolourpaint pavucontrol source-code-pro ];
-        gui_ubuntu = [ gnomeExtensions.dash-to-dock ubuntu_font_family ubuntu-themes yaru-theme ];
-        dev        = [ emacs ];
-        dev_rust   = [ cargo gcc rustc ]; # see https://nixos.wiki/wiki/Rust
-        leisure    = [ discord mpv tdesktop thunderbird-bin youtube-dl ];
-      in base ++ gui_base ++ gui_ubuntu ++ dev ++ dev_rust ++ leisure;
+    # sudo only works with group "wheel"
+    extraGroups = [ "adbusers" "networkmanager" "wheel" ];
+    packages = with pkgs; [
+      bc borgbackup breeze-icons # breeze-icons contains icons for kolourpaint
+      cargo curl discord drawpile emacs29 file firefox git gnome.gnome-tweaks
+      gnomeExtensions.dash-to-dock gnumake jq keepassxc killall kolourpaint
+      krita lm_sensors mpv telegram-desktop tree ubuntu_font_family
+      ubuntu-themes unzip wget xxHash yaru-theme youtube-dl
+    ];
   };
 
+  # system-wide packages
+  # - only bare necessities that are regularly needed for administration stuff
+  #   (everything else can be pulled in via nix-shell
+  # - only programs that are allowed to run as root
+  environment.systemPackages = with pkgs; [ gptfdisk screen vim-full ];
+  environment.gnome.excludePackages = with pkgs.gnome; [ epiphany totem yelp ];
+
   # other programs and services
-  programs.adb.enable = choose "adb";
-  programs.steam.enable = choose "steam";
-  programs.wireshark.enable = choose "wireshark";
+  programs = {
+    adb.enable = choose "adb";
+    steam.enable = choose "steam";
+    wireshark.enable = choose "wireshark";
+  };
   services.postgresql = choose "postgres";
-  virtualisation.anbox.enable = choose "anbox";
-  virtualisation.docker.enable = choose "docker";
-  virtualisation.virtualbox.host.enable = choose "virtualbox";
+  virtualisation = {
+    anbox.enable = choose "anbox";
+    docker.enable = choose "docker";
+    virtualbox.host.enable = choose "virtualbox";
+  };
 
   # environment and shell
   environment = {
     etc."mpv/mpv.conf".text = "audio-display=no";
     variables = {
-      NIXPKGS_ALLOW_UNFREE = "1";
       EDITOR = "vim";
       VISUAL = "vim";
     };
@@ -172,12 +166,28 @@ in
     '';
   };
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "21.11"; # Did you read the comment?
+  # Copy the NixOS configuration file and link it from the resulting system
+  # (/run/current-system/configuration.nix). This is useful in case you
+  # accidentally delete configuration.nix.
+  system.copySystemConfiguration = true;
+
+  # This option defines the first version of NixOS you have installed on this particular machine,
+  # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
+  #
+  # Most users should NEVER change this value after the initial install, for any reason,
+  # even if you've upgraded your system to a new NixOS release.
+  #
+  # This value does NOT affect the Nixpkgs version your packages and OS are pulled from,
+  # so changing it will NOT upgrade your system.
+  #
+  # This value being lower than the current NixOS release does NOT mean your system is
+  # out of date, out of support, or vulnerable.
+  #
+  # Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
+  # and migrated your data accordingly.
+  #
+  # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
+  system.stateVersion = "23.11"; # Did you read the comment?
+
 }
 
