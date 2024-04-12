@@ -90,20 +90,23 @@ in
     group = "laerling";
     # sudo only works with group "wheel"
     extraGroups = [ "adbusers" "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      bc borgbackup breeze-icons # breeze-icons contains icons for kolourpaint
-      cargo curl discord drawpile emacs29 file firefox git gnome.gnome-tweaks
-      gnomeExtensions.dash-to-dock gnumake jq keepassxc killall kolourpaint
-      krita lm_sensors mpv telegram-desktop tree ubuntu_font_family
-      ubuntu-themes unzip wget xxHash yaru-theme youtube-dl
-    ];
+    packages = with pkgs; let
+      gnome-packages = with gnome; [ gnome-tweaks dconf-editor];
+      ubuntu-style = [ humanity-icon-theme ubuntu_font_family ubuntu-themes
+      yaru-theme ] ++ (with gnomeExtensions; [ dash-to-dock user-themes ]);
+    in [
+      # breeze-icons contains icons for kolourpaint
+      bc borgbackup breeze-icons cargo curl discord drawpile emacs29 file
+      firefox git gnumake jq keepassxc killall kolourpaint krita lm_sensors mpv
+      telegram-desktop tree unzip wget xxHash youtube-dl
+    ] ++ gnome-packages ++ ubuntu-style;
   };
 
   # system-wide packages
   # - only bare necessities that are regularly needed for administration stuff
   #   (everything else can be pulled in via nix-shell
   # - only programs that are allowed to run as root
-  environment.systemPackages = with pkgs; [ gptfdisk screen vim-full ];
+  environment.systemPackages = with pkgs; [ efibootmgr gptfdisk screen vim-full ];
   environment.gnome.excludePackages = with pkgs.gnome; [ epiphany totem yelp ];
 
   # other programs and services
