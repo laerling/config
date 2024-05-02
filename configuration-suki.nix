@@ -2,7 +2,10 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
+{ config, lib, pkgs, ... }:
+
 let
+
   choose = keyname: chooseOrDefault keyname false;
   # TODO rename to chooseOrCustomDefault (including all occurences)
   # and define chooseOrDefault with default being the NixOS option
@@ -12,11 +15,12 @@ let
     choices = import path;
   in if builtins.pathExists path && choices ? "${keyname}"
   then choices."${keyname}" else default;
-in
 
-{ config, lib, pkgs, ... }:
+  chosenPackages = if choose "minecraft"
+    then with pkgs; [ prismlauncher ] else [];
 
-{
+in {
+
   imports =
     [ # Include the results of the hardware scan.
       # For more hardware-specific settings (and - according to the
@@ -54,10 +58,15 @@ in
     # firewall.enable = false;
   };
 
+  # console = {
+  #   font = "Lat2-Terminus16";
+  #   keyMap = "us";
+  #   useXkbConfig = true; # use xkb.options in tty.
+  # };
+
   # GUI
   services.xserver = {
     enable = true;
-
     xkb.layout = if choose "neo" then "de" else "us";
     xkb.variant = if choose "neo" then "neo" else "altgr-intl";
     xkb.options = "eurosign:e"; # Also an option: "caps:escape"
@@ -69,18 +78,38 @@ in
       displayManager.sddm.enable = true;
       desktopManager.plasma5.enable = true;
     } else {
+      # FIXME: With lightdm the screen can't be locked (e.g. after waking up from suspend)
+      #displayManager.lightdm = {
+      #  enable = true;
+      #  greeters.slick = {
+      #    enable = true;
+      #    theme.package = pkgs.yaru-theme;
+      #    theme.name = "Yaru-dark";
+      #    iconTheme.package = pkgs.humanity-icon-theme;
+      #    iconTheme.name = "Humanity-Dark";
+      #  };
+      #};
+      # TODO: unity(d) and/or unityx - https://unityd.org/
       displayManager.gdm.enable = true;
-      # ToDo:
-      # wm/compositor: compiz (zukünftig unityx)
-      # shell: unity 7 (zukünftig unityx)
-      # theme: ambiance
-      # icons: humanity
       desktopManager.gnome.enable = true;
     });
+  # Don't use Lomiri (formerly Unity8) - it is clearly made for Ubuntu Touch and not for desktops! It's really bad...
+  #services.desktopManager.lomiri.enable = true;
 
   # Sound
   sound.enable = true; # ALSA
   hardware.pulseaudio.enable = true;
+  # pipewire (somehow doesn't work)
+  #hardware.pulseaudio.enable = false; # required by pipewire
+  #security.rtkit.enable = true; # realtime capabilities
+  #services.pipewire = {
+  #  enable = true;
+  #  audio.enable = true; # use as primary audio server
+  #  # enable emulations when needed
+  #  alsa.enable = true;
+  #  pulse.enable = true;
+  #  #jack.enable = true;
+  #};
 
   # same GID and UID as on Ubuntu
   users.groups.laerling.gid = 1000;
@@ -89,25 +118,32 @@ in
     uid = 1000;
     group = "laerling";
     # sudo only works with group "wheel"
-    extraGroups = [ "adbusers" "networkmanager" "wheel" ];
+    extraGroups = [ "adbusers" "networkmanager" "wheel" "vboxusers" ];
     packages = with pkgs; let
       gnome-packages = with gnome; [ gnome-tweaks dconf-editor];
       ubuntu-style = [ humanity-icon-theme ubuntu_font_family ubuntu-themes
-      yaru-theme ] ++ (with gnomeExtensions; [ dash-to-dock user-themes ]);
+        yaru-theme ] ++ (with gnomeExtensions; [ dash-to-dock user-themes ]);
     in [
       # breeze-icons contains icons for kolourpaint
-      bc borgbackup breeze-icons cargo curl discord drawpile emacs29 file
-      firefox git gnumake jq keepassxc killall kolourpaint krita lm_sensors mpv
-      telegram-desktop tree unzip wget xxHash youtube-dl
-    ] ++ gnome-packages ++ ubuntu-style;
+      # TODO check that nc points to the one in netcat-gnu
+      bc borgbackup breeze-icons cargo curl discord drawpile emacs29 ffmpeg
+      file firefox git gnumake jq keepassxc killall kolourpaint krita
+      lm_sensors man-pages mpv netcat-gnu pavucontrol telegram-desktop
+      thunderbird tree unzip wget xxHash youtube-dl
+    ] ++ gnome-packages ++ ubuntu-style ++ chosenPackages;
   };
 
   # system-wide packages
   # - only bare necessities that are regularly needed for administration stuff
   #   (everything else can be pulled in via nix-shell
   # - only programs that are allowed to run as root
-  environment.systemPackages = with pkgs; [ efibootmgr gptfdisk screen vim-full ];
-  environment.gnome.excludePackages = with pkgs.gnome; [ epiphany totem yelp ];
+  environment.systemPackages = with pkgs; [
+    bintools efibootmgr gptfdisk screen vim-full ];
+    environment.gnome.excludePackages = with pkgs; [
+      gnome-tour
+    ] ++ (with pkgs.gnome; [
+      epiphany geary gnome-calendar gnome-music gnome-tour totem xterm yelp
+    ]);
 
   # other programs and services
   programs = {
@@ -129,44 +165,6 @@ in
       EDITOR = "vim";
       VISUAL = "vim";
     };
-  };
-  programs.bash = {
-    interactiveShellInit = ''
-      # Add colors to less/man/...
-      export LESS_TERMCAP_mb=$'\E[1;31m'     # begin bold
-      export LESS_TERMCAP_md=$'\E[1;36m'     # begin blink
-      export LESS_TERMCAP_me=$'\E[0m'        # reset bold/blink
-      export LESS_TERMCAP_so=$'\E[01;44;33m' # begin reverse video
-      export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
-      export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
-      export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
-      export GROFF_NO_SGR=1                  # for konsole and gnome-terminal
-
-      alias l='ls -Alh'
-      alias la='ls -A'
-
-      alias loop='mpv --loop-playlist'
-      alias play='loop --shuffle'
-      alias music='play --no-video ~/Music/'
-
-      alias s='screen -h 1024 -DRU -e ^xx'
-    '';
-    promptInit = ''
-      # Provide a nice prompt if the terminal supports it.
-      if [ "$TERM" != "dumb" ] || [ -n "$INSIDE_EMACS" ]; then
-        PROMPT_COLOR="1;31m"
-        ((UID)) && PROMPT_COLOR="1;32m"
-        if [ -n "$INSIDE_EMACS" ] || [ "$TERM" = "eterm" ] || [ "$TERM" = "eterm-color" ]; then
-          # Emacs term mode doesn't support xterm title escape sequence (\e]0;)
-          PS1="\[\033[$PROMPT_COLOR\][\u@\h:\w]\\$\[\033[0m\] "
-        else
-          PS1="\[\033[$PROMPT_COLOR\][\[\e]0;\u@\h: \w\a\]\u@\h:\w]\\$\[\033[0m\] "
-        fi
-        if test "$TERM" = "xterm"; then
-          PS1="\[\033]2;\h:\u:\w\007\]$PS1"
-        fi
-      fi
-    '';
   };
 
   # Copy the NixOS configuration file and link it from the resulting system
