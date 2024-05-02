@@ -8,8 +8,6 @@ in
 
   discord = callPackage ./discord {};
 
-  firefox = callPackage ./firefox {}; # touch-friendly
-
   nixos-utils = callPackage ./nixos-utils {};
 
 }
