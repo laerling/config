@@ -148,8 +148,8 @@ rec {
       environment.gnome.excludePackages = with pkgs; [
         gnome-tour
       ] ++ (with pkgs.gnome; [
-        epiphany geary gnome-calendar gnome-music gnome-tour totem
-        xterm yelp
+        epiphany geary gnome-calendar gnome-initial-setup gnome-music
+        gnome-tour totem xterm yelp
       ]);
 
     # other programs (e.g. steam, wireshark, ...) and services
