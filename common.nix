@@ -22,8 +22,12 @@ rec {
 
   config = {
 
-    imports =
-      [ # Include the results of the hardware scan.
+    ###########
+    # general #
+    ###########
+
+    imports = [
+      # Include the results of the hardware scan.
       # For more hardware-specific settings (and - according to the
       # NixOS user manual - hardware configuration for known
       # hardware), see https://github.com/NixOS/nixos-hardware
@@ -32,13 +36,21 @@ rec {
 
     nixpkgs.config.allowUnfree = true;
 
-    # boot
+
+    ########
+    # boot #
+    ########
+
     boot.loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
 
-    # low-level settings
+
+    ######################
+    # low-level settings #
+    ######################
+
     time.timeZone = "Europe/Berlin";
     i18n.defaultLocale = "en_US.UTF-8";
     services.logind.lidSwitch = "ignore"; # Also an option: "lock"
@@ -48,6 +60,7 @@ rec {
       # On desktop managers like Gnome it is enough to enable NetworkManager and
       # add the user to the "networkmanager" group.
       networkmanager.enable = true;
+      networkmanager.ethernet.macAddress = "random";
       #networkmanager.backend = "iwd";
       #wireless.iwd.enable = true; # IWD
 
@@ -55,7 +68,7 @@ rec {
       # firewall.allowedTCPPorts = [ ... ];
       # firewall.allowedUDPPorts = [ ... ];
       # Or disable the firewall altogether.
-      # firewall.enable = false;
+      firewall.enable = true;
       #firewall.interfaces.enp9s0.allowedTCPPorts = [ 7878 ];
     };
 
@@ -64,6 +77,11 @@ rec {
     #   keyMap = "us";
     #   useXkbConfig = true; # use xkb.options in tty.
     # };
+
+
+    ############
+    # graphics #
+    ############
 
     services.xserver = {
       enable = true;
@@ -90,83 +108,122 @@ rec {
       # Don't use Lomiri (formerly Unity8) - it is clearly made for Ubuntu Touch and not for desktops! It's really bad...
       #services.desktopManager.lomiri.enable = true;
     } // (
-      let kde = utils.choose "kde"; in
-      if kde then {
-        displayManager.sddm.enable = true;
-        desktopManager.plasma5.enable = true;
-      } else {
-        displayManager.gdm.enable = true;
-        desktopManager.gnome.enable = true;
-      }
+      let desktop = utils.chooseOrDefault "desktop" "gnome"; in {
+        kde = {
+          displayManager.sddm.enable = true;
+          desktopManager.plasma5.enable = true;
+        };
+        gnome = {
+          displayManager.gdm.enable = true;
+          desktopManager.gnome.enable = true;
+        };
+        i3 = {
+          desktopManager.gnome.enable = true;
+          windowManager.i3.enable = true;
+          windowManager.i3.package = pkgs.i3-rounded;
+          windowManager.i3.configFile = ./files/i3_config;
+        };
+      }."${desktop}"
     );
 
-    # Sound
-    sound.enable = true; # ALSA
-    hardware.pulseaudio.enable = true;
-    # pipewire (somehow doesn't work)
-    #hardware.pulseaudio.enable = false; # required by pipewire
-    #security.rtkit.enable = true; # realtime capabilities
-    #services.pipewire = {
-    #  enable = true;
-    #  audio.enable = true; # use as primary audio server
-    #  # enable emulations when needed
-    #  alsa.enable = true;
-    #  pulse.enable = true;
-    #  #jack.enable = true;
-    #};
 
-    # same GID and UID as on Ubuntu
-    users.groups.laerling.gid = 1000;
+    #########
+    # Sound #
+    #########
+
+    # default sound settings are enough right now. They use pipewire and it
+    # works for me so far.
+
+
+    ###########################
+    # users and user packages #
+    ###########################
+
+    users.groups.laerling.gid = 1000; # same GID and UID as on Ubuntu
     users.users.laerling = {
       isNormalUser = true;
       uid = 1000;
       group = "laerling";
-      # sudo only works with group "wheel"
-      extraGroups = [ "adbusers" "networkmanager" "wheel" "vboxusers" ];
+      extraGroups = [
+        # - pipewire might require users to be in group "audio"
+        # - sudo only works with group "wheel"
+        "adbusers" "audio" "networkmanager" "vboxusers" "wheel" "wireshark"
+      ];
       packages = with pkgs; let
-        gnome-packages = [ ffmpegthumbnailer ] ++ (with gnome; [
-          gnome-tweaks dconf-editor]);
-        ubuntu-style = [ humanity-icon-theme ubuntu_font_family ubuntu-themes
-          yaru-theme ] ++ (with gnomeExtensions; [ dash-to-dock user-themes ]);
+        gnome-packages = [
+          # eog is the old (and better, because it supports saving image
+          # rotation) image viewer (the new one is loupe)
+          eog ffmpegthumbnailer gnome-tweaks dconf-editor
+        ];
+        ubuntu-style = [
+          # font packages are handled via the fonts.packages option
+          humanity-icon-theme ubuntu-themes yaru-theme
+        ] ++ (with gnomeExtensions; [ dash-to-dock user-themes ]);
       in [
         # breeze-icons contains icons for kolourpaint
-        # TODO check that nc points to the one in netcat-gnu
-        bc borgbackup breeze-icons cargo curl discord drawpile
-        emacs29 ffmpeg file firefox git gnumake jq keepassxc killall
-        kolourpaint krita lm_sensors man-pages mpv netcat-gnu nmap
-        pavucontrol telegram-desktop thunderbird tree unzip wget
-        xxHash youtube-dl
+        bc borgbackup breeze-icons cargo curl dig discord drawpile emacs29 ffmpeg
+        file firefox gcc gdb gnumake gnupg jq keepassxc killall kolourpaint
+        krita lm_sensors man-pages mpv netcat-gnu nmap pavucontrol python3
+        tcpdump telegram-desktop thunderbird tor-browser tree unzip wget
+        wireshark xxHash whois yt-dlp
       ] ++ gnome-packages ++ ubuntu-style ++ utils.chosenPackages;
     };
 
-    # system-wide packages
+
+    ########################
+    # system-wide packages #
+    ########################
+
     # - only bare necessities that are regularly needed for administration stuff
     #   (everything else can be pulled in via nix-shell)
     # - only programs that are allowed to run as root
     environment.systemPackages = with pkgs; [
       bintools efibootmgr gptfdisk screen vim-full ];
       environment.gnome.excludePackages = with pkgs; [
-        gnome-tour
-      ] ++ (with pkgs.gnome; [
-        epiphany geary gnome-calendar gnome-initial-setup gnome-music
-        gnome-tour totem xterm yelp
-      ]);
+        # loupe is the new and incomplete image viewer. I use eog (see above).
+        gnome-tour epiphany geary gnome-calendar gnome-initial-setup
+        gnome-music loupe man-pages man-pages-posix totem xterm yelp
+      ];
 
-    # other programs (e.g. steam, wireshark, ...) and services
+
+    ###############################
+    # other programs and services #
+    ###############################
+
+    # E. g. steam, wireshark, ...
     programs.adb.enable = true;
+    programs.git = {
+      enable = true;
+      lfs.enable = true;
+    };
     programs.mtr.enable = true;
+    programs.steam.enable = utils.choose "steam";
+    programs.wireshark.enable = true;
     virtualisation.virtualbox.host.enable = true;
 
-    # environment and shell
+
+    #########################
+    # environment and shell #
+    #########################
+
     environment = {
       etc."mpv/mpv.conf".text = "audio-display=no";
       variables = {
         EDITOR = "vim";
+        TERMINAL = "kgx";
         VISUAL = "vim";
       };
     };
 
-  };
+    # generate immutable manpage DB
+    documentation.man.generateCaches = true;
+
+    # fonts
+    fonts.packages = with pkgs; [
+      ubuntu-classic ubuntu-sans ubuntu-sans-mono
+    ];
+
+  }; # end of config
 
   utils = rec {
 
@@ -182,12 +239,12 @@ rec {
     then choices."${keyname}" else default;
 
     # map choices to derivations, returning them as a list
-    chosenPackages = let packageByChoice = with pkgs; {
+    chosenPackages = let packageForChoice = with pkgs; {
       minecraft = prismlauncher;
       crt = cool-retro-term;
     }; in with builtins; concatMap
-    (c: if choose c then [packageByChoice."${c}"] else [])
-    (attrNames packageByChoice);
+    (c: if choose c then [packageForChoice."${c}"] else [])
+    (attrNames packageForChoice);
 
   };
 

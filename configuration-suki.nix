@@ -7,7 +7,16 @@
 let common = import ./common.nix { inherit pkgs; };
 in common.config // {
 
-  networking = common.config.networking // { hostName = "suki"; };
+  networking = common.config.networking // {
+    hostName = "suki";
+    networkmanager.ensureProfiles.profiles."38C3" = import ./38c3-wifi.nix;
+  };
+
+  users = let u = common.config.users; in u // {
+    users.laerling = let l = u.users.laerling; in l // {
+      packages = l.packages ++ (with pkgs; [ nvtopPackages.intel ]);
+    };
+  };
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.

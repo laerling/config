@@ -10,7 +10,15 @@ in common.config // {
   networking = common.config.networking // { hostName = "saito"; };
 
   services.xserver = common.config.services.xserver // {
+    # FIXME check version - see https://www.pcworld.com/article/2504035/security-flaws-found-in-all-nvidia-geforce-gpus-update-drivers-asap.html
     videoDrivers = [ "nvidia" ]; # see 'nvidia' NixOS wiki article
+    wacom.enable = true;
+  };
+
+  users = let u = common.config.users; in u // {
+    users.laerling = let l = u.users.laerling; in l // {
+      packages = l.packages ++ (with pkgs; [ nvtopPackages.nvidia libreoffice ]);
+    };
   };
 
   # This option defines the first version of NixOS you have installed on this particular machine,
