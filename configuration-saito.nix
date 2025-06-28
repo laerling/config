@@ -16,7 +16,6 @@ in common.config // {
   services.xserver = common.config.services.xserver // {
     # FIXME check version - see https://www.pcworld.com/article/2504035/security-flaws-found-in-all-nvidia-geforce-gpus-update-drivers-asap.html
     videoDrivers = [ "nvidia" ]; # see 'nvidia' NixOS wiki article
-    wacom.enable = true;
   };
 
   users = let u = common.config.users; in u // {

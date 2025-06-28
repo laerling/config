@@ -89,6 +89,9 @@ rec {
       xkb.variant = if utils.choose "neo" then "neo" else "altgr-intl";
       xkb.options = "eurosign:e"; # Also an option: "caps:escape"
 
+      # drawing tablet driver
+      wacom.enable = true;
+
       # TODO: unity(d) and/or unityx - https://unityd.org/
 
       # FIXME: With lightdm+gnome the screen can't be locked (e.g. after waking up from suspend)
