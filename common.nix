@@ -162,6 +162,8 @@ rec {
           # font packages are handled via the fonts.packages option
           humanity-icon-theme ubuntu-themes yaru-theme
         ] ++ (with gnomeExtensions; [ dash-to-dock user-themes ]);
+        secretPackages = let path = ./secrets/default.nix;
+        in if builtins.pathExists path then import path else _: [];
       in [
         # breeze-icons contains icons for kolourpaint
         bc borgbackup breeze-icons cargo curl dig discord drawpile emacs29 ffmpeg
@@ -169,7 +171,7 @@ rec {
         krita lm_sensors man-pages mpv netcat-gnu nmap pavucontrol python3
         tcpdump telegram-desktop thunderbird tor-browser tree unzip wget
         wireshark xxHash whois yt-dlp
-      ] ++ gnome-packages ++ ubuntu-style ++ utils.chosenPackages;
+      ] ++ gnome-packages ++ ubuntu-style ++ utils.chosenPackages ++ secretPackages pkgs;
     };
 
 
