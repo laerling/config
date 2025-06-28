@@ -7,6 +7,10 @@
 let common = import ./common.nix { inherit pkgs; };
 in common.config // {
 
+  # udev configuration for ZSA keyboards
+  hardware.keyboard.zsa.enable = true;
+  hardware.sane.enable = true;
+
   networking = common.config.networking // { hostName = "saito"; };
 
   services.xserver = common.config.services.xserver // {
