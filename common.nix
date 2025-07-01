@@ -65,14 +65,11 @@ rec {
       # add the user to the "networkmanager" group.
       networkmanager.enable = true;
       networkmanager.ethernet.macAddress = "random";
-      #networkmanager.backend = "iwd";
-      #wireless.iwd.enable = true; # IWD
 
-      # Open ports in the firewall.
+      # firewall
+      firewall.enable = true;
       # firewall.allowedTCPPorts = [ ... ];
       # firewall.allowedUDPPorts = [ ... ];
-      # Or disable the firewall altogether.
-      firewall.enable = true;
       #firewall.interfaces.enp9s0.allowedTCPPorts = [ 7878 ];
     };
 
