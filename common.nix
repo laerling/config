@@ -88,41 +88,24 @@ rec {
       wacom.enable = true;
 
       # TODO: unity(d) and/or unityx - https://unityd.org/
-
-      # FIXME: With lightdm+gnome the screen can't be locked (e.g. after waking up from suspend)
-      #displayManager.lightdm = {
-      #  enable = true;
-      #  greeters.slick = {
-      #    enable = true;
-      #    theme.package = pkgs.yaru-theme;
-      #    theme.name = "Yaru";
-      #    iconTheme.package = pkgs.humanity-icon-theme;
-      #    iconTheme.name = "Humanity-Dark";
-      #    cursorTheme.name = "Yaru";
-      #    extraConfig = "background=/nix/store/7kgj35gfy6kjd69f5n6xv480sgb5dq63-Ubuntu-13-10-s-Default-Wallpaper-Leaked-384965-2.jpg\n";
-      #  };
-      #};
-
       # Don't use Lomiri (formerly Unity8) - it is clearly made for Ubuntu Touch and not for desktops! It's really bad...
-      #services.desktopManager.lomiri.enable = true;
-    } // (
-      let desktop = utils.chooseOrDefault "desktop" "gnome"; in {
-        kde = {
-          displayManager.sddm.enable = true;
-          desktopManager.plasma5.enable = true;
-        };
-        gnome = {
-          displayManager.gdm.enable = true;
-          desktopManager.gnome.enable = true;
-        };
-        i3 = {
-          desktopManager.gnome.enable = true;
-          windowManager.i3.enable = true;
-          windowManager.i3.package = pkgs.i3-rounded;
-          windowManager.i3.configFile = ./files/i3_config;
-        };
-      }."${desktop}"
-    );
+
+      # TODO finish customizing xfce
+      # - start menu
+      # - start menu shortcut
+      # - learn shortcuts (maximize, minimize, show desktop, ...)
+      # - fonts from flake into own derivation
+      # - explorer/thunar += tree view on the left
+      # - bluetooth support
+      # - set that one-pixel-stroke font for task bar items and explorer
+      # - set correct font for start button, if possible
+      # - browser - Pale Moon? Librewolf?
+      # - make derivation from flake for fonts
+      # - icons (currently copied to ~/.icons/) from flake into own derivation
+      desktopManager.xfce.enable = true;
+      desktopManager.xterm.enable = false;
+
+    };
 
 
     #########
@@ -148,25 +131,64 @@ rec {
         "adbusers" "audio" "networkmanager" "vboxusers" "wheel" "wireshark"
       ];
       packages = with pkgs; let
-        gnome-packages = [
-          # eog is the old (and better, because it supports saving image
-          # rotation) image viewer (the new one is loupe)
-          eog ffmpegthumbnailer gnome-tweaks dconf-editor
+
+        # function to install a given package from a flake
+        flake_ = ref: pkg: (builtins.getFlake ref).packages."${builtins.currentSystem}"."${pkg}";
+
+        # function to install the default package from a flake
+        flake = ref: flake_ ref "default";
+
+
+        # packages I always want that aren't tied to any particular ecosystem
+        basic-packages = [
+          bc borgbackup cargo chromium curl dig discord drawpile emacs30 feh
+          ffmpeg file gcc gdb ghc gnumake gnupg jq keepassxc killall krita
+          libreoffice librewolf lm_sensors man-pages mpv netcat-gnu nmap pureref
+          python3 tcpdump telegram-desktop thunderbird tor-browser tree unzip
+          wget wireshark xxHash upscayl vivaldi whois yt-dlp
         ];
-        ubuntu-style = [
-          # font packages are handled via the fonts.packages option
-          humanity-icon-theme ubuntu-themes yaru-theme
-        ] ++ (with gnomeExtensions; [ dash-to-dock user-themes ]);
-        secretPackages = let path = ./secrets/default.nix;
-        in if builtins.pathExists path then import path else _: [];
-      in [
-        # breeze-icons contains icons for kolourpaint
-        bc borgbackup breeze-icons cargo curl dig discord drawpile emacs29 ffmpeg
-        file firefox gcc gdb gnumake gnupg jq keepassxc killall kolourpaint
-        krita lm_sensors man-pages mpv netcat-gnu nmap pavucontrol python3
-        tcpdump telegram-desktop thunderbird tor-browser tree unzip wget
-        wireshark xxHash whois yt-dlp
-      ] ++ gnome-packages ++ ubuntu-style ++ utils.chosenPackages ++ secretPackages pkgs;
+
+        # here I group ecosystem-specific packages by the ecosystem
+        # they come from (usually desktop environments)
+        ecosystem-packages = {
+
+          gnome = [
+            dconf-editor ffmpegthumbnailer gnome-screenshot gnome-system-monitor gnome-tweaks
+          ];
+
+          kde = with kdePackages; [
+            # breeze-icons contains icons for kolourpaint
+            breeze-icons kolourpaint
+          ];
+
+          xfce = with xfce; [
+            # Windows 95 theming
+            xfce4-whiskermenu-plugin # with chicago95 it looks like the Win95 start menu
+            #TODO use all outputs from this flake (after having tested them)
+            # this is a fork from "github:salvatorecriscioneweb/chicago95-nix"
+            (flake "github:laerling/chicago95-nix") # chicago95
+            # alternative: "github:rice-cracker-dev/chicago95-nix"
+
+            # other programs that for some reason need to be specified manually
+            blueman # bluetooth manager
+            xfce4-systemload-plugin # system monitor
+            xreader # document viewer (PDF etc.)
+          ];
+
+          ubuntu = [
+            # font packages are handled via the fonts.packages option
+            humanity-icon-theme ubuntu-themes yaru-theme
+          ] ++ (with gnomeExtensions; [
+            dash-to-dock user-themes
+          ]);
+        };
+
+        ecosystem-packages-list = with builtins; foldl' (a: b: a ++ b) [] (attrValues ecosystem-packages);
+
+        secret-packages = let path = ./secrets/default.nix;
+        in if builtins.pathExists path then import path pkgs else [];
+
+      in basic-packages ++ ecosystem-packages-list ++ secret-packages;
     };
 
 
