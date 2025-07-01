@@ -178,17 +178,18 @@ rec {
     #   (everything else can be pulled in via nix-shell)
     # - only programs that are allowed to run as root
     environment.systemPackages = with pkgs; [
-      bintools efibootmgr gptfdisk screen vim-full ];
-      environment.gnome.excludePackages = with pkgs; [
-        # loupe is the new and incomplete image viewer. I use eog (see above).
-        gnome-tour epiphany geary gnome-calendar gnome-initial-setup
-        gnome-music loupe man-pages man-pages-posix totem xterm yelp
-      ];
+      bintools efibootmgr gptfdisk screen vim-full
+    ];
+    environment.gnome.excludePackages = with pkgs; [
+      # loupe is the new and incomplete image viewer. I use eog (see above).
+      epiphany geary gnome-calendar gnome-console gnome-initial-setup
+      gnome-music gnome-tour loupe man-pages man-pages-posix totem xterm yelp
+    ];
 
 
-    ###############################
-    # other programs and services #
-    ###############################
+    #########################
+    # programs and services #
+    #########################
 
     # E. g. steam, wireshark, ...
     programs.adb.enable = true;
