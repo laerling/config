@@ -47,18 +47,14 @@ target | description
 - firefox config via autoconfig (also see https://wiki.archlinux.org/index.php/Firefox ) (/usr/lib/firefox/defaults/pref/ etc....)
   - Make default browser
   - Plugin
-    - umatrix
+    - uBlock origin
     - Decentraleyes
+    - privacy badger
     - Optionally Tree Style Tab
 
 ### NixOS
-- Find/write and add NixOS utilities (or first compile a cheat sheet from the pills and the manuals etc.)
-  - Remove jq from the user packages, I basically only need it for this utility functionality, that is mostly for parsing output of `nix show-derivation`.
-- Override/Overlay: Add ffmpeg from kdenlive closure to kdenlive's PATH, make nixpkgs issue
-- Make nixpkgs PR for overriding discord version
-- Make nixpkgs PR for (optionally) adding `MOZ_USE_XINPUT2=1` to firefox wrapper
 - For more hardware-specific settings (and - according to the NixOS user manual - hardware configuration for known hardware), see https://github.com/NixOS/nixos-hardware
-- System packages gehen nach /, user packages nach /etc/profiles/per-user/<user>, über nix-env installierte Pakete nach /home/<user>/.nix-profile/
+- System packages go to `/`, user packages to `/etc/profiles/per-user/<user>`, packages installed via nix-env go to `/home/<user>/.nix-profile/`
 - Try home manager
 
 ### Arch Linux
