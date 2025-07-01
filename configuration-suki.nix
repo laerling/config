@@ -9,7 +9,6 @@ in common.config // {
 
   networking = common.config.networking // {
     hostName = "suki";
-    networkmanager.ensureProfiles.profiles."38C3" = import ./38c3-wifi.nix;
   };
 
   users = let u = common.config.users; in u // {
