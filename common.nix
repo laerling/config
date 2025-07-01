@@ -213,6 +213,18 @@ rec {
 
     environment = {
       etc."mpv/mpv.conf".text = "audio-display=no";
+      interactiveShellInit = ''
+        function h {
+          $@ --help |& less -SR
+        }
+        alias j="jobs"
+        alias gb="git branch -va"
+        alias gf="git fetch --all --prune"
+        alias gl="git list"
+        alias gla="git list --all --graph --oneline"
+        alias gp="git pull"
+        alias gs="git status"
+      '';
       variables = {
         EDITOR = "vim";
         TERMINAL = "gnome-terminal";
