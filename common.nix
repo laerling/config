@@ -197,9 +197,13 @@ rec {
       enable = true;
       lfs.enable = true;
     };
+    # enable classic Gnome terminal instead of kgx - needs adjustment of
+    # gnome.excludePackages and $TERMINAL
+    programs.gnome-terminal.enable = true;
     programs.mtr.enable = true;
     programs.steam.enable = utils.choose "steam";
     programs.wireshark.enable = true;
+    services.gnome.localsearch.enable = false;
     virtualisation.virtualbox.host.enable = true;
 
 
@@ -211,7 +215,7 @@ rec {
       etc."mpv/mpv.conf".text = "audio-display=no";
       variables = {
         EDITOR = "vim";
-        TERMINAL = "kgx";
+        TERMINAL = "gnome-terminal";
         VISUAL = "vim";
       };
     };
