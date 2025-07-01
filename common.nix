@@ -226,6 +226,7 @@ rec {
     # fonts
     fonts.packages = with pkgs; [
       ubuntu-classic ubuntu-sans ubuntu-sans-mono
+      libertinus
     ];
 
   }; # end of config
