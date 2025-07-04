@@ -92,7 +92,6 @@ rec {
 
       # TODO finish customizing xfce
       # - start menu
-      # - start menu shortcut
       # - learn shortcuts (maximize, minimize, show desktop, ...)
       # - fonts from flake into own derivation
       # - explorer/thunar += tree view on the left
@@ -266,6 +265,23 @@ rec {
   }; # end of config
 
   utils = rec {
+
+    # Merge sets recursively, i. e. without overriding subsets
+    mergeSets = let m = s1: s2: with builtins;
+      let s2-merged-into-s1 = mapAttrs (n: v_s1:
+        if s2 ? "${n}" then (
+          let v_s2 = s2."${n}"; in
+          if typeOf v_s1 == "set" && typeOf v_s2 == "set"
+          # recursively merge sets
+          then m v_s1 v_s2
+          # for all other types, s2 overrides s1
+          else v_s2
+        ) else v_s1) s1;
+      in s2 // s2-merged-into-s1; # add elements that are in s2 but not in s1
+    in m;
+
+    # merge a set s2 with a subset of a given set s1, even if it doesn't exist
+    merge = s1: name: s2: if s1 ? name then mergeSets s1."${name}" s2 else s2;
 
     choose = keyname: chooseOrDefault keyname false;
 

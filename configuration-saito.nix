@@ -5,23 +5,33 @@
 { config, lib, pkgs, ... }:
 
 let common = import ./common.nix { inherit pkgs; };
-in common.config // {
+in common.utils.mergeSets common.config {
 
-  # udev configuration for ZSA keyboards
-  hardware.keyboard.zsa.enable = true;
-  hardware.sane.enable = true;
+  networking.hostName = "saito";
 
-  networking = common.config.networking // { hostName = "saito"; };
-
-  services.xserver = common.config.services.xserver // {
-    # FIXME check version - see https://www.pcworld.com/article/2504035/security-flaws-found-in-all-nvidia-geforce-gpus-update-drivers-asap.html
-    videoDrivers = [ "nvidia" ]; # see 'nvidia' NixOS wiki article
+  hardware = {
+    # udev configuration for ZSA keyboards
+    keyboard.zsa.enable = true;
+    sane.enable = true;
   };
 
-  users = let u = common.config.users; in u // {
-    users.laerling = let l = u.users.laerling; in l // {
-      packages = l.packages ++ (with pkgs; [ nvtopPackages.nvidia libreoffice ]);
+  # FIXME check version - see https://www.pcworld.com/article/2504035/security-flaws-found-in-all-nvidia-geforce-gpus-update-drivers-asap.html
+  services.xserver.videoDrivers = [ "nvidia" ]; # see 'nvidia' NixOS wiki article
     };
+  };
+
+  users.users.laerling = let l = common.config.users.users.laerling; in {
+    extraGroups = l.extraGroups ++ [
+      "docker"  # Can be used for privilege escalation if Docker daemon runs as root!
+      "scanner" # access to scanners
+      "lp"      # access to scanners that are also printers
+    ];
+    packages = l.packages ++ (with pkgs; [ nvtopPackages.nvidia ]);
+  };
+
+  virtualisation.docker.rootless = {
+    enable = true;
+    setSocketVariable = true; # let docker client know how to contact the daemon
   };
 
   # This option defines the first version of NixOS you have installed on this particular machine,

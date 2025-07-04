@@ -5,17 +5,16 @@
 { config, lib, pkgs, ... }:
 
 let common = import ./common.nix { inherit pkgs; };
-in common.config // {
+in common.utils.mergeSets common.config {
 
-  networking = common.config.networking // {
-    hostName = "suki";
-  };
+  networking.hostName = "suki";
 
-  users = let u = common.config.users; in u // {
-    users.laerling = let l = u.users.laerling; in l // {
-      packages = l.packages ++ (with pkgs; [ nvtopPackages.intel ]);
-    };
-  };
+  users.users.laerling.packages =
+    common.config.users.users.laerling.packages
+    ++ (with pkgs; [ nvtopPackages.intel ]);
+
+  # libinput allows for things like deactivating the touchpad while typing
+  services.libinput.enable = true;
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
