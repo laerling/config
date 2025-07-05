@@ -78,7 +78,7 @@ rec {
     # graphics #
     ############
 
-    services.xserver = {
+    services.xserver = builtins.trace "TODO: Finish Unity desktop" {
       enable = true;
       xkb.layout = if utils.choose "neo" then "de" else "us";
       xkb.variant = if utils.choose "neo" then "neo" else "altgr-intl";
