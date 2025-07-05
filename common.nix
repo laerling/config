@@ -131,13 +131,6 @@ rec {
       ];
       packages = with pkgs; let
 
-        # function to install a given package from a flake
-        flake_ = ref: pkg: (builtins.getFlake ref).packages."${builtins.currentSystem}"."${pkg}";
-
-        # function to install the default package from a flake
-        flake = ref: flake_ ref "default";
-
-
         # packages I always want that aren't tied to any particular ecosystem
         basic-packages = [
           bc borgbackup cargo chromium curl dig discord drawpile emacs30 feh
@@ -161,12 +154,12 @@ rec {
           ];
 
           xfce = with xfce; [
-            # Windows 95 theming
-            xfce4-whiskermenu-plugin # with chicago95 it looks like the Win95 start menu
-            #TODO use all outputs from this flake (after having tested them)
-            # this is a fork from "github:salvatorecriscioneweb/chicago95-nix"
-            (flake "github:laerling/chicago95-nix") # chicago95
+            # Windows 95/98/2000 theming
+            # This flake is a fork from "github:salvatorecriscioneweb/chicago95-nix"
             # alternative: "github:rice-cracker-dev/chicago95-nix"
+            (utils.flakeDefault "github:laerling/chicago95-nix")
+            (utils.flakePackage "github:laerling/chicago95-nix" "chicago95-icons")
+            xfce4-whiskermenu-plugin # with chicago95 it looks like the Win95 start menu
 
             # other programs that for some reason need to be specified manually
             blueman # bluetooth manager
@@ -260,11 +253,20 @@ rec {
     fonts.packages = with pkgs; [
       ubuntu-classic ubuntu-sans ubuntu-sans-mono
       libertinus
+
+      # Windows 95/98/2000 theming
+      (utils.flakePackage "github:laerling/chicago95-nix" "chicago95-fonts")
     ];
 
   }; # end of config
 
   utils = rec {
+
+    # function to install a given package from a flake
+    flakePackage = ref: pkg: (builtins.getFlake ref).packages."${builtins.currentSystem}"."${pkg}";
+
+    # function to install the default package from a flake
+    flakeDefault = ref: flakePackage ref "default";
 
     # Merge sets recursively, i. e. without overriding subsets
     mergeSets = let m = s1: s2: with builtins;
