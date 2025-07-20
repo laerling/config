@@ -68,8 +68,8 @@ rec {
 
       # firewall
       firewall.enable = true;
-      # firewall.allowedTCPPorts = [ ... ];
-      # firewall.allowedUDPPorts = [ ... ];
+      #firewall.allowedTCPPorts = [ ... ];
+      #firewall.allowedUDPPorts = [ ... ];
       #firewall.interfaces.enp9s0.allowedTCPPorts = [ 7878 ];
     };
 
@@ -90,12 +90,13 @@ rec {
       # TODO: unity(d) and/or unityx - https://unityd.org/
       # Don't use Lomiri (formerly Unity8) - it is clearly made for Ubuntu Touch and not for desktops! It's really bad...
 
-      # TODO finish customizing xfce
-      # - start menu
-      # - learn shortcuts (maximize, minimize, show desktop, ...)
+      # TODO finish setting up and customizing xfce
+      # - key store (e. g. for LUKS keys of external drives)
+      # - bluetooth support
       # - fonts from flake into own derivation
       # - explorer/thunar += tree view on the left
-      # - bluetooth support
+      # - start menu
+      # - learn shortcuts (maximize, minimize, show desktop, ...)
       # - set that one-pixel-stroke font for task bar items and explorer
       # - set correct font for start button, if possible
       # - browser - Pale Moon? Librewolf?
@@ -137,7 +138,7 @@ rec {
           ffmpeg file gcc gdb ghc gnumake gnupg jq keepassxc killall krita
           libreoffice librewolf lm_sensors man-pages mpv netcat-gnu nmap pureref
           python3 tcpdump telegram-desktop thunderbird tor-browser tree unzip
-          wget wireshark xxHash upscayl vivaldi whois yt-dlp
+          wget wireshark xxHash upscayl vivaldi whois yt-dlp zip
         ];
 
         # here I group ecosystem-specific packages by the ecosystem
