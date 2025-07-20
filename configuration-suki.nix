@@ -16,6 +16,10 @@ in common.utils.mergeSets common.config {
   # libinput allows for things like deactivating the touchpad while typing
   services.libinput.enable = true;
 
+  # bluetooth
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
   #
