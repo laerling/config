@@ -301,6 +301,7 @@ rec {
     chosenPackages = let packageForChoice = with pkgs; {
       minecraft = prismlauncher;
       crt = cool-retro-term;
+      inherit ollama;
     }; in with builtins; concatMap
     (c: if choose c then [packageForChoice."${c}"] else [])
     (attrNames packageForChoice);
