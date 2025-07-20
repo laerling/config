@@ -158,7 +158,7 @@ rec {
             # This flake is a fork from "github:salvatorecriscioneweb/chicago95-nix"
             # alternative: "github:rice-cracker-dev/chicago95-nix"
             (utils.flakeDefault "github:laerling/chicago95-nix")
-            (utils.flakePackage "github:laerling/chicago95-nix" "chicago95-icons")
+            #FIXME (utils.flakePackage "github:laerling/chicago95-nix" "chicago95-icons")
             xfce4-whiskermenu-plugin # with chicago95 it looks like the Win95 start menu
 
             # other programs that for some reason need to be specified manually
@@ -180,7 +180,7 @@ rec {
         secret-packages = let path = ./secrets/default.nix;
         in if builtins.pathExists path then import path pkgs else [];
 
-      in basic-packages ++ ecosystem-packages-list ++ secret-packages;
+      in basic-packages ++ ecosystem-packages-list ++ secret-packages ++ utils.chosenPackages;
     };
 
 
@@ -255,7 +255,7 @@ rec {
       libertinus
 
       # Windows 95/98/2000 theming
-      (utils.flakePackage "github:laerling/chicago95-nix" "chicago95-fonts")
+      #FIXME (utils.flakePackage "github:laerling/chicago95-nix" "chicago95-fonts")
     ];
 
   }; # end of config
