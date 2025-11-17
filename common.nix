@@ -58,19 +58,21 @@ rec {
     time.timeZone = "Europe/Berlin";
     i18n.defaultLocale = "en_US.UTF-8";
     services.logind.lidSwitch = "ignore"; # Also an option: "lock"
+
+
+    ##############
+    # networking #
+    ##############
+
     networking = {
       hosts = if builtins.pathExists ./hosts.nix then import ./hosts.nix else {};
 
       # On desktop managers like Gnome it is enough to enable NetworkManager and
       # add the user to the "networkmanager" group.
       networkmanager.enable = true;
-      networkmanager.ethernet.macAddress = "random";
 
-      # firewall
+      # firewall (no need to manually open services.openssh.ports)
       firewall.enable = true;
-      #firewall.allowedTCPPorts = [ ... ];
-      #firewall.allowedUDPPorts = [ ... ];
-      #firewall.interfaces.enp9s0.allowedTCPPorts = [ 7878 ];
     };
 
 

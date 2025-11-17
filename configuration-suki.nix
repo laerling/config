@@ -8,7 +8,13 @@ let common = import ./common.nix { inherit pkgs; };
 in common.utils.mergeSets common.config {
 
   networking.hostName = "suki";
+  networking.networkmanager.ethernet.macAddress = "random";
 
+  # firewall
+  networking.firewall.enable = true;
+  #networking.firewall.interfaces.wlp61s0.allowedTCPPorts = [ 7878 ];
+
+  # packages
   users.users.laerling.packages =
     common.config.users.users.laerling.packages
     ++ (with pkgs; [ nvtopPackages.intel ]);
