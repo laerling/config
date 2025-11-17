@@ -251,9 +251,12 @@ rec {
     documentation.man.generateCaches = true;
 
     # fonts
+    # to view fonts use e. g. fontpreview
     fonts.packages = with pkgs; [
       ubuntu-classic ubuntu-sans ubuntu-sans-mono
-      libertinus
+      liberation_ttf libertinus times-newer-roman
+      terminus_font # similar to VGA font, but... also bitmap apparently...
+      uni-vga # unicode VGA font
 
       # Windows 95/98/2000 theming
       #FIXME (utils.flakePackage "github:laerling/chicago95-nix" "chicago95-fonts")
