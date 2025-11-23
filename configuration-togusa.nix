@@ -16,7 +16,10 @@ in common.config // {
   # TODO #
   ########
   # - Try X11Forwarding (for displaying separate windows instead of desktop)
-  # - mesa-demos => tri => console output
+  #   => Does not allow for local rendering, since the X server on the client
+  #      can't give the programs on the server an OpenGL context (via GLX) that
+  #      is also on the server.
+  # Very good read: https://virtualgl.org/About/Background
   # - Xvfb
   # - x11vnc
   # - mesa-demos => tri => console output
