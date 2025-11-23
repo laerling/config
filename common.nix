@@ -140,8 +140,8 @@ rec {
           ffmpeg file gcc gdb ghc glibcInfo gnumake gnupg htop jq keepassxc
           killall krita libreoffice librewolf lm_sensors man-pages mpv
           netcat-gnu nmap pureref python3 qdirstat tcpdump telegram-desktop
-          thunderbird tor-browser tree unzip upscayl vivaldi wget whois
-          wireshark xxHash yt-dlp zip
+          thunderbird tor-browser unzip upscayl vivaldi wget whois wireshark
+          yt-dlp zip
         ];
 
         # here I group ecosystem-specific packages by the ecosystem
@@ -196,7 +196,7 @@ rec {
     #   (everything else can be pulled in via nix-shell)
     # - only programs that are allowed to run as root
     environment.systemPackages = with pkgs; [
-      bintools efibootmgr gptfdisk screen vim-full
+      bintools efibootmgr gptfdisk screen tree vim-full xxHash
     ];
     environment.gnome.excludePackages = with pkgs; [
       # loupe is the new and incomplete image viewer. I use eog (see above).
