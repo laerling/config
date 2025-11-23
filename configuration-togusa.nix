@@ -4,36 +4,36 @@
 
 { config, lib, pkgs, ... }:
 
-{
-  imports =
-    [
-      # Include the results of the hardware scan.
-      # For more hardware-specific settings (and - according to the
-      # NixOS user manual - hardware configuration for known
-      # hardware), see https://github.com/NixOS/nixos-hardware
-      /etc/nixos/hardware-configuration.nix
-    ];
+let common = import ./common.nix { inherit pkgs; };
+in common.utils.mergeSets common.config {
+
+  networking.hostName = "togusa"; # Ghost in the Shell
+
+
+  ########
+  # TODO #
+  ########
+  # - Try X11Forwarding (for displaying separate windows instead of desktop)
+  # - mesa-demos => tri => console output
+  # - Xvfb
+  # - x11vnc
+  # - mesa-demos => tri => console output
+  # - audio
 
 
   #############
   # low-level #
   #############
 
+  # grub instead of systemd-boot. No EFI anyway.
+  boot.loader.systemd-boot.enable = false;
   boot.loader.grub.enable = true;
-
-  time.timeZone = "Europe/Berlin";
-  i18n.defaultLocale = "en_US.UTF-8";
-  # console.font = "Lat2-Terminus16";
-  # console.keyMap = "us";
-  # console.useXkbConfig = true; # use xkb.options in tty.
 
 
   ##############
   # networking #
   ##############
 
-  networking.hostName = "togusa"; # Ghost in the Shell
-  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
   networking.interfaces.enp0s3.ipv4.addresses = [{
     address = "192.168.178.68"; # the final headless PC will have 69 of course
     prefixLength = 24;
@@ -54,7 +54,7 @@
     };
   };
 
-  
+
   ############
   # graphics #
   ############
@@ -62,6 +62,7 @@
   # since there is no X server installed, we have to manually enable OpenGL
   hardware.graphics.enable = true;
   #hardware.graphics.package = pkgs.mesa;
+  services.xserver.enable = false;
 
 
   #########
@@ -79,31 +80,10 @@
   # user, programs, environment #
   ###############################
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.groups.laerling.gid = 1000; # same GUD and UID as on Ubuntu
   users.users.laerling = {
-    isNormalUser = true;
-    uid = 1000;
     extraGroups = [ "networkmanager" "wheel" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [ man-pages mesa-demos netcat-gnu ];
   };
-
-  programs.git.enable = true;
-
-  # List packages installed in system profile.
-  # You can use https://search.nixos.org/ to find more packages (and options).
-  environment.systemPackages = with pkgs; [
-    screen
-    tree
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    xxHash 
-  ];
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent.enable = true;
-  # programs.gnupg.agent.enableSSHSupport = true;
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
