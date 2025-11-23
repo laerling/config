@@ -215,6 +215,9 @@ rec {
       enable = true;
       lfs.enable = true;
     };
+    # Needed for pinentry program, which is needed to decrypt files.
+    # If it doesn't work, restart the program (it's not in a systemd unit).
+    programs.gnupg.agent.enable = true;
     # enable classic Gnome terminal instead of kgx - needs adjustment of
     # gnome.excludePackages and $TERMINAL
     programs.gnome-terminal.enable = true;
