@@ -5,7 +5,9 @@
 { config, lib, pkgs, ... }:
 
 let common = import ./common.nix { inherit pkgs; };
-in common.utils.mergeSets common.config {
+# not using common.utils.mergeSets here, because we actually don't just want to
+# change details (that is, subkeys), but overwrite entire sets.
+in common.config // {
 
   networking.hostName = "togusa"; # Ghost in the Shell
 
@@ -25,22 +27,20 @@ in common.utils.mergeSets common.config {
   # low-level #
   #############
 
-  # grub instead of systemd-boot. No EFI anyway.
-  boot.loader.systemd-boot.enable = false;
   boot.loader.grub.enable = true;
+  # disable virtualisation
+  virtualisation = {};
 
 
   ##############
   # networking #
   ##############
 
+  networking.networkmanager.enable = true;
   networking.interfaces.enp0s3.ipv4.addresses = [{
     address = "192.168.178.68"; # the final headless PC will have 69 of course
     prefixLength = 24;
   }];
-
-  # TODO configure firewall when everything else is configured
-  networking.firewall.enable = false;
 
   services.openssh = {
     enable = true;
@@ -54,6 +54,9 @@ in common.utils.mergeSets common.config {
     };
   };
 
+  # TODO configure firewall when everything else is configured
+  networking.firewall.enable = false;
+
 
   ############
   # graphics #
@@ -62,7 +65,6 @@ in common.utils.mergeSets common.config {
   # since there is no X server installed, we have to manually enable OpenGL
   hardware.graphics.enable = true;
   #hardware.graphics.package = pkgs.mesa;
-  services.xserver.enable = false;
 
 
   #########
@@ -80,9 +82,18 @@ in common.utils.mergeSets common.config {
   # user, programs, environment #
   ###############################
 
+  users.groups.laerling.gid = 1000; # same GID and UID as on Ubuntu
   users.users.laerling = {
+    isNormalUser = true;
+    group = "laerling";
     extraGroups = [ "networkmanager" "wheel" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [ man-pages mesa-demos netcat-gnu ];
+  };
+
+  # disable most programs from common.config
+  programs = {
+    # ...except these:
+    inherit (common.config.programs) git;
   };
 
   # Copy the NixOS configuration file and link it from the resulting system
