@@ -57,7 +57,7 @@ rec {
 
     time.timeZone = "Europe/Berlin";
     i18n.defaultLocale = "en_US.UTF-8";
-    services.logind.lidSwitch = "ignore"; # Also an option: "lock"
+    services.logind.settings.Login.HandleLidSwitch = "ignore"; # Also an option: "lock"
 
 
     ##############
