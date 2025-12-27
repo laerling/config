@@ -184,7 +184,10 @@ rec {
         secret-packages = let path = ./secrets/default.nix;
         in if builtins.pathExists path then import path pkgs else [];
 
-      in basic-packages ++ ecosystem-packages-list ++ secret-packages ++ utils.chosenPackages;
+        # packages I need for a while but don't need anymore at some point in the future
+        temporary-packages = [ veracrypt ];
+
+      in basic-packages ++ ecosystem-packages-list ++ secret-packages ++ utils.chosenPackages ++ temporary-packages;
     };
 
 
