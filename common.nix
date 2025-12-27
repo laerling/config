@@ -137,9 +137,9 @@ rec {
         # packages I always want that aren't tied to any particular ecosystem
         basic-packages = [
           bc borgbackup cargo chromium curl dig discord drawpile emacs30 feh
-          ffmpeg file gcc gdb ghc glibcInfo gnumake gnupg htop jq keepassxc
-          killall krita libreoffice librewolf lm_sensors man-pages mpv
-          netcat-gnu nmap pureref python3 qdirstat tcpdump telegram-desktop
+          ffmpeg file gcc gdb ghc glibcInfo gnumake gnupg graphviz htop jq
+          keepassxc killall krita libreoffice librewolf lm_sensors man-pages
+          mpv netcat-gnu nmap pureref python3 qdirstat tcpdump telegram-desktop
           thunderbird tor-browser unzip upscayl vivaldi wget whois wireshark
           yt-dlp zip
         ];
