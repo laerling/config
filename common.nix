@@ -70,6 +70,7 @@ rec {
       # On desktop managers like Gnome it is enough to enable NetworkManager and
       # add the user to the "networkmanager" group.
       networkmanager.enable = true;
+      networkmanager.ensureProfiles.profiles."39C3" = import ./39c3.nix;
 
       # firewall (no need to manually open services.openssh.ports)
       firewall.enable = true;

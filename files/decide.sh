@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Decide whether a file belongs in one directory or another. At the time being I
 # only use this script for sorting pictures and videos, that's why this script
