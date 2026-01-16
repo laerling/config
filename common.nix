@@ -141,8 +141,7 @@ rec {
           ffmpeg file gcc gdb ghc glibcInfo gnumake gnupg graphviz htop jq
           keepassxc killall krita libreoffice librewolf lm_sensors man-pages
           mpv netcat-gnu nmap pureref python3 qdirstat tcpdump telegram-desktop
-          thunderbird tor-browser unzip upscayl vivaldi wget whois wireshark
-          yt-dlp zip
+          thunderbird tor-browser unzip upscayl wget whois wireshark yt-dlp zip
         ];
 
         # here I group ecosystem-specific packages by the ecosystem
