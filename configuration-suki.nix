@@ -7,6 +7,8 @@
 let common = import ./common.nix { inherit pkgs; };
 in common.utils.mergeSets common.config {
 
+  # TODO use hardware configuration from nixos-hardware
+
   networking.hostName = "suki";
   networking.networkmanager.ethernet.macAddress = "random";
 

@@ -15,7 +15,7 @@ in common.utils.mergeSets common.config {
     sane.enable = true;
   };
 
-  # FIXME check version - see https://www.pcworld.com/article/2504035/security-flaws-found-in-all-nvidia-geforce-gpus-update-drivers-asap.html
+  # load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = [ "nvidia" ]; # see 'nvidia' NixOS wiki article
 
   users.users.laerling = let l = common.config.users.users.laerling; in {
