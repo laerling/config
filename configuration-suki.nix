@@ -7,7 +7,10 @@
 let common = import ./common.nix { inherit pkgs; };
 in common.utils.mergeSets common.config {
 
-  # TODO use hardware configuration from nixos-hardware
+  # use hardware configuration from nixos-hardware
+  imports = common.config.imports ++ [
+    <nixos-hardware/lenovo/thinkpad/t480s>
+  ];
 
   networking.hostName = "suki";
   networking.networkmanager.ethernet.macAddress = "random";
