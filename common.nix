@@ -1,20 +1,11 @@
-# we export a set containing configuration (config) and utiliy
-# functions (utils). This is helpful because on one hand we use
-# config to build the final configuration by merging it with a
-# device-specific set in configuration-*.nix, on the other hand some
-# of the configuration options within that device-specific set might
-# need to access the common configuration from here (especially when
-# overwriting only subsets, e.g. common.config // { services.xserver
-# = common.services.xserver // { ... }; }). And since we're exporting
+# we export a set containing configuration (config) and utiliy functions
+# (utils). This is helpful because on one hand we use config to build the
+# final configuration by merging it with a device-specific set in
+# configuration-*.nix, on the other hand some of the configuration options
+# within that device-specific set might need to access the common
+# configuration from here (via common.config).  And since we're exporting
 # the default configuration like this we can also export the utility
 # functions from this set.
-
-# FIXME Currently the problem is that the merge operator (//)
-# overwrites subsets. I.e. {s={a=1;b=2;};}//{s.b=3;} yields
-# {s={b=3;};} instead of {s={a=1;b=3;};}. Surely there is some
-# nixpkgs library function that can easily merge sets without
-# overwriting subsets. Maybe there is even some concept for joining
-# sets that represent system configurations?
 
 { pkgs }:
 
