@@ -7,7 +7,10 @@
 let common = import ./common.nix { inherit pkgs; };
 in common.utils.mergeSets common.config {
 
-  networking.hostName = "saito";
+  networking.hostName = "thia";
+  networking.firewall.allowedTCPPorts = [
+    33149 # ollama
+  ];
 
   hardware = {
     # udev configuration for ZSA keyboards
@@ -15,8 +18,13 @@ in common.utils.mergeSets common.config {
     sane.enable = true;
   };
 
+  # headless (TODO)
+  services.xserver = {
+    overrideThisSet = true;
+    enable = false;
+  };
   # load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = [ "nvidia" ]; # see 'nvidia' NixOS wiki article
+  #services.xserver.videoDrivers = [ "nvidia" ]; # see 'nvidia' NixOS wiki article
 
   users.users.laerling = let l = common.config.users.users.laerling; in {
     extraGroups = l.extraGroups ++ [
@@ -25,6 +33,21 @@ in common.utils.mergeSets common.config {
       "lp"      # access to scanners that are also printers
     ];
     packages = l.packages ++ (with pkgs; [ nvtopPackages.nvidia ]);
+  };
+
+  services.openssh = {
+    enable = true;
+    ports = [ 69 ];
+    settings = {
+      ChallengeResponseAuthentication = false;
+      LoginGraceTime = 0; # prevent timeout that might be exploitable via CVE-2024-6387
+      PasswordAuthentication = false;
+      PermitRootLogin = "no";
+      PrintMotd = false;
+      UsePAM = false;
+      X11Forwarding = false;
+      AllowUsers = [ "laerling" ];
+    };
   };
 
   virtualisation.docker.rootless = {
