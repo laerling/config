@@ -280,7 +280,7 @@ rec {
     # function to install the default package from a flake
     flakeDefault = ref: flakePackage ref "default";
 
-    # Merge sets recursively, i. e. without overriding subsets
+    # Merge sets recursively, i. e. without overriding subsets, unless they explicitly say so
     mergeSets = let m = s1: s2: with builtins;
       let s2-merged-into-s1 = mapAttrs (n: v_s1:
         if s2 ? "${n}" then (
@@ -291,7 +291,12 @@ rec {
           # for all other types, s2 overrides s1
           else v_s2
         ) else v_s1) s1;
-      in s2 // s2-merged-into-s1; # add elements that are in s2 but not in s1
+      in
+        # add elements that are in s2 but not in s1, unless overrideThisSet is true
+        # remove overrideThisSet, lest it be treated as an option
+        builtins.removeAttrs (
+          if s2 ? "overrideThisSet" && s2.overrideThisSet then s2 else s2 // s2-merged-into-s1
+          ) [ "overrideThisSet" ];
     in m;
 
     # merge a set s2 with a subset of a given set s1, even if it doesn't exist
