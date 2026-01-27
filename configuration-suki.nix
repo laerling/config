@@ -22,7 +22,10 @@ in common.utils.mergeSets common.config {
   # packages
   users.users.laerling.packages =
     common.config.users.users.laerling.packages
-    ++ (with pkgs; [ nvtopPackages.intel ]);
+    ++ (with pkgs; [
+      nvtopPackages.intel
+      ollama
+    ]);
 
   # libinput allows for things like deactivating the touchpad while typing
   services.libinput.enable = true;

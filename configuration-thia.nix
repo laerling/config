@@ -32,7 +32,10 @@ in common.utils.mergeSets common.config {
       "scanner" # access to scanners
       "lp"      # access to scanners that are also printers
     ];
-    packages = l.packages ++ (with pkgs; [ nvtopPackages.nvidia ]);
+    packages = l.packages ++ (with pkgs; [
+      nvtopPackages.nvidia
+      ollama-cuda
+    ]);
   };
 
   services.openssh = {
