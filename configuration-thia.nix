@@ -21,10 +21,9 @@ in common.utils.mergeSets common.config {
   # headless (TODO)
   services.xserver = {
     overrideThisSet = true;
-    enable = false;
+    enable = true;
+    videoDrivers = [ "nvidia" ]; # see 'nvidia' NixOS wiki article
   };
-  # load nvidia driver for Xorg and Wayland
-  #services.xserver.videoDrivers = [ "nvidia" ]; # see 'nvidia' NixOS wiki article
 
   users.users.laerling = let l = common.config.users.users.laerling; in {
     extraGroups = l.extraGroups ++ [
