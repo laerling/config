@@ -2,9 +2,11 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 
-let common = import ./common.nix { inherit pkgs; };
+let
+  common = import ./common.nix;
+  pkgs = common.pkgs;
 in common.utils.mergeSets common.config {
 
   networking.hostName = "thia";

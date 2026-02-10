@@ -1,6 +1,6 @@
-{ pkgs ? import <nixpkgs> {} }:
-
 let
+
+  pkgs = import <nixpkgs> {};
 
   callPackage = path: args: pkgs.callPackage path args;
 
@@ -22,16 +22,18 @@ let
 
 in
 
-{
+  pkgs // {
 
-  discord = callPackage ./discord {};
+    chicago95-dark = callPackage ./Chicago95_dark {};
 
-  nixos-utils = callPackage ./nixos-utils {};
+    discord = callPackage ./discord {};
 
-  ollama = overrideOllama {};
-  ollama-cpu = overrideOllama { acceleration = false; };
-  ollama-rocm = overrideOllama { acceleration = "rocm"; };
-  ollama-cuda = overrideOllama { acceleration = "cuda"; };
-  ollama-vulkan = overrideOllama { acceleration = "vulkan"; };
+    nixos-utils = callPackage ./nixos-utils {};
 
-}
+    ollama = overrideOllama {};
+    ollama-cpu = overrideOllama { acceleration = false; };
+    ollama-rocm = overrideOllama { acceleration = "rocm"; };
+    ollama-cuda = overrideOllama { acceleration = "cuda"; };
+    ollama-vulkan = overrideOllama { acceleration = "vulkan"; };
+
+  }

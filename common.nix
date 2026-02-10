@@ -7,9 +7,9 @@
 # the default configuration like this we can also export the utility
 # functions from this set.
 
-{ pkgs }:
-
 rec {
+
+  pkgs = import ./pkgs;
 
   config = {
 
