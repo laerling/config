@@ -31,6 +31,9 @@ rec {
       "nix-command"
     ];
 
+    # udev configuration for ZSA keyboards
+    hardware.keyboard.zsa.enable = true;
+
 
     ########
     # boot #

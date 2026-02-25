@@ -14,12 +14,6 @@ in common.utils.mergeSets common.config {
     33149 # ollama
   ];
 
-  hardware = {
-    # udev configuration for ZSA keyboards
-    keyboard.zsa.enable = true;
-    sane.enable = true;
-  };
-
   # headless (TODO)
   services.xserver = {
     overrideThisSet = true;
