@@ -178,10 +178,10 @@ rec {
         secret-packages = let path = ./secrets/default.nix;
         in if builtins.pathExists path then import path pkgs else [];
 
-        # packages I need for a while but don't need anymore at some point in the future
-        temporary-packages = [ veracrypt ];
+        # miscellaneous or temporary packages
+        misc-packages = [ (utils.flakeDefault "github:opensteno/plover-flake") ];
 
-      in basic-packages ++ ecosystem-packages-list ++ secret-packages ++ utils.chosenPackages ++ temporary-packages;
+      in basic-packages ++ ecosystem-packages-list ++ secret-packages ++ utils.chosenPackages ++ misc-packages;
     };
 
 
