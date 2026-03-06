@@ -179,7 +179,7 @@ rec {
         in if builtins.pathExists path then import path pkgs else [];
 
         # miscellaneous or temporary packages
-        misc-packages = [ (utils.flakeDefault "github:opensteno/plover-flake") ];
+        misc-packages = [ ];
 
       in basic-packages ++ ecosystem-packages-list ++ secret-packages ++ utils.chosenPackages ++ misc-packages;
     };

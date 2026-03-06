@@ -27,7 +27,8 @@ in common.utils.mergeSets common.config {
     ++ (with pkgs; [
       nvtopPackages.intel
       ollama
-    ]);
+    ])
+    ++ [ (common.utils.flakeDefault "github:opensteno/plover-flake") ];
 
   # libinput allows for things like deactivating the touchpad while typing
   services.libinput.enable = true;
