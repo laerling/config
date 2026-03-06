@@ -238,8 +238,10 @@ rec {
         alias j="jobs"
         alias gb="git branch -va"
         alias gf="git fetch --all --prune"
-        alias gl="git list"
-        alias gla="git list --all --graph --oneline"
+        alias gl="git log"
+        alias gla="git log --all --graph --oneline"
+        alias gd="git diff --"
+        alias gds="git diff --staged --"
         alias gp="git pull"
         alias gs="git status"
       '';
