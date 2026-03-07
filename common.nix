@@ -7,9 +7,10 @@
 # the default configuration like this we can also export the utility
 # functions from this set.
 
-rec {
+let nixpkgs_config = { allowUnfree = true; };
+in rec {
 
-  pkgs = import ./pkgs;
+  pkgs = import ./pkgs nixpkgs_config;
 
   config = {
 
@@ -25,7 +26,7 @@ rec {
       /etc/nixos/hardware-configuration.nix
     ];
 
-    nixpkgs.config.allowUnfree = true;
+    nixpkgs.config = nixpkgs_config;
     nix.settings.experimental-features = [
       "flakes"
       "nix-command"
@@ -88,7 +89,6 @@ rec {
 
       # TODO finish setting up and customizing xfce
       # - key store (e. g. for LUKS keys of external drives)
-      # - bluetooth support
       # - fonts from flake into own derivation
       # - explorer/thunar += tree view on the left
       # - start menu
