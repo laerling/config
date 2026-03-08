@@ -9,6 +9,10 @@ let
   pkgs = common.pkgs;
 in common.utils.mergeSets common.config {
 
+  boot.kernelModules = [
+    "nct6775" # access to all sensors
+  ];
+
   networking.hostName = "thia";
 
   # headless (TODO)
