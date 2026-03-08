@@ -10,9 +10,6 @@ let
 in common.utils.mergeSets common.config {
 
   networking.hostName = "thia";
-  networking.firewall.allowedTCPPorts = [
-    33149 # ollama
-  ];
 
   # headless (TODO)
   services.xserver = {
@@ -27,9 +24,25 @@ in common.utils.mergeSets common.config {
       "scanner" # access to scanners
       "lp"      # access to scanners that are also printers
     ];
-    packages = l.packages ++
-    (with pkgs; [ nvtopPackages.nvidia ]) ++
-    [(import ./pkgs { inherit pkgs; }).ollama-cuda];
+    packages = l.packages ++ (with pkgs; [
+      mesa-demos nvtopPackages.nvidia ollama-cuda
+    ]);
+  };
+
+  services.ollama = {
+    enable = true;
+    package = pkgs.ollama-cuda;
+
+    host = "0.0.0.0";
+    port = 42069;
+    openFirewall = true;
+
+    # create user and group in order to be able to chown the models directory
+    user = "ollama";
+    group = "ollama";
+    #FIXME Error: mkdir /home/nobackup: permission denied: ensure path elements are traversable
+    #models = "/home/nobackup/.ollama/models";
+    environmentVariables.OLLAMA_CONTEXT_LENGTH = "128000";
   };
 
   services.openssh = {
