@@ -44,8 +44,7 @@ in common.utils.mergeSets common.config {
     # create user and group in order to be able to chown the models directory
     user = "ollama";
     group = "ollama";
-    #FIXME Error: mkdir /home/nobackup: permission denied: ensure path elements are traversable
-    #models = "/home/nobackup/.ollama/models";
+    home = "/ollama"; # nothing else works, not even /home/ollama
     environmentVariables.OLLAMA_CONTEXT_LENGTH = "128000";
   };
 
