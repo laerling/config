@@ -12,3 +12,4 @@ hosts.nix
 choices.nix
 secrets
 hardware-configuration*.nix
+crypttab*
